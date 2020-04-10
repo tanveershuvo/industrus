@@ -214,7 +214,7 @@ button:hover {box-shadow: 0 0 20px 0 #C0D7DD;}
 		<p class="p">4</p>
 
 		<div class="page-ms">
-			<p class="page-msg"> Oops, this link has been used once. </p>
+			<p class="page-msg"> Oops, this link has been used once . </p>
 			<a href="login" class="go-back" >Go Back</a>
 		</div>
 </div>
