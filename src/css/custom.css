@@ -1,3 +1,27 @@
+input,textarea {
+    outline: none;
+    border: 1px thin grey !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    }
+
+.error{
+    color: #c30000;
+    font-weight: bold;
+}
+.err_2{
+    color: RED;
+    font-weight: bold;
+}
+.error-block{
+    color: RED;
+    font-weight: bold;
+}
+.borderch{
+    border: 1px solid red !important;
+}
+
 .project-tab {
     padding: 10%;
     margin-top: -8%;
@@ -37,3 +61,4 @@
     color: #333;
     font-weight: 600;
 }
+    

@@ -2,7 +2,7 @@
 <?php include'includes/navbar.php';?>
 
         <section id="tabs" class="project-tab">
-          <form id="form" method="post">
+          <form id="form" method="post" enctype="multipart/form-data">
           <div id="smartwizard">
     <ul>
         <li><a href="#step-1">First Step <br /><small> Technical File</small></a></li>
