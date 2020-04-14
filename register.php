@@ -49,15 +49,15 @@
                         </div>
                         <div class="group-input">
                             <label for="password">Password</label>
-                            <input type="password" id="password"  name="password" placeholder="password">
+                            <input type="password" id="password" name="password" placeholder="password">
                         </div>
                         <div class="group-input">
                             <label for="company_name">Company Name</label>
-                            <input type="text" id="company_name"  name="company_name" placeholder="company_name">
+                            <input type="text" id="company_name" name="company_name" placeholder="company_name">
                         </div>
                         <div class="group-input">
                             <label for="phone">phone</label>
-                            <input type="text" id="phone"  name="phone" placeholder="phone">
+                            <input type="text" id="phone" name="phone" placeholder="phone">
                         </div>
                         <button type="submit" class="site-btn register-btn" name="submit" id="submit">REGISTER</button>
                     </form>

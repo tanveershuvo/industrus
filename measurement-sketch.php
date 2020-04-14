@@ -7,23 +7,23 @@
             <div class="form-group">
                 <label for="frontMeasurementSketch" class="control-label"><b>Upload Front Measurement Sketch
                         <span class="err_2">*</span> :</b></label>
-                <input type="file" class="form-control" id="frontMeasurementSketch" name="measurementSketch">
+                <input type="text" class="form-control" id="frontMeasurementSketch" name="measurementSketch">
             </div>
             <div class="form-group">
                 <label for="backMeasurementSketch" class="control-label"><b>Upload Back Measurement Sketch
                         <span class="err_2">*</span> :</b></label>
-                <input type="file" class="form-control" id="backMeasurementSketch" name="measurementSketch">
+                <input type="text" class="form-control" id="backMeasurementSketch" name="measurementSketch">
             </div>
             <div class="form-group">
                 <label for="collarMeasurementSketch" class="control-label"><b>Upload Collar Measurement Sketch <span class="err_2">*</span> :</b></label>
-                <input type="file" class="form-control" id="collarMeasurementSketch" name="measurementSketch">
+                <input type="text" class="form-control" id="collarMeasurementSketch" name="measurementSketch">
             </div>
         </div>
         <div class="col-sm-2">
             <label for="examples" class="cnotrol-label"><b>Example Sketch:</b></label>
         </div>
         <div class="col-sm-4">
-            <img src="img/18-14-LineDrawing.jpg" data-action="zoom" alt="example-sketch" style="width:100%;max-width:300px">
+            <img src="img/ee51b7e91811269cea23d3979f006bab.jpg" data-action="zoom" alt="example-sketch" style="width:100%;max-width:300px">
         </div>
     </div>
     </br>
@@ -88,14 +88,11 @@
 
 <script type="text/javascript">
     function validation_form_2() {
-
         $(".error-block").remove();
         $("input").removeClass("borderch");
         $('#step-2 input[type=file]').each(
             function(index) {
-
                 let inputfile = $(this);
-
                 if (inputfile.val() == "") {
                     console.log(inputfile);
                     let str = inputfile.attr('id');
@@ -126,30 +123,11 @@
                         exit();
                     }
                 }
-
             }
         )
-
-
-
         $(".err_2").remove();
         return true;
     }
-
-    // $("#step-2 input[type=text]").change(function() {
-    //   let input = $(this);
-    //   //alert(input)
-    //   input.each(
-    //     function(){
-    //   var textExtension = ['jpeg', 'jpg', 'png', 'gif'];
-    //   if ($.inArray($(this).val().split('.').pop().toLowerCase(), textExtension) == -1) {
-    //       input.val('');
-    //       input.after('<span class="error-block">* Only formats are allowed : ' + textExtension.join(', ') + '</span>').focus();
-    //       exit();
-    //   }
-    // }
-    // )
-    // });
 
     function displaySizing() {
         if ($("#mQuantity").val() == "") {

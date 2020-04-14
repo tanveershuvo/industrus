@@ -47,45 +47,51 @@
       </br>
 
       <div class=" row">
-          <div class="col-sm-2">
-              <label for="colors" class="control-label"><b>Colors <span class="error">*</span> :</b></label>
-          </div>
-          <div class="col-sm-4">
-              <input type="text" class="form-control" id="colors" name="colors" placeholder="Colors name or colors code">
-          </div>
-          <div class="col-sm-2">
+
+          <div class="col-sm-3">
               <label for="fabricConstruction" class="control-label"><b>Main Fabric Construction <span class="error">*</span> :</b></label>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-6">
               <input type="text" class="form-control" id="fabricConstruction" name="fabricConstruction" placeholder="fabric pique">
           </div>
       </div>
       </br>
 
 
-      <div class="well">
-          <div class="card">
-              <div class="card-header"><b>Quantity in pieces by Size <span class="error">*</span> :</b></div>
+      <div class="well clonable-block" data-toggle="cloner">
+          <div class="card clonable" data-ss="1">
               <div class="card-body">
-
+                  <div class="card-title mb-4 row">
+                      <div class="col-sm-2">
+                          <label for="colors" class="control-label"><b>Colors <span class="error">*</span> :</b></label>
+                      </div>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control clonable-increment-id clonable-increment-name" id="colors_0" name="colors[0]" placeholder="Colors name or colors code">
+                      </div>
+                      <div class="btn-group btn-group-sm col-sm-2" role="group" aria-label="...">
+                          <button class="clonable-button-add btn btn-primary" type="button"><i class="fa fa-plus"></i> Add New</button>
+                          <button type="button" class="btn btn-danger clonable-button-close"><i class="fa fa-trash"></i></button>
+                      </div>
+                  </div>
+                  <div class="card-subtitle mb-4 text-muted"><b>Quantity in pieces by Size & Color <span class="error">*</span> :</b></div>
                   <div class=" row">
                       <div class="col-sm-1">
                           <label for="mQuantity" class="control-label">M :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity" id="mQuantity" name="mQuantity" placeholder="quantity in pieces">
+                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="mQuantity_0" name="mQuantity[0]" placeholder="quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="sQuantity" class="">S :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity" id="sQuantity" name="sQuantity" placeholder="quantity in pieces">
+                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="sQuantity_0" name="sQuantity[0]" placeholder="quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="lQuantity" class="">L :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity" id="lQuantity" name="lQuantity" placeholder="quantity in pieces">
+                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="lQuantity_0" name="lQuantity[0]" placeholder="quantity in pieces">
                       </div>
                   </div>
                   </br>
@@ -95,19 +101,19 @@
                           <label for="xlQuantity" class="control-label">XL :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity" id="xlQuantity" name="xlQuantity" placeholder="quantity in pieces">
+                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="xlQuantity_0" name="xlQuantity[0]" placeholder=" quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="xxlQuantity" class="">XXL :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity" id="xxlQuantity" name="xxlQuantity" placeholder="quantity in pieces">
+                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="xxlQuantity_0" name="xxlQuantity[0]" placeholder="quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="xxxlQuantity" class="">XXXL :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="text" class="form-control quantity" id="xxxlQuantity" name="xxxlQuantity" placeholder="quantity in pieces">
+                          <input type="text" class="form-control quantity clonable-increment-id clonable-increment-name" id="xxxlQuantity_0" name="xxxlQuantity[0]" placeholder="quantity in pieces">
                       </div>
                   </div>
 
@@ -162,15 +168,10 @@
                           exit();
                       }
                   }
-                  if ($("#mQuantity").val() == "" && $("#sQuantity").val() == "" && $("#lQuantity").val() == "" && $(
-                          "#xlQuantity").val() == "" && $("#xxlQuantity").val() == "" && $("#xxxlQuantity").val() == "") {
-                      $('#msg').after('<span class="error-block">*At least one Quantity is required</span>').focus();
-                      exit();
-                  }
+
               }
           )
           $(".error").remove();
           return true;
       }
-
   </script>

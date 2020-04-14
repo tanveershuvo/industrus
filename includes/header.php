@@ -29,11 +29,11 @@
     <link rel="stylesheet" href="src/css/custom.css" type="text/css">
     <script src="src/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-    function message(str) {
-        let newstr = str.split(/(?=[A-Z])/).join(" ");
-        let newstr1 = newstr.split('_').join(" ");
-        let newstr2 = newstr1.replace(/\d+/g, '')
-        let upperstr = newstr.charAt(0).toUpperCase() + newstr2.slice(1);
-        return upperstr;
-    }
+        function message(str) {
+            let newstr = str.split(/(?=[A-Z])/).join(" ");
+            let newstr1 = newstr.split('_').join(" ");
+            let newstr2 = newstr1.replace(/\d+/g, '')
+            let upperstr = newstr.charAt(0).toUpperCase() + newstr2.slice(1);
+            return upperstr;
+        }
     </script>

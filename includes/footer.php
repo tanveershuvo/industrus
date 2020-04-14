@@ -92,32 +92,35 @@
       // stepDirection === 'forward' :- this condition allows to do the form validation
       // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
       if (stepDirection === 'forward' && elmForm) {
-        if (stepNumber == 0) { // 4 is the last step in this case
+        if (stepNumber == 0) {
           displaySizing();
           result = validation();
         }
         if (stepNumber == 1) { // 4 is the last step in this case
-          result = validation_form_2();
+          if (result == true) {
+            result = validation_form_2();
+          } else {
+
+          }
         }
         return result;
       }
     });
   });
 
-  
+
+
   $("input[type=file]").change(function() {
     $(".error-block").remove();
-        $("input").removeClass("borderch");
+    $("input").removeClass("borderch");
     let input = $(this);
-    console.log(input)
-          var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
-          if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-              $("#" + input.attr('id')).val('');
-              $("#" + input.attr('id')).after('<span class="error-block">* Only formats are allowed : ' + fileExtension.join(
-                  ', ') + '</span>').focus();
-                  $("#" + input.attr('id')).addClass("borderch");
-          }
-      });
+    var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+      $("#" + input.attr('id')).val('');
+      $("#" + input.attr('id')).after('<span class="error-block">* Only formats are allowed : ' + fileExtension.join(', ') + '</span>').focus();
+      $("#" + input.attr('id')).addClass("borderch");
+    }
+  });
 </script>
 </body>
 
