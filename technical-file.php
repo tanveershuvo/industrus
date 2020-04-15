@@ -65,6 +65,7 @@
                       <div class="col-sm-2">
                           <label for="colors" class="control-label"><b>Colors <span class="error">*</span> :</b></label>
                       </div>
+
                       <div class="col-sm-4">
                           <input type="text" class="form-control clonable-increment-id clonable-increment-name" id="colors_0" name="colors[0]" placeholder="Colors name or colors code">
                       </div>
@@ -145,8 +146,15 @@
 
   <script type="text/javascript">
       function validation() {
+          let names = [];
+          $('#step-1 input[name^="colors"]').each(function() {
+              let data = this.value;
+              names.push(data);
+              localStorage.setItem('locname', JSON.stringify(names));
+          });
+          let result = true;
           $('#step-1 input,textarea').each(
-              function(index) {
+              function() {
                   let input = $(this).not(".quantity");
                   //console.log(input)
                   $(".error-block").remove();
@@ -156,7 +164,8 @@
                       $("#" + input.attr('id')).after('<span class="error-block">* ' + message(str) +
                           ' is required</span>').focus();
                       $("#" + input.attr('id')).addClass("borderch");
-                      exit();
+                      result = false;
+                      return false;
                   }
                   if ($(this).hasClass("quantity")) {
                       let inputNumber = $(this);
@@ -165,13 +174,14 @@
                           $("#" + inputNumber.attr('id')).after('<span class="error-block">* ' + message(str) +
                               ' must be number</span>').focus();
                           $("#" + inputNumber.attr('id')).addClass("borderch");
-                          exit();
+                          result = false;
+                          return false;
                       }
                   }
 
               }
           )
           $(".error").remove();
-          return true;
+          return result;
       }
   </script>

@@ -1,13 +1,13 @@
-<div id="step-2" role="form">
+<div id="step-3" role="form">
     <hr class="err_2">
     <h5 class="err_2">All * fields are required</h5>
     <hr>
     <div class=" row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="frontMeasurementSketch" class="control-label"><b>Upload Front Measurement Sketch
+                <label for="frontDetails" class="control-label"><b>Upload Front Details Sketch
                         <span class="err_2">*</span> :</b></label>
-                <input type="text" class="form-control" id="frontMeasurementSketch" name="measurementSketch">
+                <input type="text" class="form-control" id="frontDetails" name="frontDetails">
             </div>
             <div class="form-group">
                 <label for="backMeasurementSketch" class="control-label"><b>Upload Back Measurement Sketch
@@ -87,45 +87,98 @@
 </div>
 
 <script type="text/javascript">
-    function validation_form_2() {
-        $(".error-block").remove();
-        $("input").removeClass("borderch");
-        $('#step-2 input[type=file]').each(
-            function(index) {
-                let inputfile = $(this);
-                if (inputfile.val() == "") {
-                    console.log(inputfile);
-                    let str = inputfile.attr('id');
-                    $("#" + inputfile.attr('id')).after('<span class="error-block">* ' + message(str) +
-                        ' img is required</span>').focus();
-                    $("#" + inputfile.attr('id')).addClass("borderch");
-                    exit();
-                }
-            }
-        )
-        $('#step-2 input').each(
-            function(index) {
-                let input = $(this).not('.hiding');
-                if (input.val() == "") {
-                    let str = input.attr('id');
-                    $("#errormsg").after('<span class="error-block">* ' + message(str) +
-                        ' is required</span>');
-                    $("#" + input.attr('id')).addClass("borderch").focus();
-                    exit();
-                }
-                if ($(this).hasClass("num")) {
-                    let inputNumber = $(this);
-                    if (isNaN(inputNumber.val())) {
-                        let str = inputNumber.attr('id');
-                        $("#" + inputNumber.attr('id')).addClass("borderch").focus();
-                        $("#errormsg").after('<span class="error-block">* ' + message(str) +
-                            ' must be number</span>');
-                        exit();
-                    }
-                }
-            }
-        )
-        $(".err_2").remove();
-        return true;
+    function addHtml() {
+        var names = JSON.parse(localStorage.getItem('locname') || "[]");
+        for (var p in names) {
+            console.log(p + ':' + names[p]);
+            localStorage.removeItem('locname');
+        }
     }
+
+    // function validation_form_3() {
+    //     $(".error-block").remove();
+    //     $("input").removeClass("borderch");
+    //     $('#step-2 input[type=file]').each(
+    //         function(index) {
+    //             let inputfile = $(this);
+    //             if (inputfile.val() == "") {
+    //                 console.log(inputfile);
+    //                 let str = inputfile.attr('id');
+    //                 $("#" + inputfile.attr('id')).after('<span class="error-block">* ' + message(str) +
+    //                     ' img is required</span>').focus();
+    //                 $("#" + inputfile.attr('id')).addClass("borderch");
+    //                 exit();
+    //             }
+    //         }
+    //     )
+    //     $('#step-2 input').each(
+    //         function(index) {
+    //             let input = $(this).not('.hiding');
+    //             if (input.val() == "") {
+    //                 let str = input.attr('id');
+    //                 $("#errormsg").after('<span class="error-block">* ' + message(str) +
+    //                     ' is required</span>');
+    //                 $("#" + input.attr('id')).addClass("borderch").focus();
+    //                 exit();
+    //             }
+    //             if ($(this).hasClass("num")) {
+    //                 let inputNumber = $(this);
+    //                 if (isNaN(inputNumber.val())) {
+    //                     let str = inputNumber.attr('id');
+    //                     $("#" + inputNumber.attr('id')).addClass("borderch").focus();
+    //                     $("#errormsg").after('<span class="error-block">* ' + message(str) +
+    //                         ' must be number</span>');
+    //                     exit();
+    //                 }
+    //             }
+    //         }
+    //     )
+    //     $(".err_2").remove();
+    //     return true;
+    // }
+
+    // function displaySizing() {
+    //     if ($("#mQuantity").val() == "") {
+    //         $('.m').hide();
+    //         $('.m input[type=number]').addClass('hiding').val('');
+    //     } else {
+    //         $('.m').show();
+    //         $('.m input[type=number]').removeClass('hiding');
+    //     }
+    //     if ($("#sQuantity").val() == "") {
+    //         $('.s').hide();
+    //         $('.s input[type=number]').addClass('hiding').val('');
+    //     } else {
+    //         $('.s').show();
+    //         $('.s input[type=number]').removeClass('hiding');
+    //     }
+    //     if ($("#lQuantity").val() == "") {
+    //         $('.l').hide();
+    //         $('.l input[type=number]').addClass('hiding').val('');
+    //     } else {
+    //         $('.l').show();
+    //         $('.l input[type=number]').removeClass('hiding');
+    //     }
+    //     if ($("#xlQuantity").val() == "") {
+    //         $('.xl').hide();
+    //         $('.xl input[type=number]').addClass('hiding').val('');
+    //     } else {
+    //         $('.xl').show();
+    //         $('.xl input[type=number]').removeClass('hiding');
+    //     }
+    //     if ($("#xxlQuantity").val() == "") {
+    //         $('.xxl').hide();
+    //         $('.xxl input[type=number]').addClass('hiding').val('');
+    //     } else {
+    //         $('.xxl').show();
+    //         $('.xxl input[type=number]').removeClass('hiding');
+    //     }
+    //     if ($("#xxxlQuantity").val() == "") {
+    //         $('.xxxl').hide();
+    //         $('.xxxl input[type=number]').addClass('hiding').val('');
+    //     } else {
+    //         $('.xxxl').show();
+    //         $('.xxxl input[type=number]').removeClass('hiding');
+    //     }
+    // }
 </script>

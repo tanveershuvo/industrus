@@ -16,6 +16,7 @@
 
         <?php include 'technical-file.php'; ?>
         <?php include 'measurement-sketch.php'; ?>
+        <?php include 'sewing-measurement.php'; ?>
 
         <div id="step-3" class="">
           Step Content
@@ -32,9 +33,9 @@
 
 <!-- The Modal -->
 
-<script>
+<!-- <script>
   $(window).bind('beforeunload', function() {
     return 'are you sure you want to leave?';
   });
-</script>
+</script> -->
 <?php include 'includes/footer.php'; ?>

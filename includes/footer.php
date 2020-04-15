@@ -89,19 +89,15 @@
     let result = "";
     $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
       var elmForm = $("#step-" + stepNumber);
-      // stepDirection === 'forward' :- this condition allows to do the form validation
-      // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
       if (stepDirection === 'forward' && elmForm) {
         if (stepNumber == 0) {
-          displaySizing();
           result = validation();
         }
-        if (stepNumber == 1) { // 4 is the last step in this case
-          if (result == true) {
-            result = validation_form_2();
-          } else {
-
-          }
+        if (stepNumber == 1) {
+          result = validation_form_2();
+        }
+        if (stepNumber == 2) {
+          addHtml();
         }
         return result;
       }
