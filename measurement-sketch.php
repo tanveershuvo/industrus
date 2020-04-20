@@ -47,7 +47,7 @@
         <tbody class="clonable-block" data-toggle="cloner">
             <tr class="clonable" data-ss="1">
                 <th scope="row">
-                    <input type="text" id="imgRef_0" class="form-control clonable-increment-id clonable-increment-name clonable-increment-id clonable-increment-name" name="img[0]" placeholder="reference">
+                    <input type="text" id="imgRef_0" class="form-control clonable-increment-id clonable-increment-name " name="img[0]" placeholder="reference">
                 </th>
                 <td>
                     <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="" placeholder="Measurement description">
