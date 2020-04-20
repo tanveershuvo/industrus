@@ -92,12 +92,13 @@
       if (stepDirection === 'forward' && elmForm) {
         if (stepNumber == 0) {
           result = validation();
+          addHtml();
         }
         if (stepNumber == 1) {
           result = validation_form_2();
         }
         if (stepNumber == 2) {
-          addHtml();
+
         }
         return result;
       }

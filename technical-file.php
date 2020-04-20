@@ -130,7 +130,7 @@
                   <div class="form-group">
                       <label for="sketchUpload" class="control-label"><b>Upload Sketch <span class="error">*</span>
                               :</b></label>
-                      <input type="file" class="form-control" id="sketchUpload" name="sketchUpload">
+                      <input type="text" class="form-control" id="sketchUpload" name="sketchUpload">
                   </div>
               </div>
               <div class="col-sm-2">

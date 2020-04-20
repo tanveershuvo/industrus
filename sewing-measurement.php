@@ -16,20 +16,10 @@
     <hr>
     <table class="table table-striped">
         <thead>
-            <col>
-            <colgroup span="2"></colgroup>
-            <colgroup span="1"></colgroup>
-            <colgroup span="1"></colgroup>
             <tr>
-                <td colspan="2"></td>
-                <th colspan="1" scope="colgroup">Colors</th>
-                <td colspan="1"></td>
-            </tr>
-            <tr id="test">
                 <th scope="col">Ref <span class="err_2">*</span></th>
                 <th width="40%" scope="col">Description <span class="err_2">*</span></th>
-                <th scope="col">Colors <span class="err_2">*</span></th>
-                <th scope="col">Colors <span class="err_2">*</span></th>
+                <th id="test" scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="clonable-block" data-toggle="cloner">
@@ -38,10 +28,8 @@
                 <td>
                     <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="" placeholder="Measurement description">
                 </td>
-                <td>
-                    <input type="number" id="tolerance_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="tolerance">
-                </td>
-                <td>
+
+                <td id="data">
                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
                         <button class="clonable-button-add btn btn-primary" type="button"><i class="fa fa-plus"></i></button>
                         <button type="button" class="btn btn-danger clonable-button-close"><i class="fa fa-trash"></i></button>
@@ -56,11 +44,23 @@
 
 <script type="text/javascript">
     function addHtml() {
+        var th = 0;
+        var td = 0;
         var names = JSON.parse(localStorage.getItem('locname') || "[]");
-        for (var p in names) {
-            console.log(p + ':' + names[p]);
-            localStorage.removeItem('locname');
+        var i;
+        console.log(names)
+        for (i = 0; i < names.length; i++) {
+            th = '<th>' + names[i] + '</th>';
+            td = '<td><input type="number" id="yarnColor' + i + '_1" class="form-control num clonable-increment-id clonable-increment-name" name="yarnColor' + i + '[1]" placeholder="tolerance"></td>';
+            console.log(':' + names[i]);
+            //localStorage.removeItem('locname');
+            //$("#test").before(th);
+            $(th).insertBefore("#test");
+            $(td).insertBefore("#data");
+
         }
+
+
     }
 
     // function validation_form_3() {
