@@ -91,14 +91,14 @@
       var elmForm = $("#step-" + stepNumber);
       if (stepDirection === 'forward' && elmForm) {
         if (stepNumber == 0) {
-          result = validation();
-          addHtml();
+          result = technicalValidation();
+          addColor();
         }
         if (stepNumber == 1) {
-          result = validation_form_2();
+          result = measurementValidation();
         }
         if (stepNumber == 2) {
-
+          result = sewingValidation();
         }
         return result;
       }

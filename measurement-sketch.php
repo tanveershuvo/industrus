@@ -7,16 +7,16 @@
             <div class="form-group">
                 <label for="frontMeasurementSketch" class="control-label"><b>Upload Front Measurement Sketch
                         <span class="err_2">*</span> :</b></label>
-                <input type="text" class="form-control" id="frontMeasurementSketch" name="measurementSketch">
+                <input type="file" class="form-control" id="frontMeasurementSketch" name="measurementSketch">
             </div>
             <div class="form-group">
                 <label for="backMeasurementSketch" class="control-label"><b>Upload Back Measurement Sketch
                         <span class="err_2">*</span> :</b></label>
-                <input type="text" class="form-control" id="backMeasurementSketch" name="measurementSketch">
+                <input type="file" class="form-control" id="backMeasurementSketch" name="measurementSketch">
             </div>
             <div class="form-group">
                 <label for="collarMeasurementSketch" class="control-label"><b>Upload Collar Measurement Sketch <span class="err_2">*</span> :</b></label>
-                <input type="text" class="form-control" id="collarMeasurementSketch" name="measurementSketch">
+                <input type="file" class="form-control" id="collarMeasurementSketch" name="measurementSketch">
             </div>
         </div>
         <div class="col-sm-2">
@@ -87,45 +87,48 @@
 </div>
 
 <script type="text/javascript">
-    function validation_form_2() {
+    function measurementValidation() {
+        let result = true;
         $(".error-block").remove();
         $("input").removeClass("borderch");
         $('#step-2 input[type=file]').each(
             function(index) {
                 let inputfile = $(this);
                 if (inputfile.val() == "") {
-                    console.log(inputfile);
-                    let str = inputfile.attr('id');
-                    $("#" + inputfile.attr('id')).after('<span class="error-block">* ' + message(str) +
+                    let inputID = inputfile.attr('id');
+                    $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
                         ' img is required</span>').focus();
-                    $("#" + inputfile.attr('id')).addClass("borderch");
-                    exit();
+                    $("#" + inputID).addClass("borderch");
+                    result = false;
+                    return false;
                 }
             }
         )
-        $('#step-2 input').each(
+        $('#step-2 input:not([type=file])').each(
             function(index) {
-                let input = $(this).not('.hiding');
+                let input = $(this);
                 if (input.val() == "") {
-                    let str = input.attr('id');
-                    $("#errormsg").after('<span class="error-block">* ' + message(str) +
+                    let inputID = input.attr('id');
+                    $("#errormsg").after('<span class="error-block">* ' + message(inputID) +
                         ' is required</span>');
-                    $("#" + input.attr('id')).addClass("borderch").focus();
-                    exit();
+                    $("#" + inputID).addClass("borderch").focus();
+                    result = false;
+                    return false;
                 }
                 if ($(this).hasClass("num")) {
                     let inputNumber = $(this);
                     if (isNaN(inputNumber.val())) {
-                        let str = inputNumber.attr('id');
-                        $("#" + inputNumber.attr('id')).addClass("borderch").focus();
-                        $("#errormsg").after('<span class="error-block">* ' + message(str) +
+                        let inputID = inputNumber.attr('id');
+                        $("#" + inputID).addClass("borderch").focus();
+                        $("#errormsg").after('<span class="error-block">* ' + message(inputID) +
                             ' must be number</span>');
-                        exit();
+                        result = false;
+                        return false;
                     }
                 }
             }
         )
         $(".err_2").remove();
-        return true;
+        return result;
     }
 </script>

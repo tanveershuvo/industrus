@@ -4,9 +4,9 @@
     <hr>
     <div class="row">
         <div class="col-sm-6">
-            <div class="form-group"> <label for="frontSewing" class="control-label"><b>Upload Front sewing Sketch <span class="err_2">*</span> :</b></label> <input type="text" class="form-control" id="frontSewing" name="frontSewing"> </div>
-            <div class="form-group"> <label for="frontPlacket" class="control-label"><b>Upload Front Placket Sketch <span class="err_2">*</span> :</b></label> <input type="text" class="form-control" id="frontPlacket" name="frontPlacket"> </div>
-            <div class="form-group"> <label for="slideSlit" class="control-label"><b>Upload Slide slit sewing Sketch <span class="err_2">*</span> :</b></label> <input type="text" class="form-control" id="slideSlit" name="slideSlit"> </div>
+            <div class="form-group"> <label for="frontSewing" class="control-label"><b>Upload Front sewing Sketch <span class="err_2">*</span> :</b></label> <input type="file" class="form-control" id="frontSewing" name="frontSewing"> </div>
+            <div class="form-group"> <label for="frontPlacket" class="control-label"><b>Upload Front Placket Sketch <span class="err_2">*</span> :</b></label> <input type="file" class="form-control" id="frontPlacket" name="frontPlacket"> </div>
+            <div class="form-group"> <label for="slideSlit" class="control-label"><b>Upload Slide slit sewing Sketch <span class="err_2">*</span> :</b></label> <input type="file" class="form-control" id="slideSlit" name="slideSlit"> </div>
         </div>
         <div class="col-sm-2"> <label for="examples1" class="cnotrol-label"><b>Example sewing Sketch:</b></label> </div>
         <div class="col-sm-4"> <img src="" data-action="zoom" alt="example-sketch1" style="width:100%;max-width:300px"> </div>
@@ -24,9 +24,9 @@
         </thead>
         <tbody class="clonable-block" data-toggle="cloner">
             <tr class="clonable" data-ss="1">
-                <th scope="row"> <input type="text" id="reference" class="form-control clonable-increment-id clonable-increment-name " name="reference" placeholder="reference"> </th>
+                <td scope="row"> <input type="text" id="reference_0" class="form-control clonable-increment-id clonable-increment-name " name="reference" placeholder="reference"> </td>
                 <td>
-                    <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="" placeholder="Measurement description">
+                    <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="Measurement" placeholder="Measurement description">
                 </td>
 
                 <td id="data">
@@ -39,69 +39,61 @@
         </tbody>
 
     </table>
-    <label id='errormsg' class="col-12"></label>
+    <label id='errormsg1' class="col-12"></label>
 </div>
 
 <script type="text/javascript">
-    function addHtml() {
-        var th = 0;
-        var td = 0;
-        var names = JSON.parse(localStorage.getItem('locname') || "[]");
-        var i;
-        console.log(names)
-        for (i = 0; i < names.length; i++) {
-            th = '<th>' + names[i] + '</th>';
-            td = '<td><input type="number" id="yarnColor' + i + '_1" class="form-control num clonable-increment-id clonable-increment-name" name="yarnColor' + i + '[1]" placeholder="tolerance"></td>';
-            console.log(':' + names[i]);
-            //localStorage.removeItem('locname');
-            //$("#test").before(th);
-            $(th).insertBefore("#test");
-            $(td).insertBefore("#data");
+    function addColor() {
+        let names = [];
+        $(".appended").remove();
+        $('#step-1 input[name^="colors"]').each(function() {
+            let data = this.value;
+            names.push(data);
+        });
+        let th = "";
+        let td = "";
+        for (let i = 0; i < names.length; i++) {
+            th += "<th class='appended'>" + names[i] + "</th>";
+            td += '<td class="appended"><input type="text"  id="yarnColor' + i + '_1" class="form-control  clonable-increment-id clonable-increment-name" name="yarnColor' + i + '[1]" placeholder="tolerance"></td>';
 
         }
-
+        $(th).insertBefore("#test");
+        $(td).insertBefore("#data");
 
     }
 
-    // function validation_form_3() {
-    //     $(".error-block").remove();
-    //     $("input").removeClass("borderch");
-    //     $('#step-2 input[type=file]').each(
-    //         function(index) {
-    //             let inputfile = $(this);
-    //             if (inputfile.val() == "") {
-    //                 console.log(inputfile);
-    //                 let str = inputfile.attr('id');
-    //                 $("#" + inputfile.attr('id')).after('<span class="error-block">* ' + message(str) +
-    //                     ' img is required</span>').focus();
-    //                 $("#" + inputfile.attr('id')).addClass("borderch");
-    //                 exit();
-    //             }
-    //         }
-    //     )
-    //     $('#step-2 input').each(
-    //         function(index) {
-    //             let input = $(this).not('.hiding');
-    //             if (input.val() == "") {
-    //                 let str = input.attr('id');
-    //                 $("#errormsg").after('<span class="error-block">* ' + message(str) +
-    //                     ' is required</span>');
-    //                 $("#" + input.attr('id')).addClass("borderch").focus();
-    //                 exit();
-    //             }
-    //             if ($(this).hasClass("num")) {
-    //                 let inputNumber = $(this);
-    //                 if (isNaN(inputNumber.val())) {
-    //                     let str = inputNumber.attr('id');
-    //                     $("#" + inputNumber.attr('id')).addClass("borderch").focus();
-    //                     $("#errormsg").after('<span class="error-block">* ' + message(str) +
-    //                         ' must be number</span>');
-    //                     exit();
-    //                 }
-    //             }
-    //         }
-    //     )
-    //     $(".err_2").remove();
-    //     return true;
-    // }
+    function sewingValidation() {
+        $(".error-block").remove();
+        $("input").removeClass("borderch");
+        let result = true;
+        $('#step-3 input[type=file]').each(
+            function(index) {
+                let inputfile = $(this);
+                if (inputfile.val() == "") {
+                    let inputID = inputfile.attr('id');
+                    $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
+                        ' img is required</span>').focus();
+                    $("#" + inputID).addClass("borderch");
+                    result = false;
+                    return false;
+                }
+            }
+        )
+        $('#step-3 input:not([type=file])').each(
+            function(index) {
+                let input = $(this);
+                if (input.val() == "") {
+                    let inputID = input.attr('id');
+                    $("#errormsg1").after('<span class="error-block">* ' + message(inputID) +
+                        ' is required</span>');
+                    $("#" + inputID).addClass("borderch").focus();
+                    result = false;
+                    return false;
+                }
+            }
+        )
+
+        $(".err_2").remove();
+        return result;
+    }
 </script>

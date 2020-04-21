@@ -145,13 +145,7 @@
   </div>
 
   <script type="text/javascript">
-      function validation() {
-          let names = [];
-          $('#step-1 input[name^="colors"]').each(function() {
-              let data = this.value;
-              names.push(data);
-              localStorage.setItem('locname', JSON.stringify(names));
-          });
+      function technicalValidation() {
           let result = true;
           $('#step-1 input,textarea').each(
               function() {
@@ -160,20 +154,20 @@
                   $(".error-block").remove();
                   $("input,textarea").removeClass("borderch");
                   if (input.val() == "") {
-                      let str = input.attr('id');
-                      $("#" + input.attr('id')).after('<span class="error-block">* ' + message(str) +
+                      let inputID = input.attr('id');
+                      $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
                           ' is required</span>').focus();
-                      $("#" + input.attr('id')).addClass("borderch");
+                      $("#" + inputID).addClass("borderch");
                       result = false;
                       return false;
                   }
                   if ($(this).hasClass("quantity")) {
                       let inputNumber = $(this);
                       if (isNaN(inputNumber.val())) {
-                          let str = inputNumber.attr('id');
-                          $("#" + inputNumber.attr('id')).after('<span class="error-block">* ' + message(str) +
+                          let inputID = inputNumber.attr('id');
+                          $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
                               ' must be number</span>').focus();
-                          $("#" + inputNumber.attr('id')).addClass("borderch");
+                          $("#" + inputID).addClass("borderch");
                           result = false;
                           return false;
                       }
