@@ -4,23 +4,35 @@
     <hr>
     <div class=" row">
         <div class="col-sm-6">
+
+
             <div class="form-group">
                 <label for="frontMeasurementSketch" class="control-label"><b>Upload Front Measurement Sketch
                         <span class="err_2">*</span> :</b></label>
-                <input type="file" class="form-control" id="frontMeasurementSketch" name="measurementSketch">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="frontMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required="">
+                    <label class="custom-file-label" for="postedFile">Choose front Measurement Sketch</label>
+                    <div class="invalid-feedback">That didn't work.</div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="backMeasurementSketch" class="control-label"><b>Upload Back Measurement Sketch
                         <span class="err_2">*</span> :</b></label>
-                <input type="file" class="form-control" id="backMeasurementSketch" name="measurementSketch">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="backMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04">
+                    <label class="custom-file-label" for="postedFile">Choose back Measurement Sketch</label>
+                </div>
             </div>
             <div class="form-group">
                 <label for="collarMeasurementSketch" class="control-label"><b>Upload Collar Measurement Sketch <span class="err_2">*</span> :</b></label>
-                <input type="file" class="form-control" id="collarMeasurementSketch" name="measurementSketch">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="collarMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required>
+                    <label class="custom-file-label" for="postedFile">Choose collar Measurement Sketch</label>
+                </div>
             </div>
         </div>
         <div class="col-sm-2">
-            <label for="examples" class="cnotrol-label"><b>Example Sketch:</b></label>
+            <label for="examples" class="control-label"><b>Example Sketch:</b></label>
         </div>
         <div class="col-sm-4">
             <img src="img/ee51b7e91811269cea23d3979f006bab.jpg" data-action="zoom" alt="example-sketch" style="width:100%;max-width:300px">
@@ -89,45 +101,46 @@
 <script type="text/javascript">
     function measurementValidation() {
         let result = true;
-        $(".error-block").remove();
-        $("input").removeClass("borderch");
+        $(".invalid-feedback").remove();
+        $("input").removeClass("is-invalid");
         $('#step-2 input[type=file]').each(
             function(index) {
                 let inputfile = $(this);
                 if (inputfile.val() == "") {
                     let inputID = inputfile.attr('id');
-                    $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
-                        ' img is required</span>').focus();
-                    $("#" + inputID).addClass("borderch");
+                    $("#" + inputID).after('<span class="invalid-feedback">* ' + message(inputID) +
+                        ' is required</span>').addClass("is-invalid").focus();
                     result = false;
                     return false;
                 }
-            }
-        )
-        $('#step-2 input:not([type=file])').each(
-            function(index) {
-                let input = $(this);
-                if (input.val() == "") {
-                    let inputID = input.attr('id');
-                    $("#errormsg").after('<span class="error-block">* ' + message(inputID) +
-                        ' is required</span>');
-                    $("#" + inputID).addClass("borderch").focus();
-                    result = false;
-                    return false;
-                }
-                if ($(this).hasClass("num")) {
-                    let inputNumber = $(this);
-                    if (isNaN(inputNumber.val())) {
-                        let inputID = inputNumber.attr('id');
-                        $("#" + inputID).addClass("borderch").focus();
-                        $("#errormsg").after('<span class="error-block">* ' + message(inputID) +
-                            ' must be number</span>');
+            })
+        if (result == true) {
+            $('#step-2 input[type!=file]').each(
+                function(index) {
+                    let inputText = $(this).not("num");
+                    if ($(this).hasClass("num")) {
+                        let inputNumber = $(this);
+                        if (isNaN(inputNumber.val())) {
+                            let inputID = inputNumber.attr('id');
+                            $("#" + inputID).after('<span class="invalid-tooltip ">* ' + message(inputID) +
+                                ' is required</span>').addClass("is-invalid").focus();
+                            result = false;
+                            return false;
+                        }
+
+                    } else if ((inputText.val() == "")) {
+                        let inputID = inputText.attr('id');
+                        $("#" + inputID).after('<span class="invalid-tooltip">* ' + message(inputID) +
+                            ' is required</span>').addClass("is-invalid").focus();
                         result = false;
                         return false;
                     }
                 }
-            }
-        )
+            )
+
+        }
+
+
         $(".err_2").remove();
         return result;
     }

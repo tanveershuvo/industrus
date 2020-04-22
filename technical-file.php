@@ -151,13 +151,13 @@
               function() {
                   let input = $(this).not(".quantity");
                   //console.log(input)
-                  $(".error-block").remove();
-                  $("input,textarea").removeClass("borderch");
+                  $(".invalid-feedback").remove();
+                  $("input,textarea").removeClass("is-invalid");
                   if (input.val() == "") {
                       let inputID = input.attr('id');
-                      $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
-                          ' is required</span>').focus();
-                      $("#" + inputID).addClass("borderch");
+                      $("#" + inputID).after('<div class="invalid-feedback">* ' + message(inputID) +
+                          ' is required</div>').focus();
+                      $("#" + inputID).addClass("is-invalid");
                       result = false;
                       return false;
                   }
@@ -165,9 +165,9 @@
                       let inputNumber = $(this);
                       if (isNaN(inputNumber.val())) {
                           let inputID = inputNumber.attr('id');
-                          $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
-                              ' must be number</span>').focus();
-                          $("#" + inputID).addClass("borderch");
+                          $("#" + inputID).after('<div class="invalid-feedback">* ' + message(inputID) +
+                              ' must be number</div>').focus();
+                          $("#" + inputID).addClass("is-invalid");
                           result = false;
                           return false;
                       }

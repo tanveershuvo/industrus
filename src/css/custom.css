@@ -6,6 +6,13 @@ textarea {
   -moz-box-shadow: none !important;
   box-shadow: none !important;
 }
+.custom-file {
+  outline: none;
+  border: 1px thin grey !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
 
 .error {
   color: #c30000;

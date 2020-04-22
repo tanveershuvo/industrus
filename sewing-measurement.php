@@ -66,9 +66,9 @@
         $(".error-block").remove();
         $("input").removeClass("borderch");
         let result = true;
-        $('#step-3 input[type=file]').each(
+        $('#step-3 input').each(
             function(index) {
-                let inputfile = $(this);
+                let inputfile = $('#step-3 input[type=file]');
                 if (inputfile.val() == "") {
                     let inputID = inputfile.attr('id');
                     $("#" + inputID).after('<span class="error-block">* ' + message(inputID) +
@@ -77,11 +77,7 @@
                     result = false;
                     return false;
                 }
-            }
-        )
-        $('#step-3 input:not([type=file])').each(
-            function(index) {
-                let input = $(this);
+                let input = $('#step-3 input[type=text]');
                 if (input.val() == "") {
                     let inputID = input.attr('id');
                     $("#errormsg1").after('<span class="error-block">* ' + message(inputID) +
@@ -92,6 +88,7 @@
                 }
             }
         )
+
 
         $(".err_2").remove();
         return result;

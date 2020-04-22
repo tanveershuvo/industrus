@@ -104,18 +104,22 @@
       }
     });
   });
-
-
-
-  $("input[type=file]").change(function() {
-    $(".error-block").remove();
-    $("input").removeClass("borderch");
+  $("input[type=file]").change(function(event) {
+    $(".invalid-feedback").remove();
+    $("input").removeClass("is-invalid");
+    var inputFile = event.currentTarget;
+    $(inputFile).parent()
+      .find('.custom-file-label')
+      .html(inputFile.files[0].name);
     let input = $(this);
     var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
     if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-      $("#" + input.attr('id')).val('');
-      $("#" + input.attr('id')).after('<span class="error-block">* Only formats are allowed : ' + fileExtension.join(', ') + '</span>').focus();
-      $("#" + input.attr('id')).addClass("borderch");
+      let id = $("#" + input.attr('id'));
+      $(inputFile).parent()
+        .find('.custom-file-label')
+        .html('');
+      id.after('<span class="invalid-feedback">* Only formats are allowed : ' + fileExtension.join(', ') + '</span>').focus();
+      id.addClass("is-invalid");
     }
   });
 </script>
