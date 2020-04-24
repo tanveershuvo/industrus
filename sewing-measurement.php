@@ -7,21 +7,21 @@
             <div class="form-group">
                 <label for="frontSewing" class="control-label"><b>Upload Front sewing Sketch <span class="step-3-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="frontSewing" name="frontSewing" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="frontSewing" name="frontSewing" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose Front sewing image</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="frontPlacket" class="control-label"><b>Upload Front Placket Sketch <span class="step-3-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="frontPlacket" name="frontPlacket" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="frontPlacket" name="frontPlacket" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose front Placket image</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="slideSlit" class="control-label"><b>Upload Slide slit sewing Sketch <span class="step-3-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="slideSlit" name="slideSlit" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="slideSlit" name="slideSlit" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose slide Slit image</label>
                 </div>
             </div>
@@ -44,11 +44,11 @@
             <tr class="clonable" data-ss="1">
                 <td scope="row"> <input type="text" id="reference_0" class="form-control clonable-increment-id clonable-increment-name " name="reference" placeholder="reference"> </td>
                 <td>
-                    <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="Measurement" placeholder="Measurement description">
+                    <input type="text" id="sewingDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="sewingDescription_0" placeholder="sewing description">
                 </td>
                 <td id="data">
                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                        <button class="clonable-button-add btn btn-primary" type="button"><i class="fa fa-plus"></i></button>
+                        <button class="clonable-button-add btn btn-primary cl" type="button"><i class="fa fa-plus"></i></button>
                         <button type="button" class="btn btn-danger clonable-button-close"><i class="fa fa-trash"></i></button>
                     </div>
                 </td>
@@ -58,56 +58,41 @@
 </div>
 <script type="text/javascript">
     function addColor() {
-        let names = [];
+        let colornames = [];
         $(".appended").remove();
         $('#step-1 input[name^="colors"]').each(function() {
             let data = this.value;
-            names.push(data);
+            colornames.push(data);
         });
         let inputname = "";
         let inputfield = "";
-        for (let i = 0; i < names.length; i++) {
-            th += "<th class='appended'>" + names[i] + "</th>";
-            td += '<td class="appended"><input type="text"  id="yarnColor' + i + '_1" class="form-control  clonable-increment-id clonable-increment-name" name="yarnColor' + i + '[1]" placeholder="tolerance"></td>';
+        for (let i = 0; i < colornames.length; i++) {
 
+            inputname += "<th class='appended'>" + colornames[i] + "</th>";
+            colornames[i] = colornames[i].replace(/ /g, '');
+            console.log(colornames[i])
+            inputfield += '<td class="appended"><input type="text" id="yarn' + i + '_1" class="form-control  clonable-increment-id clonable-increment-name" name="yarnColor[' + colornames[i] + '][1]" placeholder="' + colornames[i] + '"></td>';
         }
         $(inputname).insertBefore("#test");
         $(inputfield).insertBefore("#data");
-
     }
 
     function sewingValidation() {
         let result = true;
         $(".invalid-feedback").remove();
         $("input").removeClass("is-invalid");
-        $('#step-3 input[type=file]').each(
+        $('#step-3 input').each(
             function(index) {
-                let inputfile = $(this);
-                if (inputfile.val() == "") {
-                    let inputID = inputfile.attr('id');
+                let inputText = $(this);
+                if ((inputText.val() == "")) {
+                    let inputID = inputText.attr('id');
                     $("#" + inputID).after('<span class="invalid-feedback">* ' + message(inputID) +
                         ' is required</span>').addClass("is-invalid").focus();
                     result = false;
                     return false;
                 }
-            })
-        if (result == true) {
-            $('#step-3 input[type!=file]').each(
-                function(index) {
-                    let inputText = $(this);
-                    if ((inputText.val() == "")) {
-                        let inputID = inputText.attr('id');
-                        $("#" + inputID).after('<span class="invalid-feedback">* ' + message(inputID) +
-                            ' is required</span>').addClass("is-invalid").focus();
-                        result = false;
-                        return false;
-                    }
-                }
-            )
-
-        }
-
-
+            }
+        )
         $(".step-3-error").remove();
         return result;
     }

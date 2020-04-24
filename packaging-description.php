@@ -28,7 +28,7 @@
     </table>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function sub() {
         $('#form').submit();
     }
@@ -69,4 +69,4 @@
         $(".step-3-error").remove();
         return result;
     }
-</script>
+</script> -->

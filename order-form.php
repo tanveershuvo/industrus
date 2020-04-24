@@ -24,9 +24,12 @@
   </form>
 </section>
 
-<!-- <script>
-  $(window).bind('beforeunload', function() {
-    return 'are you sure you want to leave?';
-  });
-</script> -->
+<script>
+  // $(window).bind('beforeunload', function() {
+  //   return 'are you sure you want to leave?';
+  // });
+  // $(window).on('load', function() {
+  //   window.location.href = "http://localhost/industrus/order-form#step-1";
+  // });
+</script>
 <?php include 'includes/footer.php'; ?>
