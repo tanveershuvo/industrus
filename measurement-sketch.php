@@ -1,6 +1,6 @@
 <div id="step-2" role="form">
-    <hr class="err_2">
-    <h5 class="err_2">All * fields are required</h5>
+    <hr class="step-2-error">
+    <h5 class="step-2-error">All * fields are required</h5>
     <hr>
     <div class=" row">
         <div class="col-sm-6">
@@ -8,25 +8,25 @@
 
             <div class="form-group">
                 <label for="frontMeasurementSketch" class="control-label"><b>Upload Front Measurement Sketch
-                        <span class="err_2">*</span> :</b></label>
+                        <span class="step-2-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="frontMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required="">
+                    <input type="text" class="custom-file-input" id="frontMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required="">
                     <label class="custom-file-label" for="postedFile">Choose front Measurement Sketch</label>
                     <div class="invalid-feedback">That didn't work.</div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="backMeasurementSketch" class="control-label"><b>Upload Back Measurement Sketch
-                        <span class="err_2">*</span> :</b></label>
+                        <span class="step-2-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="backMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04">
+                    <input type="text" class="custom-file-input" id="backMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04">
                     <label class="custom-file-label" for="postedFile">Choose back Measurement Sketch</label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="collarMeasurementSketch" class="control-label"><b>Upload Collar Measurement Sketch <span class="err_2">*</span> :</b></label>
+                <label for="collarMeasurementSketch" class="control-label"><b>Upload Collar Measurement Sketch <span class="step-2-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="collarMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="collarMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose collar Measurement Sketch</label>
                 </div>
             </div>
@@ -44,9 +44,9 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Ref <span class="err_2">*</span></th>
-                <th width="25%" scope="col">Description <span class="err_2">*</span></th>
-                <th scope="col">Tol(-+) <span class="err_2">*</span></th>
+                <th scope="col">Ref <span class="step-2-error">*</span></th>
+                <th width="25%" scope="col">Description <span class="step-2-error">*</span></th>
+                <th scope="col">Tol(-+) <span class="step-2-error">*</span></th>
                 <th scope="col" class="s">S</th>
                 <th scope="col" class="m">M</th>
                 <th scope="col" class="l">L</th>
@@ -64,6 +64,7 @@
                 <td>
                     <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="" placeholder="Measurement description">
                 </td>
+
                 <td>
                     <input type="number" id="tolerance_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="tolerance">
                 </td>
@@ -93,9 +94,7 @@
                 </td>
             </tr>
         </tbody>
-
     </table>
-    <label id='errormsg' class="col-12"></label>
 </div>
 
 <script type="text/javascript">
@@ -122,15 +121,15 @@
                         let inputNumber = $(this);
                         if (isNaN(inputNumber.val())) {
                             let inputID = inputNumber.attr('id');
-                            $("#" + inputID).after('<span class="invalid-tooltip ">* ' + message(inputID) +
-                                ' is required</span>').addClass("is-invalid").focus();
+                            $("#" + inputID).after('<span class="invalid-feedback ">* ' + message(inputID) +
+                                ' must be a number</span>').addClass("is-invalid").focus();
                             result = false;
                             return false;
                         }
 
                     } else if ((inputText.val() == "")) {
                         let inputID = inputText.attr('id');
-                        $("#" + inputID).after('<span class="invalid-tooltip">* ' + message(inputID) +
+                        $("#" + inputID).after('<span class="invalid-feedback">* ' + message(inputID) +
                             ' is required</span>').addClass("is-invalid").focus();
                         result = false;
                         return false;
@@ -141,7 +140,7 @@
         }
 
 
-        $(".err_2").remove();
+        $(".step-2-error").remove();
         return result;
     }
 </script>

@@ -1,18 +1,18 @@
   <div id="step-1" role="form">
-      <hr class="error">
-      <h5 class="error">All * fields are required</h5>
+      <hr class="step-1-error">
+      <h5 class="step-1-error">All * fields are required</h5>
       <hr>
       </br>
       <div class=" row">
           <div class="col-sm-2">
-              <label for="buyerName" class="control-label"><b>Buyer Name <span class="error">*</span> :</b></label>
+              <label for="buyerName" class="control-label"><b>Buyer Name <span class="step-1-error">*</span> :</b></label>
           </div>
           <div class="col-sm-4">
               <input type="text" class="form-control " id="buyerName" name="buyerName" placeholder="type Your Name">
           </div>
 
           <div class="col-sm-2">
-              <label for="companyName" class="control-label"><b>Company Name <span class="error">*</span> :</b></label>
+              <label for="companyName" class="control-label"><b>Company Name <span class="step-1-error">*</span> :</b></label>
           </div>
           <div class="col-sm-4">
               <input type="text" class="form-control " id="companyName" name="companyName" placeholder="type Company Name">
@@ -22,7 +22,7 @@
 
       <div class=" row">
           <div class="col-sm-2">
-              <label for="productName" class="control-label"><b>Product Name <span class="error">*</span> :</b></label>
+              <label for="productName" class="control-label"><b>Product Name <span class="step-1-error">*</span> :</b></label>
           </div>
           <div class="col-sm-6">
               <input type="text" class="form-control" id="productName" name="productName" placeholder="type Product Name">
@@ -31,13 +31,13 @@
       </br>
       <div class=" row">
           <div class="col-sm-2">
-              <label for="composition" class="control-label"><b>Composition <span class="error">*</span> :</b></label>
+              <label for="composition" class="control-label"><b>Composition <span class="step-1-error">*</span> :</b></label>
           </div>
           <div class="col-sm-4">
               <input type="text" class="form-control" id="composition" name="composition" placeholder="ex: cotton % or viscage %">
           </div>
           <div class="col-sm-2">
-              <label for="fabricsWeight" class="control-label"><b>Fabrics weight <span class="error">*</span>
+              <label for="fabricsWeight" class="control-label"><b>Fabrics weight <span class="step-1-error">*</span>
                       :</b></label>
           </div>
           <div class="col-sm-4">
@@ -47,9 +47,8 @@
       </br>
 
       <div class=" row">
-
           <div class="col-sm-3">
-              <label for="fabricConstruction" class="control-label"><b>Main Fabric Construction <span class="error">*</span> :</b></label>
+              <label for="fabricConstruction" class="control-label"><b>Main Fabric Construction <span class="step-1-error">*</span> :</b></label>
           </div>
           <div class="col-sm-6">
               <input type="text" class="form-control" id="fabricConstruction" name="fabricConstruction" placeholder="fabric pique">
@@ -57,15 +56,13 @@
       </div>
       </br>
 
-
       <div class="well clonable-block" data-toggle="cloner">
           <div class="card clonable" data-ss="1">
               <div class="card-body">
                   <div class="card-title mb-4 row">
                       <div class="col-sm-2">
-                          <label for="colors" class="control-label"><b>Colors <span class="error">*</span> :</b></label>
+                          <label for="colors" class="control-label"><b>Colors <span class="step-1-error">*</span> :</b></label>
                       </div>
-
                       <div class="col-sm-4">
                           <input type="text" class="form-control clonable-increment-id clonable-increment-name" id="colors_0" name="colors[0]" placeholder="Colors name or colors code">
                       </div>
@@ -74,7 +71,7 @@
                           <button type="button" class="btn btn-danger clonable-button-close"><i class="fa fa-trash"></i></button>
                       </div>
                   </div>
-                  <div class="card-subtitle mb-4 text-muted"><b>Quantity in pieces by Size & Color <span class="error">*</span> :</b></div>
+                  <div class="card-subtitle mb-4 text-muted"><b>Quantity in pieces by Size & Color <span class="step-1-error">*</span> :</b></div>
                   <div class=" row">
                       <div class="col-sm-1">
                           <label for="mQuantity" class="control-label">M :</label>
@@ -124,11 +121,11 @@
           <div class=" row">
               <div class="col-sm-6">
                   <div class="form-group">
-                      <label for="febricDescription"><b>Fabrics Description <span class="error">*</span> :</b></label>
+                      <label for="febricDescription"><b>Fabrics Description <span class="step-1-error">*</span> :</b></label>
                       <textarea class="form-control" id="febricDescription" name="febricDescription" rows="2" placeholder="combed , viscage etc"></textarea>
                   </div>
                   <div class="form-group">
-                      <label for="sketchUpload" class="control-label"><b>Upload Sketch <span class="error">*</span>
+                      <label for="sketchUpload" class="control-label"><b>Upload Sketch <span class="step-1-error">*</span>
                               :</b></label>
                       <input type="text" class="form-control" id="sketchUpload" name="sketchUpload">
                   </div>
@@ -175,7 +172,7 @@
 
               }
           )
-          $(".error").remove();
+          $(".step-1-error").remove();
           return result;
       }
   </script>

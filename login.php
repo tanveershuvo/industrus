@@ -23,7 +23,13 @@
             <div class="col-lg-6 offset-lg-3">
                 <div class="login-form">
                     <h2>Login</h2>
-                    <form action="loginsave.php" onsubmit="return nullcheck();" action="registersave.php" method="POST">
+                    <?php if (isset($_SESSION['amsg'])) { ?>
+                        <div class="alert alert-<?= $_SESSION['amsg']['type'] ?>" role="alert">
+                            <?= $_SESSION['amsg']['msg'] ?>
+                        </div>
+                    <?php unset($_SESSION['amsg']);
+                    } ?>
+                    <form action="loginsave.php" method="POST">
                         <div class="group-input">
                             <label for="email">Email address *</label>
                             <input type="text" id="email" name="email" placeholder="email" autocomplete="on">
@@ -34,15 +40,10 @@
                         </div>
                         <div class="group-input gi-check">
                             <div class="gi-more">
-                                <label for="save-pass">
-                                    Save Password
-                                    <input type="checkbox" id="save-pass">
-                                    <span class="checkmark"></span>
-                                </label>
                                 <a href="forgotpassword" class="forget-pass">Forget your Password</a>
                             </div>
                         </div>
-                        <button type="submit" class="site-btn login-btn" name="login">Sign In</button>
+                        <button type="submit" id="submit" class="site-btn login-btn" name="login">Sign In</button>
                     </form>
                     <div class="switch-login">
                         <a href="./register.php" class="or-login">Or Create An Account</a>
@@ -87,29 +88,29 @@
     </div>
 </div>
 
-<script>
-    function nullcheck() {
-
-        $(".error").remove();
-
-        if ($('#email').val() == '') {
-            $('#email').after('<span class="error">* This field is required</span>');
-            return false;
-        }
-
-        if ($('#password').val() == '') {
-            $('#password').after('<span class="error">* This field is required</span>');
-            return false;
-        }
-
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#email").val())) {
-
-            $('#email').after('<span class="error">* Type a valid email!!</span>');
-            return false;
-
-        }
-    }
-</script>
-
 <!-- Partner Logo Section End -->
 <?php include 'includes/footer.php'; ?>
+<script>
+    $(document).ready(function() {
+        $("form").submit(function() {
+            $(".error").remove();
+            $("input").removeClass("validateBorder");
+            if ($('#email').val() == '') {
+                $('#email').after('<span class="error">* This field is required</span>').addClass("validateBorder").focus();
+                return false;
+            }
+            if ($('#password').val() == '') {
+                $('#password').after('<span class="error">* This field is required</span>').addClass("validateBorder").focus();
+                return false;
+            }
+        });
+    });
+
+    $('#email').on('input', function() {
+        $(".error").remove();
+        $(".validateBorder").removeClass();
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#email").val())) {
+            $('#email').after('<span class="error">* Type a valid email!!</span>').addClass("validateBorder").focus();
+        }
+    });
+</script>
