@@ -8,7 +8,7 @@
               <label for="buyerName" class="control-label"><b>Buyer Name <span class="step-1-error">*</span> :</b></label>
           </div>
           <div class="col-sm-4">
-              <input type="text" class="form-control " id="buyerName" name="buyerName" placeholder="type Your Name">
+              <input type="text" class="form-control" id="buyerName" name="buyerName" placeholder="type Your Name">
           </div>
 
           <div class="col-sm-2">
@@ -24,8 +24,19 @@
           <div class="col-sm-2">
               <label for="productName" class="control-label"><b>Product Name <span class="step-1-error">*</span> :</b></label>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-4">
               <input type="text" class="form-control" id="productName" name="productName" placeholder="type Product Name">
+          </div>
+          <div class="col-sm-3">
+              <label for="productName" class="control-label"><b>Product Price Per 25 Pcs <span class="step-1-error">*</span> :</b></label>
+          </div>
+          <div class="col-sm-3">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">$</span>
+                  </div>
+                  <input type="text" class="form-control num" id="productPrice" name="productPrice" aria-label="Amount (to the nearest dollar)">
+              </div>
           </div>
       </div>
       </br>
@@ -77,19 +88,19 @@
                           <label for="mQuantity" class="control-label">M :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="mQuantity_0" name="mQuantity[0]" placeholder="quantity in pieces">
+                          <input type="text" class="form-control num nreq clonable-increment-id clonable-increment-name" id="mQuantity_0" name="mQuantity[0]" placeholder="quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="sQuantity" class="">S :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="sQuantity_0" name="sQuantity[0]" placeholder="quantity in pieces">
+                          <input type="text" class="form-control num nreq clonable-increment-id clonable-increment-name" id="sQuantity_0" name="sQuantity[0]" placeholder="quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="lQuantity" class="">L :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="lQuantity_0" name="lQuantity[0]" placeholder="quantity in pieces">
+                          <input type="text" class="form-control num nreq clonable-increment-id clonable-increment-name" id="lQuantity_0" name="lQuantity[0]" placeholder="quantity in pieces">
                       </div>
                   </div>
                   </br>
@@ -99,19 +110,19 @@
                           <label for="xlQuantity" class="control-label">XL :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="xlQuantity_0" name="xlQuantity[0]" placeholder=" quantity in pieces">
+                          <input type="text" class="form-control num nreq clonable-increment-id clonable-increment-name" id="xlQuantity_0" name="xlQuantity[0]" placeholder=" quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="xxlQuantity" class="">XXL :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="number" class="form-control quantity clonable-increment-id clonable-increment-name" id="xxlQuantity_0" name="xxlQuantity[0]" placeholder="quantity in pieces">
+                          <input type="text" class="form-control num nreq clonable-increment-id clonable-increment-name" id="xxlQuantity_0" name="xxlQuantity[0]" placeholder="quantity in pieces">
                       </div>
                       <div class="col-sm-1">
                           <label for="xxxlQuantity" class="">XXXL :</label>
                       </div>
                       <div class="col-sm-3">
-                          <input type="text" class="form-control quantity clonable-increment-id clonable-increment-name" id="xxxlQuantity_0" name="xxxlQuantity[0]" placeholder="quantity in pieces">
+                          <input type="text" class="form-control num nreq clonable-increment-id clonable-increment-name" id="xxxlQuantity_0" name="xxxlQuantity[0]" placeholder="quantity in pieces">
                       </div>
                   </div>
 
@@ -127,7 +138,10 @@
                   <div class="form-group">
                       <label for="sketchUpload" class="control-label"><b>Upload Sketch <span class="step-1-error">*</span>
                               :</b></label>
-                      <input type="text" class="form-control" id="sketchUpload" name="sketchUpload">
+                      <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="sketchUpload" name="sketchUpload" aria-describedby="inputGroupFileAddon04" required>
+                          <label class="custom-file-label" for="sketchUpload">Choose image</label>
+                      </div>
                   </div>
               </div>
               <div class="col-sm-2">
@@ -144,9 +158,9 @@
   <script type="text/javascript">
       function technicalValidation() {
           let result = true;
-          $('#step-1 input,textarea').each(
+          $('#step-1 input,#step-1 textarea').each(
               function() {
-                  let input = $(this).not(".quantity");
+                  let input = $(this).not(".nreq");
                   //console.log(input)
                   $(".invalid-feedback").remove();
                   $("input,textarea").removeClass("is-invalid");
@@ -155,21 +169,23 @@
                       $("#" + inputID).after('<div class="invalid-feedback">* ' + message(inputID) +
                           ' is required</div>').focus();
                       $("#" + inputID).addClass("is-invalid");
+                      console.log("#" + inputID)
                       result = false;
                       return false;
                   }
-                  if ($(this).hasClass("quantity")) {
+                  //   alert(result + 're')
+                  if ($(this).hasClass("num")) {
                       let inputNumber = $(this);
                       if (isNaN(inputNumber.val())) {
                           let inputID = inputNumber.attr('id');
                           $("#" + inputID).after('<div class="invalid-feedback">* ' + message(inputID) +
                               ' must be number</div>').focus();
                           $("#" + inputID).addClass("is-invalid");
+                          console.log(inputID + ' ok')
                           result = false;
                           return false;
                       }
                   }
-
               }
           )
           $(".step-1-error").remove();

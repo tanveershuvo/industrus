@@ -136,10 +136,7 @@
                     }
                 }
             )
-
         }
-
-
         $(".step-2-error").remove();
         return result;
     }

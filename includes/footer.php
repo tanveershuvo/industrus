@@ -100,10 +100,14 @@
         if (stepNumber == 2) {
           result = sewingValidation();
         }
+        if (stepNumber == 3) {
+          result = packingValidation();
+        }
         return result;
       }
     });
   });
+
   $("input[type=file]").change(function(event) {
     $(".invalid-feedback").remove();
     $("input").removeClass("is-invalid");
@@ -122,6 +126,18 @@
       id.addClass("is-invalid");
     }
   });
+  // $(document).ready(function() {
+  //   $("#submit").click(function() {
+  //     if (technicalValidation() == true && measurementValidation() == true && sewingValidation() == true && packingValidation() == true) {
+  //       $('#form').submit();
+  //     } else {
+  //       $("#formerror").show();
+  //       setTimeout(function() {
+  //         $('#formerror').fadeOut()
+  //       }, 5000);
+  //     }
+  //   });
+  // });
 </script>
 </body>
 

@@ -17,17 +17,15 @@
         <?php include 'packaging-description.php'; ?>
 
       </div>
-
-      <button type="submit" style="display:none;" onclick="sub();">ooo</button>
     </div>
 
   </form>
 </section>
 
 <script>
-  // $(window).bind('beforeunload', function() {
-  //   return 'are you sure you want to leave?';
-  // });
+  $(window).bind('beforeunload', function() {
+    return 'are you sure you want to leave?';
+  });
   // $(window).on('load', function() {
   //   window.location.href = "http://localhost/industrus/order-form#step-1";
   // });

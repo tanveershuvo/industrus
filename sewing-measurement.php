@@ -35,8 +35,8 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Ref <span class="err_2">*</span></th>
-                <th width="40%" scope="col">Description <span class="err_2">*</span></th>
+                <th scope="col">Ref <span class="step-3-error">*</span></th>
+                <th width="40%" scope="col">Description <span class="step-3-error">*</span></th>
                 <th id="test" scope="col">Action</th>
             </tr>
         </thead>
@@ -67,10 +67,8 @@
         let inputname = "";
         let inputfield = "";
         for (let i = 0; i < colornames.length; i++) {
-
             inputname += "<th class='appended'>" + colornames[i] + "</th>";
             colornames[i] = colornames[i].replace(/ /g, '');
-            console.log(colornames[i])
             inputfield += '<td class="appended"><input type="text" id="yarn' + i + '_1" class="form-control  clonable-increment-id clonable-increment-name" name="yarnColor[' + colornames[i] + '][1]" placeholder="' + colornames[i] + '"></td>';
         }
         $(inputname).insertBefore("#test");
