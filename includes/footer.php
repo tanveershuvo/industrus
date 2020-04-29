@@ -70,7 +70,9 @@
 <script type="text/javascript" src="plugin/smart-wizard/js/jquery.smartWizard.min.js"></script>
 <script type="text/javascript" src="plugin/smart-wizard/js/jquery.cloner.js"></script>
 <script type="text/javascript" src="plugin/zoom/js/zoom.js"></script>
+
 <script type="text/javascript">
+  var result = "";
   $(function() {
 
     $('#smartwizard').smartWizard({
@@ -86,7 +88,6 @@
         $("#smartwizard .btn-toolbar .sw-btn-next").show()
       }
     });
-    let result = "";
     $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
       var elmForm = $("#step-" + stepNumber);
       if (stepDirection === 'forward' && elmForm) {
@@ -100,22 +101,18 @@
         if (stepNumber == 2) {
           result = sewingValidation();
         }
-        if (stepNumber == 3) {
-          result = packingValidation();
-        }
         return result;
       }
     });
   });
 
-  $("input[type=file]").change(function(event) {
+  $("input[type=file]").on('change', function(event) {
     $(".invalid-feedback").remove();
     $("input").removeClass("is-invalid");
     var inputFile = event.currentTarget;
     $(inputFile).parent()
       .find('.custom-file-label')
       .html(inputFile.files[0].name);
-    let input = $(this);
     var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
     if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
       let id = $("#" + input.attr('id'));
@@ -126,18 +123,21 @@
       id.addClass("is-invalid");
     }
   });
-  // $(document).ready(function() {
-  //   $("#submit").click(function() {
-  //     if (technicalValidation() == true && measurementValidation() == true && sewingValidation() == true && packingValidation() == true) {
-  //       $('#form').submit();
-  //     } else {
-  //       $("#formerror").show();
-  //       setTimeout(function() {
-  //         $('#formerror').fadeOut()
-  //       }, 5000);
-  //     }
-  //   });
-  // });
+  console.log(result)
+  $(document).ready(function() {
+    $("#submit").click(function() {
+      if (packingValidation() == true) {
+        exit();
+        $('#form').submit();
+
+      } else {
+        $("#formerror").show();
+        setTimeout(function() {
+          $('#formerror').fadeOut()
+        }, 5000);
+      }
+    });
+  });
 </script>
 </body>
 

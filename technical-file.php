@@ -139,7 +139,7 @@
                       <label for="sketchUpload" class="control-label"><b>Upload Sketch <span class="step-1-error">*</span>
                               :</b></label>
                       <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="sketchUpload" name="sketchUpload" aria-describedby="inputGroupFileAddon04" required>
+                          <input type="file" class="custom-file-input" id="sketchUpload" name="productSketch" aria-describedby="inputGroupFileAddon04" required>
                           <label class="custom-file-label" for="sketchUpload">Choose image</label>
                       </div>
                   </div>

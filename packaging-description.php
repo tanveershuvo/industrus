@@ -12,7 +12,7 @@
                     <label for="">Peices Per Box :</label>
                 </div>
                 <div class="col-5">
-                    <input type="text" class="form-control" id="" name="" placeholder="total pieces">
+                    <input type="text" class="form-control" id="peicePerBox" name="peicePerBox" placeholder="total pieces">
                 </div>
             </div>
 
@@ -29,14 +29,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">S</th>
-                    <td><input type="text" class="form-control" id="" name="" placeholder="ex:25"></td>
-                    <td><input type="text" class="form-control" id="" name="" placeholder="ex:25"></td>
-                    <td><input type="text" class="form-control" id="" name="" placeholder="ex:25"></td>
-                    <td><input type="text" class="form-control" id="" name="" placeholder="ex:6.70"></td>
-                    <td><input type="text" class="form-control" id="" name="" placeholder="ex:5.70"></td>
-                </tr>
+                <?php $size = ['s', 'm', 'l', 'xl', 'xxl', 'xxxl'];
+
+                foreach ($size as $value) {
+                ?>
+                    <tr>
+                        <th scope="row"><?php echo strtoupper($value); ?></th>
+                        <td><input type="text" class="form-control" id="<?= $value ?>Length" name="<?= $value ?>Length" placeholder="ex:25"></td>
+                        <td><input type="text" class="form-control" id="<?= $value ?>Width" name="<?= $value ?>Width" placeholder="ex:25"></td>
+                        <td><input type="text" class="form-control" id="<?= $value ?>Height" name="<?= $value ?>Height" placeholder="ex:25"></td>
+                        <td><input type="text" class="form-control" id="<?= $value ?>GW" name="<?= $value ?>GW" placeholder="ex:6.70"></td>
+                        <td><input type="text" class="form-control" id="<?= $value ?>NW" name="<?= $value ?>NW" placeholder="ex:5.70"></td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -80,18 +85,13 @@
 
     <div class="row">
         <div class="col text-center ">
-            <button class="site-btn login-btn col-6" id="submit">Order</button>
+            <button class="site-btn login-btn col-6" id="submit" name="submit">Order</button>
         </div>
     </div>
     <br>
 </div>
 
 <script type="text/javascript">
-    // function sub() {
-    //     $('#form').submit();
-    // }
-
-
     function packingValidation() {
         let result = true;
         $(".invalid-feedback").remove();

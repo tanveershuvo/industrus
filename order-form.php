@@ -2,7 +2,7 @@
 <?php include 'includes/navbar.php'; ?>
 
 <section id="tabs" class="project-tab">
-  <form id="form" action="okko" method="post" enctype="multipart/form-data">
+  <form id="form" action="controller/OrderController" method="post" enctype="multipart/form-data">
     <div id="smartwizard">
       <ul>
         <li><a href="#step-1">First Step <br /><small> Technical File</small></a></li>
@@ -22,12 +22,4 @@
   </form>
 </section>
 
-<script>
-  $(window).bind('beforeunload', function() {
-    return 'are you sure you want to leave?';
-  });
-  // $(window).on('load', function() {
-  //   window.location.href = "http://localhost/industrus/order-form#step-1";
-  // });
-</script>
 <?php include 'includes/footer.php'; ?>

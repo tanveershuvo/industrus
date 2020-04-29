@@ -10,7 +10,7 @@
                 <label for="frontMeasurementSketch" class="control-label"><b>Upload Front Measurement Sketch
                         <span class="step-2-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="text" class="custom-file-input" id="frontMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required="">
+                    <input type="text" class="custom-file-input" id="frontMeasurementSketch" name="frontMeasurementSketch" aria-describedby="inputGroupFileAddon04" required="">
                     <label class="custom-file-label" for="postedFile">Choose front Measurement Sketch</label>
                     <div class="invalid-feedback">That didn't work.</div>
                 </div>
@@ -19,14 +19,14 @@
                 <label for="backMeasurementSketch" class="control-label"><b>Upload Back Measurement Sketch
                         <span class="step-2-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="text" class="custom-file-input" id="backMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04">
+                    <input type="text" class="custom-file-input" id="backMeasurementSketch" name="backMeasurementSketch" aria-describedby="inputGroupFileAddon04">
                     <label class="custom-file-label" for="postedFile">Choose back Measurement Sketch</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="collarMeasurementSketch" class="control-label"><b>Upload Collar Measurement Sketch <span class="step-2-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="text" class="custom-file-input" id="collarMeasurementSketch" name="measurementSketch" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="collarMeasurementSketch" name="collarMeasurementSketch" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose collar Measurement Sketch</label>
                 </div>
             </div>

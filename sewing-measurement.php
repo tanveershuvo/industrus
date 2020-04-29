@@ -7,21 +7,21 @@
             <div class="form-group">
                 <label for="frontSewing" class="control-label"><b>Upload Front sewing Sketch <span class="step-3-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="text" class="custom-file-input" id="frontSewing" name="frontSewing" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="frontSewing" name="frontSewingSkecth" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose Front sewing image</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="frontPlacket" class="control-label"><b>Upload Front Placket Sketch <span class="step-3-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="text" class="custom-file-input" id="frontPlacket" name="frontPlacket" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="frontPlacket" name="frontPlacketSkecth" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose front Placket image</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="slideSlit" class="control-label"><b>Upload Slide slit sewing Sketch <span class="step-3-error">*</span> :</b></label>
                 <div class="custom-file">
-                    <input type="text" class="custom-file-input" id="slideSlit" name="slideSlit" aria-describedby="inputGroupFileAddon04" required>
+                    <input type="text" class="custom-file-input" id="slideSlit" name="slideSlitSkecth" aria-describedby="inputGroupFileAddon04" required>
                     <label class="custom-file-label" for="postedFile">Choose slide Slit image</label>
                 </div>
             </div>
