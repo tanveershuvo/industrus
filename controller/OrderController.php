@@ -1,15 +1,17 @@
 <?php
+session_start();
 include_once("../dbCon.php");
 include_once("../imageUpload.php");
 $conn = connect();
 if (isset($_POST['samplesubmit'])) {
-    $query = "INSERT INTO `sample_order`(`orderId`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`,`productSketch`, `yarnDescription`)
-              VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?,?)";
+    $query = "INSERT INTO `sample_order`(`orderId`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`,`productSketch`, `yarnDescription`,`user_id`)
+              VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?,?,?)";
 
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssssssssss", $id, $buyerName, $companyName, $productName, $productPrice, $composition, $fabricsWeight, $samplePcs, $fabricConstruction, $febricDescription, $uploadInstance, $yarnDescription);
+    $stmt->bind_param("sssssssssssss", $id, $buyerName, $companyName, $productName, $productPrice, $composition, $fabricsWeight, $samplePcs, $fabricConstruction, $febricDescription, $uploadInstance, $yarnDescription, $userID);
 
     $id = uniqid();
+    $userID = $_SESSION['id'];
     $uploadInstance = uploadImageChosen($_FILES['productSketch']);
     $buyerName = mysqli_real_escape_string($conn, $_POST['buyerName']);
     $companyName = mysqli_real_escape_string($conn, $_POST['companyName']);
@@ -22,7 +24,7 @@ if (isset($_POST['samplesubmit'])) {
     $febricDescription = mysqli_real_escape_string($conn, $_POST['febricDescription']);
     $yarnDescription = mysqli_real_escape_string($conn, $_POST['yarnDescription']);
 
-    $result = $stmt->execute();
+    $stmt->execute();
 
     $colors = $_POST['colors'];
     $arr = sizeof($colors);
@@ -41,13 +43,12 @@ if (isset($_POST['samplesubmit'])) {
         $xxlQuantity = mysqli_real_escape_string($conn, $_POST['xxlQuantity'][$i]);
         $xxxlQuantity = mysqli_real_escape_string($conn, $_POST['xxxlQuantity'][$i]);
 
-        $total = ($_POST['sQuantity'][$i] + $_POST['mQuantity'][$i] + $_POST['lQuantity'][$i] + $_POST['xlQuantity'][$i] + $_POST['xxlQuantity'][$i] + $_POST['xxxlQuantity'][$i]);
+        $total = ($mQuantity + $sQuantity + $lQuantity + $xlQuantity + $xxlQuantity + $xxlQuantity);
         $clmt->execute();
     }
-
-
 
     $stmt->close();
     $clmt->close();
     $conn->close();
+    header('Location:../sample-request');
 }

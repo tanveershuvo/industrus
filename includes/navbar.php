@@ -46,10 +46,11 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li><a href="index">Home</a></li>
-                        <li><a href="order-form">Order</a></li>
+                        <li><a href="sample-request">Order</a></li>
                         <li><a href="blog">Blog</a></li>
                         <li><a href="contact">Contact</a></li>
                         <?php if (isset($_SESSION['isLoggedIn'])) { ?>
+
                             <li><a href="logout">Log Out</a></li>
                         <?php } else { ?>
                             <li><a href="login">Log In</a></li>

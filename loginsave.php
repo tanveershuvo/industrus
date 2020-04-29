@@ -18,6 +18,7 @@ if (isset($_POST["login"])) {
 	if ($result->num_rows > 0) {
 		$_SESSION['isLoggedIn'] = TRUE;
 		while ($row = $result->fetch_assoc()) {
+			$_SESSION['id'] = $row['id'];
 			$_SESSION['email'] = $row['email'];
 			$_SESSION['name'] = $row['name'];
 			$_SESSION['company_name'] = $row['company_name'];
