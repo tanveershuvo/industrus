@@ -1,8 +1,7 @@
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
-
 <section id="tabs" class="project-tab">
-  <form id="form" action="controller/OrderController" method="post" enctype="multipart/form-data">
+  <form id="form" action="controller/DetailOrderController" method="post" enctype="multipart/form-data">
     <div id="smartwizard">
       <ul>
         <li><a href="#step-1">First Step <br /><small> Technical File</small></a></li>
@@ -15,11 +14,8 @@
         <?php include 'measurement-sketch.php'; ?>
         <?php include 'sewing-measurement.php'; ?>
         <?php include 'packaging-description.php'; ?>
-
       </div>
     </div>
-
   </form>
 </section>
-
 <?php include 'includes/footer.php'; ?>

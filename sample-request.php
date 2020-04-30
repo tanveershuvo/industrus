@@ -47,7 +47,7 @@ $conn = connect();
             case 'no result';
             ?>
                 <div class="card bg-light mb-5">
-                    <form id="myForm" action="controller/OrderController" method="post" enctype="multipart/form-data">
+                    <form id="myForm" action="controller/SampleOrderController" method="post" enctype="multipart/form-data">
                         <div class="card-header mb-3">
                             <h5 class="step-1-error">All * fields are required</h5>
                         </div>

@@ -72,7 +72,6 @@
 <script type="text/javascript" src="plugin/zoom/js/zoom.js"></script>
 
 <script type="text/javascript">
-  var result = "";
   $(function() {
 
     $('#smartwizard').smartWizard({
@@ -91,10 +90,7 @@
     $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
       var elmForm = $("#step-" + stepNumber);
       if (stepDirection === 'forward' && elmForm) {
-        if (stepNumber == 0) {
-          result = technicalValidation();
-          addColor();
-        }
+        var result = "";
         if (stepNumber == 1) {
           result = measurementValidation();
         }
@@ -105,7 +101,6 @@
       }
     });
   });
-
   $("input[type=file]").on('change', function(event) {
     $(".invalid-feedback").remove();
     $("input").removeClass("is-invalid");
@@ -123,18 +118,17 @@
       id.addClass("is-invalid");
     }
   });
-  console.log(result)
   $(document).ready(function() {
-    $("#submit").click(function() {
-      if (packingValidation() == true) {
-        exit();
-        $('#form').submit();
-
-      } else {
+    $("#submit").on('click', function() {
+      if (packingValidation() == false) {
+        return false;
+      }
+      if (sewingValidation() == false || measurementValidation() == false) {
         $("#formerror").show();
         setTimeout(function() {
           $('#formerror').fadeOut()
         }, 5000);
+        return false;
       }
     });
   });

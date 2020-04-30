@@ -1,57 +1,64 @@
-<div id="step-4" role="form">
-    <hr>
-    <h5 class="step-4-error">All * fields are required</h5>
-    <hr>
-    <div class="card mb-4">
-        <div class="row">
-            <div class="col-6 card-header ">
-                <h5><strong>Packaging</strong> Details per Box : </h5>
-            </div>
-            <div class="col-6 row card-header ">
-                <div class="col-4">
-                    <label for="">Peices Per Box :</label>
-                </div>
-                <div class="col-5">
-                    <input type="text" class="form-control" id="peicePerBox" name="peicePerBox" placeholder="total pieces">
-                </div>
-            </div>
-
-        </div>
-        <table class="table table-bordered  card-body">
-            <thead>
-                <tr>
-                    <th scope="col">Size</th>
-                    <th scope="col">Length<br>(in CM)<span class="step-4-error">*</span></th>
-                    <th scope="col">Width<br>(in CM)<span class="step-4-error">*</span></th>
-                    <th scope="col">Height<br>(in CM)<span class="step-4-error">*</span></th>
-                    <th scope="col">Gross weight<br><span class="step-4-error">*</span>(in Kg)</th>
-                    <th scope="col">Net Weight<br><span class="step-4-error">*</span>(in Kg)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $size = ['s', 'm', 'l', 'xl', 'xxl', 'xxxl'];
-
-                foreach ($size as $value) {
-                ?>
-                    <tr>
-                        <th scope="row"><?php echo strtoupper($value); ?></th>
-                        <td><input type="text" class="form-control" id="<?= $value ?>Length" name="<?= $value ?>Length" placeholder="ex:25"></td>
-                        <td><input type="text" class="form-control" id="<?= $value ?>Width" name="<?= $value ?>Width" placeholder="ex:25"></td>
-                        <td><input type="text" class="form-control" id="<?= $value ?>Height" name="<?= $value ?>Height" placeholder="ex:25"></td>
-                        <td><input type="text" class="form-control" id="<?= $value ?>GW" name="<?= $value ?>GW" placeholder="ex:6.70"></td>
-                        <td><input type="text" class="form-control" id="<?= $value ?>NW" name="<?= $value ?>NW" placeholder="ex:5.70"></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+<div id="step-4" role="form" class="card bg-light mb-5">
+    <div class="card-header mb-2">
+        <h5 class="error">All * fields are required</h5>
     </div>
-    <h5><strong>Other Packaging</strong> information : </h5>
-    <hr>
+    <div class="row mb-3">
+        <div class="col-6 ">
+            <h5><strong>Packaging</strong> Details per Box : </h5>
+        </div>
+        <div class="col-6 row ">
+            <div class="col-4">
+                <label for="">Peices Per Box :</label>
+            </div>
+            <div class="col-5">
+                <input type="text" class="form-control" id="peicePerBox" name="peicePerBox" placeholder="total pieces">
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered mb-4">
+        <thead>
+            <tr>
+                <th scope="col" width="15%">Size</th>
+                <th scope="col">Length<br>(in CM)<span class="error">*</span></th>
+                <th scope="col">Width<br>(in CM)<span class="error">*</span></th>
+                <th scope="col">Height<br>(in CM)<span class="error">*</span></th>
+                <th scope="col">Gross weight<br><span class="error">*</span>(in Kg)</th>
+                <th scope="col">Net Weight<br><span class="error">*</span>(in Kg)</th>
+                <th scope="col" width="5%">Action</th>
+            </tr>
+        </thead>
+        <tbody class="clonable-block" data-toggle="cloner">
+            <tr class="clonable" data-ss="1">
+                <th scope="row">
+                    <select class="form-control clonable-increment-id clonable-increment-name" id="size" name="size[0]">
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                        <option value="xxl">XXL</option>
+                        <option value="xxxl">XXXL</option>
+                    </select></th>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="Length_0" name="Length[0]" placeholder="ex:25"></td>
+                <td><input type="text" class="form-control num  clonable-increment-id clonable-increment-name" id="Width_0" name="Width[0]" placeholder="ex:25"></td>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="Height_0" name="Height[0]" placeholder="ex:25"></td>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="GW_0" name="GW[0]" placeholder="ex:6.70"></td>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="NW_0" name="NW[0]" placeholder="ex:5.70"></td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                        <button class="clonable-button-add btn btn-primary cl" type="button"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-danger clonable-button-close"><i class="fa fa-trash"></i></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h5 class="mb-3 mt-2"><strong>Other Packaging</strong> information : </h5>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Reference <span class="step-4-error">*</span></th>
-                <th width="40%" scope="col">Description <span class="step-4-error">*</span></th>
+                <th scope="col">Reference <span class="error">*</span></th>
+                <th width="40%" scope="col">Description <span class="error">*</span></th>
                 <th scope="col">Associated Image</th>
                 <th scope="col">Action</th>
             </tr>
@@ -80,6 +87,9 @@
 
     <div class="alert alert-danger" role="alert" id="formerror" style="display: none;">
         <h4 class="alert-heading">ERROR!</h4>
+        <hr>
+        <p>You skipped steps! Fill up those form!</p>
+        <hr>
         <p>Please Check You have selected all the required element!</p>
     </div>
 
@@ -90,13 +100,27 @@
     </div>
     <br>
 </div>
-
 <script type="text/javascript">
+    $('.clonable-button-add').click(function() {
+        $('#size').each(
+            function(index) {
+                $('option:selected').prop('disabled', 'disabled')
+            });
+    });
+
     function packingValidation() {
         let result = true;
         $(".invalid-feedback").remove();
         $("input").removeClass("is-invalid");
-        $('#step-4 input').each(
+        let select = $("#size");
+        if (select.val() === "") {
+            let inputID = select.attr('id');
+            $("#" + inputID).after('<span class="invalid-feedback">* ' + message(inputID) +
+                ' is required</span>').addClass("is-invalid").focus();
+            result = false;
+            return false;
+        }
+        $('#step-4 input[type=text]').each(
             function(index) {
                 let inputfile = $(this);
                 if (inputfile.val() == "") {
@@ -105,9 +129,18 @@
                         ' is required</span>').addClass("is-invalid").focus();
                     result = false;
                     return false;
+                } else if ($(this).hasClass("num")) {
+                    let number = $(this);
+                    if (isNaN(number.val())) {
+                        let inputID = number.attr('id');
+                        $("#" + inputID).after('<div class="invalid-feedback">* ' + message(inputID) +
+                            ' must be a number</div>').focus();
+                        $("#" + inputID).addClass("is-invalid");
+                        result = false;
+                        return false;
+                    }
                 }
             })
-        $(".step-4-error").remove();
         return result;
     }
 </script>
