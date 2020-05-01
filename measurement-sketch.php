@@ -9,7 +9,7 @@
                      <label for="frontMeasurementSketch" class="control-label"><b>Upload Front Measurement Sketch
                              <span class="error">*</span> :</b></label>
                      <div class="custom-file">
-                         <input type="text" class="custom-file-input" id="frontMeasurementSketch" name="frontMeasurementSketch" aria-describedby="inputGroupFileAddon04" required="">
+                         <input type="file" class="custom-file-input" id="frontMeasurementSketch" name="frontMeasurementSketch" aria-describedby="inputGroupFileAddon04" required="">
                          <label class="custom-file-label" for="postedFile">Choose front Measurement Sketch</label>
                          <div class="invalid-feedback">That didn't work.</div>
                      </div>
@@ -18,14 +18,14 @@
                      <label for="backMeasurementSketch" class="control-label"><b>Upload Back Measurement Sketch
                              <span class="error">*</span> :</b></label>
                      <div class="custom-file">
-                         <input type="text" class="custom-file-input" id="backMeasurementSketch" name="backMeasurementSketch" aria-describedby="inputGroupFileAddon04">
+                         <input type="file" class="custom-file-input" id="backMeasurementSketch" name="backMeasurementSketch" aria-describedby="inputGroupFileAddon04">
                          <label class="custom-file-label" for="postedFile">Choose back Measurement Sketch</label>
                      </div>
                  </div>
                  <div class="form-group">
                      <label for="collarMeasurementSketch" class="control-label"><b>Upload Collar Measurement Sketch <span class="error">*</span> :</b></label>
                      <div class="custom-file">
-                         <input type="text" class="custom-file-input" id="collarMeasurementSketch" name="collarMeasurementSketch" aria-describedby="inputGroupFileAddon04" required>
+                         <input type="file" class="custom-file-input" id="collarMeasurementSketch" name="collarMeasurementSketch" aria-describedby="inputGroupFileAddon04" required>
                          <label class="custom-file-label" for="postedFile">Choose collar Measurement Sketch</label>
                      </div>
                  </div>
@@ -57,32 +57,32 @@
          <tbody class="clonable-block" data-toggle="cloner">
              <tr class="clonable" data-ss="1">
                  <th scope="row">
-                     <input type="text" id="imgRef_0" class="form-control clonable-increment-id clonable-increment-name " name="img[0]" placeholder="reference">
+                     <input type="text" id="imgRef_0" class="form-control clonable-increment-id clonable-increment-name " name="measurementReference[0]" placeholder="reference">
                  </th>
                  <td>
-                     <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="" placeholder="Measurement description">
+                     <input type="text" id="measurementDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="measurementDescription[0]" placeholder="Measurement description">
                  </td>
 
                  <td>
-                     <input type="text" id="tolerance_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="tolerance">
+                     <input type="text" id="tolerance_0" class="form-control num clonable-increment-id clonable-increment-name" name="tolerance[0]" placeholder="tolerance">
                  </td>
                  <td class="s">
-                     <input type="text" id="sSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="Inch" value="">
+                     <input type="text" id="sSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="s_size[0]" placeholder="Inch">
                  </td>
                  <td class="m">
-                     <input type="text" id="mSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="Inch" value="">
+                     <input type="text" id="mSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="m_size[0]" placeholder="Inch">
                  </td>
                  <td class="l">
-                     <input type="text" id="lSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="Inch" value="">
+                     <input type="text" id="lSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="l_size[0]" placeholder="Inch">
                  </td>
                  <td class="xl">
-                     <input type="text" id="xlSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="Inch" value="">
+                     <input type="text" id="xlSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="xl_size[0]" placeholder="Inch">
                  </td>
                  <td class="xxl">
-                     <input type="text" id="xxlSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="" placeholder="Inch" value="">
+                     <input type="text" id="xxlSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" name="xxl_size[0]" placeholder="Inch">
                  </td>
                  <td class="xxxl">
-                     <input type="text" id="xxxlSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" placeholder="Inch" name="" value="">
+                     <input type="text" id="xxxlSizeInInch_0" class="form-control num clonable-increment-id clonable-increment-name" placeholder="Inch" name="xxxl_size[0]">
                  </td>
                  <td>
                      <div class="btn-group btn-group-sm" role="group" aria-label="...">

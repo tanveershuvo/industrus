@@ -2,7 +2,7 @@
     include_once("dbCon.php");
     $conn = connect();
     if (isset($_SESSION['isLoggedIn'])) {
-        $sql = "SELECT * FROM sample_order WHERE user_id =? AND status = 1";
+        $sql = "SELECT * FROM order_details WHERE user_id =? AND status = 1";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $id);
         $id = $_SESSION['id'];
@@ -11,7 +11,7 @@
         $stmt->close();
         $row = $result->fetch_assoc();
         //
-        $query = "SELECT * FROM sample_colors_quantity WHERE order_id = ?";
+        $query = "SELECT * FROM order_colors_quantity WHERE order_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $order_id);
         $order_id = $row['orderId'];

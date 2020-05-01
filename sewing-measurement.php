@@ -8,21 +8,21 @@
                 <div class="form-group">
                     <label for="frontSewing" class="control-label"><b>Upload Front sewing Sketch <span class="error">*</span> :</b></label>
                     <div class="custom-file">
-                        <input type="text" class="custom-file-input" id="frontSewing" name="frontSewingSkecth" aria-describedby="inputGroupFileAddon04" required>
+                        <input type="file" class="custom-file-input" id="frontSewing" name="frontSewingSkecth" aria-describedby="inputGroupFileAddon04" required>
                         <label class="custom-file-label" for="postedFile">Choose Front sewing image</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="frontPlacket" class="control-label"><b>Upload Front Placket Sketch <span class="error">*</span> :</b></label>
                     <div class="custom-file">
-                        <input type="text" class="custom-file-input" id="frontPlacket" name="frontPlacketSkecth" aria-describedby="inputGroupFileAddon04" required>
+                        <input type="file" class="custom-file-input" id="frontPlacket" name="frontPlacketSkecth" aria-describedby="inputGroupFileAddon04" required>
                         <label class="custom-file-label" for="postedFile">Choose front Placket image</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="slideSlit" class="control-label"><b>Upload Slide slit sewing Sketch <span class="error">*</span> :</b></label>
                     <div class="custom-file">
-                        <input type="text" class="custom-file-input" id="slideSlit" name="slideSlitSkecth" aria-describedby="inputGroupFileAddon04" required>
+                        <input type="file" class="custom-file-input" id="slideSlit" name="slideSlitSkecth" aria-describedby="inputGroupFileAddon04" required>
                         <label class="custom-file-label" for="postedFile">Choose slide Slit image</label>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
         </thead>
         <tbody class="clonable-block" data-toggle="cloner">
             <tr class="clonable" data-ss="1">
-                <td scope="row"> <input type="text" id="reference_0" class="form-control clonable-increment-id clonable-increment-name " name="reference[0]" placeholder="reference"> </td>
+                <td scope="row"> <input type="text" id="reference_0" class="form-control clonable-increment-id clonable-increment-name " name="sewingReference[0]" placeholder="reference"> </td>
                 <td>
                     <input type="text" id="sewingDescription_0" class="form-control clonable-increment-id clonable-increment-name" name="sewingDescription[0]" placeholder="sewing description">
                 </td>

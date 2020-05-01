@@ -4,7 +4,7 @@ include_once("../dbCon.php");
 include_once("../imageUpload.php");
 $conn = connect();
 if (isset($_POST['samplesubmit'])) {
-    $query = "INSERT INTO `sample_order`(`orderId`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`,`productSketch`, `yarnDescription`,`user_id`)
+    $query = "INSERT INTO `order_details`(`orderId`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`,`productSketch`, `yarnDescription`,`user_id`)
               VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?,?,?)";
 
     $stmt = $conn->prepare($query);
@@ -31,7 +31,7 @@ if (isset($_POST['samplesubmit'])) {
 
     for ($i = 0; $i < $arr; $i++) {
 
-        $query = "INSERT INTO `sample_colors_quantity`(`order_id`, `color`, `sQuantity`, `mQuantity`, `lQuantity`, `xlQuantity`, `xxlQuantity`, `xxxlQuantity`,`total`) VALUES (?, ?, ?,?,?,?,?,?,?)";
+        $query = "INSERT INTO `order_colors_quantity`(`order_id`, `color`, `sQuantity`, `mQuantity`, `lQuantity`, `xlQuantity`, `xxlQuantity`, `xxxlQuantity`,`total`) VALUES (?, ?, ?,?,?,?,?,?,?)";
         $clmt = $conn->prepare($query);
         $clmt->bind_param("ssssssssi", $id, $colors, $mQuantity, $sQuantity, $lQuantity, $xlQuantity, $xxlQuantity, $xxxlQuantity, $total);
 

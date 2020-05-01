@@ -20,7 +20,7 @@ $conn = connect();
 <div class="container">
     <?php
     if (isset($_SESSION['isLoggedIn'])) {
-        $sql = "SELECT IFNULL( (SELECT status FROM sample_order where user_id =?) ,'no result') as 'status';";
+        $sql = "SELECT IFNULL( (SELECT status FROM order_details where user_id =?) ,'no result') as 'status';";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $id);
         $id = $_SESSION['id'];
