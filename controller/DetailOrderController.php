@@ -6,7 +6,7 @@ $conn = connect();
 if (isset($_POST['submit'])) {
 
     $query = "UPDATE `order_details` SET `frontMeasurementSketch`=?,
-    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? WHERE orderId = ?";
+    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? , `status` = 3 WHERE orderId = ?";
 
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssssssss", $frontMeasurementSketch, $backMeasurementSketch, $collarMeasurementSketch, $frontSewingSkecth, $frontPlacketSkecth, $slideSlitSkecth, $pcsPerBox, $orderId);
@@ -22,16 +22,16 @@ if (isset($_POST['submit'])) {
 
     $stmt->execute();
 
-    $reference = $_POST['measurementReference'];
-    $arr = sizeof($reference);
+    $measurementReference = $_POST['measurementReference'];
+    $measurementArr = sizeof($measurementReference);
 
-    for ($i = 0; $i < $arr; $i++) {
+    for ($i = 0; $i < $measurementArr; $i++) {
 
         $query = "INSERT INTO `measurement_pattern`(`order_id`, `reference`, `description`, `tolerance`, `s_size`, `m_size`, `l_size`, `xl_size`, `xxl_size`, `xxxl_size`) VALUES (?, ?, ?,?,?,?,?,?,?,?)";
         $clmt = $conn->prepare($query);
-        $clmt->bind_param("ssssssssss", $orderId, $measurementDescription, $reference, $tolerance, $s_size, $m_size, $l_size, $xl_size, $xxl_size, $xxxl_size);
+        $clmt->bind_param("ssssssssss", $orderId,  $measurementReference, $measurementDescription, $tolerance, $s_size, $m_size, $l_size, $xl_size, $xxl_size, $xxxl_size);
 
-        $reference = mysqli_real_escape_string($conn, $_POST['measurementReference'][$i]);
+        $measurementReference = mysqli_real_escape_string($conn, $_POST['measurementReference'][$i]);
         $measurementDescription = mysqli_real_escape_string($conn, $_POST['measurementDescription'][$i]);
         $tolerance = mysqli_real_escape_string($conn, $_POST['tolerance'][$i]);
         $s_size = mysqli_real_escape_string($conn, $_POST['s_size'][$i]);
@@ -44,9 +44,20 @@ if (isset($_POST['submit'])) {
     }
 
     $sewingReference = $_POST['sewingReference'];
-    $arry = sizeof($sewingReference);
+    $sewingReferenceArr = sizeof($sewingReference);
 
-    for ($i = 0; $i < $arry; $i++) {
+    $query = "SELECT * FROM order_colors_quantity WHERE order_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $orderId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($data = $result->fetch_assoc()) {
+        $colors[] = $data;
+    }
+
+
+
+    for ($i = 0; $i < $sewingReferenceArr; $i++) {
 
         $query = "INSERT INTO `yarn_description`(`id`, `order_id`, `reference`, `description`) VALUES (?, ?, ?,?)";
         $ydmt = $conn->prepare($query);
@@ -56,15 +67,9 @@ if (isset($_POST['submit'])) {
         $sewingDescription = mysqli_real_escape_string($conn, $_POST['sewingDescription'][$i]);
         $ydmt->execute();
 
-        $query = "SELECT * FROM order_colors_quantity WHERE order_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("s", $orderId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        while ($data = $result->fetch_assoc()) {
-            $colors[] = $data;
-        }
-        foreach ($colors as $value) {
+
+        // print_r($colors);
+        foreach ($colors as $key => $value) {
 
             $query = "INSERT INTO `yarn_color`(`yarn_desc_id`, `color`, `yarn_color`) VALUES (?, ?,?)";
             $ycmt = $conn->prepare($query);
@@ -74,4 +79,49 @@ if (isset($_POST['submit'])) {
             $ycmt->execute();
         }
     }
+
+    $size = $_POST['size'];
+    $sizeArr = sizeof($size);
+
+    for ($i = 0; $i < $sizeArr; $i++) {
+
+        $query = "INSERT INTO `package_box_details`(`order_id`, `size`, `length`, `width`, `height`, `grossWeight`, `nertWeight`)VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $clmt = $conn->prepare($query);
+        $clmt->bind_param("sssssss", $orderId, $size, $Length, $Width, $Height, $grossWeigh, $netWeight);
+
+        $size = mysqli_real_escape_string($conn, $_POST['size'][$i]);
+        $Length = mysqli_real_escape_string($conn, $_POST['length'][$i]);
+        $Width = mysqli_real_escape_string($conn, $_POST['width'][$i]);
+        $Height = mysqli_real_escape_string($conn, $_POST['height'][$i]);
+        $grossWeigh = mysqli_real_escape_string($conn, $_POST['grossWeight'][$i]);
+        $netWeight = mysqli_real_escape_string($conn, $_POST['netWeight'][$i]);
+        $clmt->execute();
+    }
+
+    if (isset($_POST['packageReference'])) {
+        $packageReference = $_POST['packageReference'];
+        $packageReferenceArr = sizeof($packageReference);
+
+        for ($i = 0; $i < $packageReferenceArr; $i++) {
+
+            $query = "INSERT INTO `package_description`(`order_id`, `reference`, `description`, `package_image`)VALUES (?, ?, ?, ?)";
+            $clmt = $conn->prepare($query);
+            $clmt->bind_param("ssss", $orderId, $packageReference, $packageDescription, $packageSketch);
+
+            $packageReference = mysqli_real_escape_string($conn, $_POST['packageReference'][$i]);
+            $packageDescription = mysqli_real_escape_string($conn, $_POST['packageDescription'][$i]);
+            if (isset($_FILES['packageSketch'])) {
+                $packageSketch = uploadImageChosen($_FILES['packageSketch']);
+            } else {
+                $packageSketch = 0;
+            }
+            $clmt->execute();
+        }
+    }
+    //exit();
+    $stmt->close();
+    $clmt->close();
+    $ycmt->close();
+    $conn->close();
+    header('Location:order_form');
 }

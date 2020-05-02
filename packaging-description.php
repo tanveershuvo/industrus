@@ -39,11 +39,11 @@
                         <option value="xxl">XXL</option>
                         <option value="xxxl">XXXL</option>
                     </select></th>
-                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="Length_0" name="Length[0]" placeholder="ex:25"></td>
-                <td><input type="text" class="form-control num  clonable-increment-id clonable-increment-name" id="Width_0" name="Width[0]" placeholder="ex:25"></td>
-                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="Height_0" name="Height[0]" placeholder="ex:25"></td>
-                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="GW_0" name="GW[0]" placeholder="ex:6.70"></td>
-                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="NW_0" name="NW[0]" placeholder="ex:5.70"></td>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="Length_0" name="length[0]" placeholder="ex:25"></td>
+                <td><input type="text" class="form-control num  clonable-increment-id clonable-increment-name" id="Width_0" name="width[0]" placeholder="ex:25"></td>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="Height_0" name="height[0]" placeholder="ex:25"></td>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="GW_0" name="grossWeight[0]" placeholder="ex:6.70"></td>
+                <td><input type="text" class="form-control num clonable-increment-id clonable-increment-name" id="NW_0" name="netWeight[0]" placeholder="ex:5.70"></td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="...">
                         <button class="clonable-button-add btn btn-primary cl" type="button"><i class="fa fa-plus"></i></button>
@@ -65,13 +65,13 @@
         </thead>
         <tbody class="clonable-block" data-toggle="cloner">
             <tr class="clonable" data-ss="1">
-                <td scope="row"> <input type="text" id="" class="form-control clonable-increment-id clonable-increment-name " name="" placeholder="reference"> </td>
+                <td scope="row"> <input type="text" class="form-control  clonable-increment-name " name="packageReference[0]" placeholder="reference"> </td>
                 <td>
-                    <textarea class="form-control" rows="3" id="comment_0" placeholder="describe other package information"></textarea>
+                    <textarea class="form-control  clonable-increment-name" rows="3" id="comment_0" placeholder="describe other package information" name="packageDescription[0]"></textarea>
                 </td>
                 <td>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="" name="" aria-describedby="inputGroupFileAddon04">
+                        <input type="file" class="custom-file-input clonable-increment-name" name="packageSketch[0]" aria-describedby="inputGroupFileAddon04">
                         <label class="custom-file-label" for="postedFile">upload image</label>
                     </div>
                 </td>
@@ -101,13 +101,6 @@
     <br>
 </div>
 <script type="text/javascript">
-    $('.clonable-button-add').click(function() {
-        $('#size').each(
-            function(index) {
-                $('option:selected').prop('disabled', 'disabled')
-            });
-    });
-
     function packingValidation() {
         let result = true;
         $(".invalid-feedback").remove();

@@ -216,9 +216,17 @@ $conn = connect();
                     </form>
                 </div>
         <?php break;
-        }
+            case '3';
+        } ?>
+        <div class="alert alert-success fade show mt-3 mb-5 text-center">
+            <h4 class="alert-heading mb-3"><i class="fa fa-check-circle"></i> Your order is placed</h4>
+            <hr>
+            <p>Further communication will be done through mail!</p>
+
+        </div>
+    <?php
     } else {
-        ?>
+    ?>
         <div class="alert alert-danger fade show mt-3 mb-5 text-center">
             <h4 class="alert-heading mb-3"><i class="fa fa-warning"></i> Please Login!</h4>
             <hr>
