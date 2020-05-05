@@ -28,6 +28,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+    <!-- Ekko Lightbox -->
+    <link rel="stylesheet" href="plugins/ekko-lightbox/ekko-lightbox.css">
     <style>
         @media print {
             @page {

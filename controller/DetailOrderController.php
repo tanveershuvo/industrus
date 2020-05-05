@@ -6,7 +6,7 @@ $conn = connect();
 if (isset($_POST['submit'])) {
 
     $query = "UPDATE `order_details` SET `frontMeasurementSketch`=?,
-    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? ,`shipmentDate`=? , `orderDate`=? ,`status` = 3 WHERE orderId = ?";
+    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? ,`shipmentDate`=? , `orderDate`=? ,`status` = 4 WHERE orderId = ?";
 
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssssssss", $frontMeasurementSketch, $backMeasurementSketch, $collarMeasurementSketch, $frontSewingSkecth, $frontPlacketSkecth, $slideSlitSkecth, $pcsPerBox, $orderId);

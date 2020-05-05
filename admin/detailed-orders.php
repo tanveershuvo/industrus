@@ -5,7 +5,7 @@ include 'includes/admin-navbar.php';
 include 'includes/admin-sidebar.php';
 include_once("../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details WHERE status = 3 OR status = 4 OR status = 5";
+$sql = "SELECT * FROM order_details WHERE status = 3 OR status = 4 ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,7 +21,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>All Sample Orders </h1>
+                <h1>All Detailed Orders </h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -37,7 +37,7 @@ $conn->close();
                         <th>Company Name</th>
                         <th>Product Name</th>
                         <th>Order date</th>
-                        <th>Action</th>
+                        <th>Shipment Date</th>
                         <th>Sample Details</th>
                     </tr>
                 </thead>
@@ -50,25 +50,21 @@ $conn->close();
                                 <td><?= $value['buyerName'] ?></td>
                                 <td><?= $value['companyName'] ?></td>
                                 <td><?= $value['productName'] ?></td>
-                                <td><?= $value['sampleOrderDate'] ?></td>
-                                <td style='white-space: nowrap;color:green;'>
-                                    <?php if ($value['status'] == 4) { ?>
-                                        <form id="form" action="controllers/orderController" method="post">
-                                            <input type="hidden" name="orderId" value="<?= $value['orderId'] ?>">
-                                            <button class="btn btn-outline-success btn-sm pull-right" name="accept-order" type="submit"><i class=" fas fa-plus-circle"></i>Accept</button>
-                                            <button class="btn btn-outline-danger btn-sm pull-left" id="decline" type="submit"><i class="fas fa-trash"></i>Decline</button>
-                                        </form>
-                                    <?php } else if (($value['status'] == 5)) {
-                                        echo 'Accepted';
-                                    } else if (($value['status'] == 3)) {
-                                        echo 'Pending';
-                                    } ?>
-                                </td>
-                                <td><?php if ($value['status'] == 4 || $value['status'] == 5) { ?>
-                                        <a href="view-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a></td>
-                            <?php } else if (($value['status'] == 3)) {
-                                        echo 'Not Yet';
-                                    } ?>
+                                <td style='color:green;'><?php if ($value['detailOrderDate'] !== '') {
+                                                                echo $value['detailOrderDate'];
+                                                            } else {
+                                                                echo 'Not yet';
+                                                            } ?></td>
+                                <td style='color:green;'><?php if ($value['shipmentDate'] !== '') {
+                                                                echo $value['shipmentDate'];
+                                                            } else {
+                                                                echo 'Not yet';
+                                                            } ?></td>
+                                <td style='color:green;'><?php if ($value['status'] == 4) { ?>
+                                        <a href="view-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                    <?php } else if (($value['status'] == 3)) {
+                                                                echo 'Pending';
+                                                            } ?></td>
                             </tr>
                     <?php }
                     } ?>
@@ -80,7 +76,7 @@ $conn->close();
                         <th>Company Name</th>
                         <th>Product Name</th>
                         <th>Order date</th>
-                        <th>Action</th>
+                        <th>Shipment Date</th>
                         <th>Sample Details</th>
                     </tr>
                 </tfoot>
@@ -119,10 +115,8 @@ $conn->close();
                 null,
                 null,
                 null,
+                null,
                 {
-                    'search': false,
-                    'orderable': false,
-                }, {
                     'searchable': false,
                     'orderable': false,
                 },

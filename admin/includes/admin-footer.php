@@ -20,6 +20,7 @@
 <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="plugins/toastr/toastr.min.js"></script>
-<script type="text/javascript" src="../plugin/zoom/js/zoom.js"></script>
+<!-- Ekko Lightbox -->
+<script src="plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>

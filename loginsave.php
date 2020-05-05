@@ -23,8 +23,11 @@ if (isset($_POST["login"])) {
 			$_SESSION['name'] = $row['name'];
 			$_SESSION['company_name'] = $row['company_name'];
 		}
+
 		header('Location:index');
 	} else {
+
+		$_SESSION['amsg'] = ['msg' => 'Invalid Login!', 'type' => 'danger'];
 		header('Location:login');
 	}
 }

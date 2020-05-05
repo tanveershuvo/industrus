@@ -31,8 +31,8 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview ">
-                        <a href="detailed-orders" class="nav-link <?= ($activePage == 'detailed-orders') ? 'active' : ''; ?> ">
-                            <i class="nav-icon fab fa-buromobelexperte"></i>
+                        <a href="detailed-orders" class="nav-link <?= ($activePage == 'detailed-orders' || $activePage == 'view-order-details') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
                             <p>
                                 Detailed orders
                             </p>
