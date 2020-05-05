@@ -4,15 +4,16 @@ include_once("../dbCon.php");
 include_once("../imageUpload.php");
 $conn = connect();
 if (isset($_POST['samplesubmit'])) {
-    $query = "INSERT INTO `order_details`(`orderId`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`,`productSketch`, `yarnDescription`,`user_id`)
+    $query = "INSERT INTO `order_details`(`orderId`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`,`productSketch`, `yarnDescription`,`user_id`, `sampleOrderDate`)
               VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?,?,?)";
 
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssssssssss", $id, $buyerName, $companyName, $productName, $productPrice, $composition, $fabricsWeight, $samplePcs, $fabricConstruction, $febricDescription, $uploadInstance, $yarnDescription, $userID);
+    $stmt->bind_param("sssssssssssss", $id, $buyerName, $companyName, $productName, $productPrice, $composition, $fabricsWeight, $samplePcs, $fabricConstruction, $febricDescription, $uploadInstance, $yarnDescription, $userID, $sampleOrderDate);
 
     $id = uniqid();
     $userID = $_SESSION['id'];
     $uploadInstance = uploadImageChosen($_FILES['productSketch']);
+    $sampleOrderDate = date('m/d/Y');
     $buyerName = mysqli_real_escape_string($conn, $_POST['buyerName']);
     $companyName = mysqli_real_escape_string($conn, $_POST['companyName']);
     $productName = mysqli_real_escape_string($conn, $_POST['productName']);

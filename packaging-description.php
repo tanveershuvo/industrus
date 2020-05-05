@@ -53,6 +53,10 @@
             </tr>
         </tbody>
     </table>
+    <h5 class="mb-3 mt-2"><strong>Shipment</strong> date : </h5>
+    <div class="col-6">
+        <input type="text" id="datepicker" name="shipmentDate" class="form-control">
+    </div>
     <h5 class="mb-3 mt-2"><strong>Other Packaging</strong> information : </h5>
     <table class="table table-striped">
         <thead>
@@ -100,6 +104,14 @@
     </div>
     <br>
 </div>
+<script>
+    $(function() {
+        $("#datepicker").datepicker({
+
+            minDate: 0
+        });
+    });
+</script>
 <script type="text/javascript">
     function packingValidation() {
         let result = true;

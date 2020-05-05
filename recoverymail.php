@@ -3,65 +3,67 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <title>Mail </title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Mail </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
 
-  <script type="text/javascript">
-    function myAlert() {
-      swal({
-        title: "Mail Sent Successfully",
-        type: "success",
-        timer: 2000,
-        showCancelButton: false,
-        showConfirmButton: false,
-        closeOnClickOutside: false,
-      }, function() {
-        window.location.href = "login";
-      });
-    }
+    <script type="text/javascript">
+        function myAlert() {
+            swal({
+                title: "Mail Sent Successfully",
+                type: "success",
+                timer: 2000,
+                showCancelButton: false,
+                showConfirmButton: false,
+                closeOnClickOutside: false,
+            }, function() {
+                window.location.href = "login";
+            });
+        }
 
-    function erAlert() {
-      swal({
-        title: "Mail cannot be sent",
-        type: "error",
-        timer: 2000,
-        showCancelButton: false,
-        showConfirmButton: false,
-        closeOnClickOutside: false,
-      }, function() {
-        window.location.href = "forgotpassword";
-      });
-    }
-  </script>
+        function erAlert() {
+            swal({
+                title: "Mail cannot be sent",
+                type: "error",
+                timer: 2000,
+                showCancelButton: false,
+                showConfirmButton: false,
+                closeOnClickOutside: false,
+            }, function() {
+                window.location.href = "forgotpassword";
+            });
+        }
+    </script>
 </head>
+
 <body>
-  <?php
-  include_once 'dbCon.php';
-  $conn = connect();
-  if (isset($_GET['email'])) {
-    function generateRandomString()
-    {
-      $characters = '123456789abcdefghijklmnopqrstuvwxyz';
-      $length = 15;
-      $charactersLength = strlen($characters);
-      $randomString = '';
-      for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-      }
-      return $randomString;
-    }
-    $token = generateRandomString();
-    $usermail = $_GET['email'];
-    //echo $usermail;exit;
-    $mailto = $usermail;
-    $mailSub   = "Account Set Up";
-    $message = '<html>
+    <?php
+    include_once 'dbCon.php';
+    $conn = connect();
+    if (isset($_GET['email'])) {
+        function generateRandomString()
+        {
+            $characters = '123456789abcdefghijklmnopqrstuvwxyz';
+            $length = 15;
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
+        $token = generateRandomString();
+        $usermail = $_GET['email'];
+        //echo $usermail;exit;
+        $mailto = $usermail;
+        $mailSub   = "Account Set Up";
+        $message = '<html>
                 <head>
                     <title>Reset Password</title>
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -203,41 +205,42 @@ session_start();
                     </table>
                   </body>
                 </html>';
-    
-    $mailMsg   = $message;
-    require 'PHPMailer-master/PHPMailerAutoload.php';
-    $mail = new PHPMailer();
-    $mail->SMTPOptions = array(
-      'ssl' => array(
-        'verify_peer'     => false,
-        'verify_peer_name'   => false,
-        'allow_self_signed' => true
-      )
-    );
-    $mail->IsSmtp();
-    $mail->SMTPDebug = 0;
-    $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = "smtp.gmail.com";
-    // $mail ->Port = 465; // or 587
-    $mail->Port = 465; // or 587
-    $mail->IsHTML(true);
-		$mail->Username = "live.restaurant12@gmail.com";
-		$mail->Password = "livemenu123";
-    $mail->setFrom('industrus', 'BD');
-    $mail->FromName = 'Industrus Support Team';
-    $mail->Subject = $mailSub;
-    $mail->Body = $mailMsg;
-    $mail->AddAddress($mailto);
-    // $mail->AddAddress('tanveershuvos@gmail.com');
-    if (!$mail->Send()) {
-      echo '<script>erAlert()</script>';
-    } else {
-      $sql = "UPDATE user_login SET token = '$token' WHERE email= '$usermail'";
-      $conn->query($sql);
-      echo '<script>myAlert()</script>';
+
+        $mailMsg   = $message;
+        require 'PHPMailer-master/PHPMailerAutoload.php';
+        $mail = new PHPMailer();
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer'     => false,
+                'verify_peer_name'   => false,
+                'allow_self_signed' => true
+            )
+        );
+        $mail->IsSmtp();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = "smtp.gmail.com";
+        // $mail ->Port = 465; // or 587
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "live.restaurant12@gmail.com";
+        $mail->Password = "livemenu123";
+        $mail->setFrom('industrus', 'BD');
+        $mail->FromName = 'Industrus Support Team';
+        $mail->Subject = $mailSub;
+        $mail->Body = $mailMsg;
+        $mail->AddAddress($mailto);
+        // $mail->AddAddress('tanveershuvos@gmail.com');
+        if (!$mail->Send()) {
+            echo '<script>erAlert()</script>';
+        } else {
+            $sql = "UPDATE user_login SET token = '$token' WHERE email= '$usermail'";
+            $conn->query($sql);
+            echo '<script>myAlert()</script>';
+        }
     }
-  }
-  ?>
+    ?>
 </body>
+
 </html>

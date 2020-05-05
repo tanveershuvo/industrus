@@ -6,13 +6,15 @@ $conn = connect();
 if (isset($_POST['submit'])) {
 
     $query = "UPDATE `order_details` SET `frontMeasurementSketch`=?,
-    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? , `status` = 3 WHERE orderId = ?";
+    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? ,`shipmentDate`=? , `orderDate`=? ,`status` = 3 WHERE orderId = ?";
 
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssssssss", $frontMeasurementSketch, $backMeasurementSketch, $collarMeasurementSketch, $frontSewingSkecth, $frontPlacketSkecth, $slideSlitSkecth, $pcsPerBox, $orderId);
 
     $orderId = mysqli_real_escape_string($conn, $_POST['order_id']);
     $pcsPerBox = mysqli_real_escape_string($conn, $_POST['peicePerBox']);
+    $shipmentDate = mysqli_real_escape_string($conn, $_POST['shipmentDate']);
+    $orderDate = date('m/d/Y');
     $frontMeasurementSketch = uploadImageChosen($_FILES['frontMeasurementSketch']);
     $backMeasurementSketch = uploadImageChosen($_FILES['backMeasurementSketch']);
     $collarMeasurementSketch = uploadImageChosen($_FILES['collarMeasurementSketch']);

@@ -1,5 +1,5 @@
-<?php include'includes/header.php';?>
-<?php include'includes/navbar.php';?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/navbar.php'; ?>
 
 <!-- Header End -->
 
@@ -223,4 +223,4 @@
     </div>
 </div>
 <!-- Partner Logo Section End -->
-<?php include'includes/footer.php';?>
+<?php include 'includes/footer.php'; ?>

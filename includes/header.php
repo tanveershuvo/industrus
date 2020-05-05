@@ -27,7 +27,9 @@
     <link rel="stylesheet" href="src/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="src/css/style.css" type="text/css">
     <link rel="stylesheet" href="src/css/custom.css" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="src/js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         function message(str) {

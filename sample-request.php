@@ -214,6 +214,7 @@ $conn = connect();
                             </div>
                         </div>
                     </form>
+
                 </div>
         <?php break;
             case '3';
@@ -236,4 +237,5 @@ $conn = connect();
 
     <?php } ?>
 </div>
+
 <?php include 'includes/footer.php'; ?>

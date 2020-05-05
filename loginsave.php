@@ -9,7 +9,7 @@ if (isset($_POST["login"])) {
 	$stmt->bind_param("ss", $email, $password);
 
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
-	$password = mysqli_real_escape_string($conn, sha1($_POST['password']));
+	$password = mysqli_real_escape_string($conn, md5($_POST['password']));
 
 	$stmt->execute();
 	$result = $stmt->get_result();
