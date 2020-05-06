@@ -21,6 +21,14 @@ if (isset($_GET['order-id'])) {
     $sum = $result->fetch_assoc();
     $stmt->close();
 }
+$sql = "SELECT * FROM deaprtments";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();;
+while ($data = $result->fetch_assoc()) {
+    $depts[] = $data;
+}
+$stmt->close();
 $conn->close();
 ?>
 
@@ -34,9 +42,9 @@ $conn->close();
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-mitten"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Knitting</span>
+                        <span class="info-box-text"><?= $depts[0]['department_name'] ?></span>
                         <span class="info-box-number">
-                            500
+                            <?= $depts[0]['production_per_day'] ?>
                             <small>kg per day</small>
                         </span>
                     </div>
@@ -50,9 +58,9 @@ $conn->close();
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cut"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Cutting</span>
+                        <span class="info-box-text"><?= $depts[1]['department_name'] ?></span>
                         <span class="info-box-number">
-                            2000
+                            <?= $depts[1]['production_per_day'] ?>
                             <small>pcs per day</small>
                         </span>
                     </div>
@@ -67,9 +75,9 @@ $conn->close();
                     <span class="info-box-icon bg-success elevation-1"><i class="fas fa-align-justify"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Sewing</span>
+                        <span class="info-box-text"><?= $depts[2]['department_name'] ?></span>
                         <span class="info-box-number">
-                            1000
+                            <?= $depts[2]['production_per_day'] ?>
                             <small>pcs per day</small>
                         </span>
                     </div>
@@ -83,9 +91,9 @@ $conn->close();
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-boxes"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Packaging</span>
+                        <span class="info-box-text"><?= $depts[3]['department_name'] ?></span>
                         <span class="info-box-number">
-                            1500
+                            <?= $depts[3]['production_per_day'] ?>
                             <small>pcs per day</small>
                         </span>
                     </div>
@@ -122,7 +130,8 @@ $conn->close();
             </div>
 
         </div>
-        <form id="form" action="" method="POST">
+        <form id="form" action="controllers/tasksController" method="POST">
+            <input type="hidden" name="order_id" value="<?= $_GET['order-id'] ?>">
             <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover table-striped text-center">
                     <thead>
@@ -134,21 +143,26 @@ $conn->close();
                     </thead>
                     <tbody style="font-weight:bold;font-size:15px;">
                         <tr>
-                            <td>Knitting</td>
+                            <td><?= $depts[0]['department_name'] ?></td>
                             <td>Total fabric : Kg</td>
-                            <td><input type="text" class="form-control" name="knitting_time"></td>
+                            <td>
+                                <input type="hidden" name="dep_id[]" value="<?= $depts[0]['id'] ?>">
+                                <input type="text" class="form-control" name="assigned_days[0]">
+                            </td>
                         </tr>
                         <tr>
                             <td>Cutting</td>
                             <td>Total pcs : <?= $sum['total'] ?></td>
                             <td>
-                                <input type="text" class="form-control" name="cutting_time">
+                                <input type="hidden" name="dep_id[]" value="<?= $depts[1]['id'] ?>">
+                                <input type="text" class="form-control" name="assigned_days[1]">
                             </td>
                         </tr>
                         <tr>
                             <td>Sewing</td>
                             <td>Total pcs : <?= $sum['total'] ?></td>
-                            <td><input type="text" class="form-control" name="sewing_time"></td>
+                            <td><input type="hidden" name="dep_id[]" value="<?= $depts[2]['id'] ?>">
+                                <input type="text" class="form-control" name="assigned_days[2]"></td>
                         </tr>
                         <tr>
                             <td>Packaging
@@ -156,14 +170,15 @@ $conn->close();
                             <td>Total packages : <?php $package = $sum['total'] / $row['pcs_per_box'];
                                                     $package = intval($package);
                                                     echo $package; ?></td>
-                            <td><input type="text" class="form-control" name="packaging_time"></td>
+                            <td><input type="hidden" name="dep_id[]" value="<?= $depts[3]['id'] ?>">
+                                <input type="text" class="form-control" name="assigned_days[3]"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
             <div class="card-footer text-center">
-                <button class="btn btn-primary col-sm-4">Done</button>
+                <button class="btn btn-primary col-sm-4" type="submit" name="done">Move to production</button>
             </div>
         </form>
     </div>
