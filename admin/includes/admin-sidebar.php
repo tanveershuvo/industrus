@@ -38,6 +38,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="task-allocate" class="nav-link <?= ($activePage == 'task-allocate' || $activePage == 'view-order-details') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Allocate Tasks
+                            </p>
+                        </a>
+                    </li>
                 <?php } ?>
 
             </ul>

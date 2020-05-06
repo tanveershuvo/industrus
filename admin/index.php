@@ -1,4 +1,5 @@
 <?php
+$title = "Industrus | Sign In";
 include 'includes/admin-header.php';
 ?>
 

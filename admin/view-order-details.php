@@ -237,193 +237,196 @@ if (isset($_GET['order-id'])) {
                                     <a href="../img/samples/<?= $row['productSketch'] ?>" data-toggle="lightbox" data-title="product Sketch" data-gallery="gallery">
                                         <img src="../img/samples/<?= $row['productSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="product Sketch" />
                                     </a>
-                                    < </div> </div> </div> </div> </div> <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
-                                        <div class="card-subtitle">
-                                            <button class=" btn btn-outline-dark col-sm-1 float-right print mb-2" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
-                                        </div>
-                                        <div class="card-text mt-3 mb-3">
-                                            <div class="row text-center">
-                                                <div class="col-sm-4 ">
-                                                    <label for="examples" class="mb-3"><b>Front Measurement Sketch :</b></label>
-                                                    <a href="../img/samples/<?= $row['frontMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Front Measurement Sketch" data-gallery="gallery">
-                                                        <img src="../img/samples/<?= $row['frontMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Measurement Sketch" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <label for="examples" class="mb-3"><b>Back Measurement Sketch :</b></label>
-                                                    <a href="../img/samples/<?= $row['backMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Back Measurement Sketch" data-gallery="gallery">
-                                                        <img src="../img/samples/<?= $row['backMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Back Measurement Sketch" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <label for="examples" class="mb-3"><b>Collar Measurement Sketch :</b></label>
-                                                    <a href="../img/samples/<?= $row['collarMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Collar Measurement Sketch " data-gallery="gallery">
-                                                        <img src="../img/samples/<?= $row['collarMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Collar Measurement Sketch" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h5 class="mb-3"><strong>Pattern/Chart of</strong> Measurement : </h5>
-                                        <table class="table table-head-fixed text-nowrap table-bordered ">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Reference </th>
-                                                    <th width="25%" scope="col">Description</th>
-                                                    <th scope="col">Tol(-+) (in Inch)</th>
-                                                    <th scope="col" class="s">S (in Inch)</th>
-                                                    <th scope="col" class="m">M (in Inch)</th>
-                                                    <th scope="col" class="l">L (in Inch)</th>
-                                                    <th scope="col" class="xl">XL (in Inch)</th>
-                                                    <th scope="col" class="xxl">XXL (in Inch)</th>
-                                                    <th scope="col" class="xxxl">XXXL (in Inch)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($measurements as $measurement) { ?>
-                                                    <tr>
-                                                        <td><?= $measurement['reference'] ?></td>
-                                                        <td><?= $measurement['description'] ?></td>
-                                                        <td><?= $measurement['tolerance'] ?></td>
-                                                        <td><?= $measurement['s_size'] ?></td>
-                                                        <td><?= $measurement['m_size'] ?></td>
-                                                        <td><?= $measurement['l_size'] ?></td>
-                                                        <td><?= $measurement['xl_size'] ?></td>
-                                                        <td><?= $measurement['xxl_size'] ?></td>
-                                                        <td><?= $measurement['xxl_size'] ?></td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
-                                    <div class="card-subtitle">
-                                        <button class=" btn btn-outline-dark col-sm-1 float-right print mb-2" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
-                                    </div>
-                                    <div class="card-text mt-3 mb-3">
-                                        <div class="row text-center">
-                                            <div class="col-sm-4 ">
-                                                <label for="examples" class="mb-3"><b>Front Sewing Sketch :</b></label>
-                                                <a href="../img/samples/<?= $row['frontSewingSkecth'] ?>" data-toggle="lightbox" data-title="Front Sewing Sketch" data-gallery="gallery">
-                                                    <img src="../img/samples/<?= $row['frontSewingSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Sewing Sketch" />
-                                                </a>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <label for="examples" class="mb-3"><b>Front Placket Skecth :</b></label>
-                                                <a href="../img/samples/<?= $row['frontPlacketSkecth'] ?>" data-toggle="lightbox" data-title="Front Placket Skecth" data-gallery="gallery">
-                                                    <img src="../img/samples/<?= $row['frontPlacketSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Placket Skecth" />
-                                                </a>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <label for="examples" class="mb-3"><b>Slide Slit Skecth :</b></label>
-                                                <a href="../img/samples/<?= $row['slideSlitSkecth'] ?>" data-toggle="lightbox" data-title="Slide Slit Skecth  " data-gallery="gallery">
-                                                    <img src="../img/samples/<?= $row['slideSlitSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Slide Slit Skecth " />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="mb-3"><strong>Pattern/Chart of</strong> Measurement : </h5>
-                                    <table class="table table-head-fixed text-nowrap table-bordered ">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Reference </th>
-                                                <th width="25%" scope="col">Description</th>
-                                                <?php foreach ($colors as $color) { ?>
-                                                    <th><?= $color['color'] ?></th>
-                                                <?php } ?>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($yarnDescriptions as $yarnDescription) { ?>
-                                                <tr>
-                                                    <td><?= $yarnDescription['reference'] ?></td>
-                                                    <td><?= $yarnDescription['description'] ?></td>
-                                                    <?php foreach ($yarnColor as $yc) {
-                                                        if ($yarnDescription['id'] == $yc['yarn_desc_id']) { ?>
-                                                            <td><?php
-
-                                                                echo $yc['yarn_color'];
-                                                                ?></td>
-                                                    <?php }
-                                                    } ?>
-                                                </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
-                                    <div class="card-header">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <h5> Shipment Date :&nbsp;<?= $row['shipmentDate'] ?></h5>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h5>Pieces Per box : <?= $row['pcs_per_box'] ?></h5>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <button class=" btn btn-outline-dark col-sm-3  float-right print" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="mb-3 mt-2"><strong>Packaging</strong> details : </h5>
-                                    <table class="table table-head-fixed text-nowrap table-bordered ">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Size </th>
-                                                <th scope="col">Length (in Inch)</th>
-                                                <th scope="col">Width (in Inch)</th>
-                                                <th scope="col">Height (in Inch)</th>
-                                                <th scope="col">Gross Weight (in KG)</th>
-                                                <th scope="col">Net Weight (in KG)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($packageBoxes as $packageBox) { ?>
-                                                <tr>
-                                                    <td><?= $packageBox['size'] ?></td>
-                                                    <td><?= $packageBox['length'] ?></td>
-                                                    <td><?= $packageBox['width'] ?></td>
-                                                    <td><?= $packageBox['height'] ?></td>
-                                                    <td><?= $packageBox['grossWeight'] ?></td>
-                                                    <td><?= $packageBox['nertWeight'] ?></td>
-                                                </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
-                                    <?php if (isset($packageDescriptions)) { ?>
-                                        <h5 class="mb-3"><strong>Other</strong> packaging details : </h5>
-                                        <table class="table table-head-fixed text-nowrap table-bordered ">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Reference </th>
-                                                    <th scope="col">Description</th>
-                                                    <th scope="col">Assigned image</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                foreach ($packageDescriptions as $packageDescription) { ?>
-                                                    <tr>
-                                                        <td><?= $packageDescription['reference'] ?></td>
-                                                        <td><?= $packageDescription['description'] ?></td>
-                                                        <td><a href="../img/samples/<?= $packageDescription['package_image'] ?>" data-toggle="lightbox" data-title="package image" data-gallery="gallery">
-                                                                <img src="../img/samples/<?= $packageDescription['package_image'] ?>" class="img-fluid mb-2 border border-secondary" alt="package_image" />
-                                                            </a></td>
-                                                    </tr>
-                                                <?php }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.card -->
                     </div>
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                    <div class="card-subtitle">
+                        <button class=" btn btn-outline-dark col-sm-1 float-right print mb-2" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
+                    </div>
+                    <div class="card-text mt-3 mb-3">
+                        <div class="row text-center">
+                            <div class="col-sm-4 ">
+                                <label for="examples" class="mb-3"><b>Front Measurement Sketch :</b></label>
+                                <a href="../img/samples/<?= $row['frontMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Front Measurement Sketch" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['frontMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Measurement Sketch" />
+                                </a>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="examples" class="mb-3"><b>Back Measurement Sketch :</b></label>
+                                <a href="../img/samples/<?= $row['backMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Back Measurement Sketch" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['backMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Back Measurement Sketch" />
+                                </a>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="examples" class="mb-3"><b>Collar Measurement Sketch :</b></label>
+                                <a href="../img/samples/<?= $row['collarMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Collar Measurement Sketch " data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['collarMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Collar Measurement Sketch" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="mb-3"><strong>Pattern/Chart of</strong> Measurement : </h5>
+                    <table class="table table-head-fixed text-nowrap table-bordered ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Reference </th>
+                                <th width="25%" scope="col">Description</th>
+                                <th scope="col">Tol(-+) (in Inch)</th>
+                                <th scope="col" class="s">S (in Inch)</th>
+                                <th scope="col" class="m">M (in Inch)</th>
+                                <th scope="col" class="l">L (in Inch)</th>
+                                <th scope="col" class="xl">XL (in Inch)</th>
+                                <th scope="col" class="xxl">XXL (in Inch)</th>
+                                <th scope="col" class="xxxl">XXXL (in Inch)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($measurements as $measurement) { ?>
+                                <tr>
+                                    <td><?= $measurement['reference'] ?></td>
+                                    <td><?= $measurement['description'] ?></td>
+                                    <td><?= $measurement['tolerance'] ?></td>
+                                    <td><?= $measurement['s_size'] ?></td>
+                                    <td><?= $measurement['m_size'] ?></td>
+                                    <td><?= $measurement['l_size'] ?></td>
+                                    <td><?= $measurement['xl_size'] ?></td>
+                                    <td><?= $measurement['xxl_size'] ?></td>
+                                    <td><?= $measurement['xxl_size'] ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                    <div class="card-subtitle">
+                        <button class=" btn btn-outline-dark col-sm-1 float-right print mb-2" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
+                    </div>
+                    <div class="card-text mt-3 mb-3">
+                        <div class="row text-center">
+                            <div class="col-sm-4 ">
+                                <label for="examples" class="mb-3"><b>Front Sewing Sketch :</b></label>
+                                <a href="../img/samples/<?= $row['frontSewingSkecth'] ?>" data-toggle="lightbox" data-title="Front Sewing Sketch" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['frontSewingSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Sewing Sketch" />
+                                </a>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="examples" class="mb-3"><b>Front Placket Skecth :</b></label>
+                                <a href="../img/samples/<?= $row['frontPlacketSkecth'] ?>" data-toggle="lightbox" data-title="Front Placket Skecth" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['frontPlacketSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Placket Skecth" />
+                                </a>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="examples" class="mb-3"><b>Slide Slit Skecth :</b></label>
+                                <a href="../img/samples/<?= $row['slideSlitSkecth'] ?>" data-toggle="lightbox" data-title="Slide Slit Skecth  " data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['slideSlitSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Slide Slit Skecth " />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="mb-3"><strong>Sewing</strong> Details : </h5>
+                    <table class="table table-head-fixed text-nowrap table-bordered ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Reference </th>
+                                <th width="25%" scope="col">Description</th>
+                                <?php foreach ($colors as $color) { ?>
+                                    <th><?= $color['color'] ?></th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($yarnDescriptions as $yarnDescription) { ?>
+                                <tr>
+                                    <td><?= $yarnDescription['reference'] ?></td>
+                                    <td><?= $yarnDescription['description'] ?></td>
+                                    <?php foreach ($yarnColor as $yc) {
+                                        if ($yarnDescription['id'] == $yc['yarn_desc_id']) { ?>
+                                            <td><?php
+                                                echo $yc['yarn_color'];
+                                                ?></td>
+                                    <?php }
+                                    } ?>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h5> Shipment Date :&nbsp;<?= $row['shipmentDate'] ?></h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5>Pieces Per box : <?= $row['pcs_per_box'] ?></h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class=" btn btn-outline-dark col-sm-3  float-right print" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="mb-3 mt-2"><strong>Packaging</strong> details : </h5>
+                    <table class="table table-head-fixed text-nowrap table-bordered ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Size </th>
+                                <th scope="col">Length (in Inch)</th>
+                                <th scope="col">Width (in Inch)</th>
+                                <th scope="col">Height (in Inch)</th>
+                                <th scope="col">Gross Weight (in KG)</th>
+                                <th scope="col">Net Weight (in KG)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($packageBoxes as $packageBox) { ?>
+                                <tr>
+                                    <td><?= $packageBox['size'] ?></td>
+                                    <td><?= $packageBox['length'] ?></td>
+                                    <td><?= $packageBox['width'] ?></td>
+                                    <td><?= $packageBox['height'] ?></td>
+                                    <td><?= $packageBox['grossWeight'] ?></td>
+                                    <td><?= $packageBox['nertWeight'] ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <?php if (isset($packageDescriptions)) { ?>
+                        <h5 class="mb-3"><strong>Other</strong> packaging details : </h5>
+                        <table class="table table-head-fixed text-nowrap table-bordered ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Reference </th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Assigned image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($packageDescriptions as $packageDescription) { ?>
+                                    <tr>
+                                        <td><?= $packageDescription['reference'] ?></td>
+                                        <td><?= $packageDescription['description'] ?></td>
+                                        <td><a href="../img/samples/<?= $packageDescription['package_image'] ?>" data-toggle="lightbox" data-title="package image" data-gallery="gallery">
+                                                <img src="../img/samples/<?= $packageDescription['package_image'] ?>" class="img-fluid mb-2 border border-secondary" alt="package_image" />
+                                            </a></td>
+                                    </tr>
+                                <?php }
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
 
 </section>
 <?php include 'includes/admin-footer.php'; ?>
@@ -489,14 +492,6 @@ if (isset($_GET['order-id'])) {
             $(this).ekkoLightbox({
                 alwaysShowClose: true
             });
-        });
-
-        $('.filter-container').filterizr({
-            gutterPixels: 3
-        });
-        $('.btn[data-filter]').on('click', function() {
-            $('.btn[data-filter]').removeClass('active');
-            $(this).addClass('active');
         });
     })
 </script>
