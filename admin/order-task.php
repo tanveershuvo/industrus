@@ -128,7 +128,7 @@ $conn->close();
                 echo $numberDays;
                 ?> days left before shipment
             </div>
-
+            <input type="hidden" id="numberDays" value="<?= $numberDays ?>">
         </div>
         <form id="form" action="controllers/tasksController" method="POST">
             <input type="hidden" name="order_id" value="<?= $_GET['order-id'] ?>">
@@ -147,7 +147,7 @@ $conn->close();
                             <td>Total fabric : Kg</td>
                             <td>
                                 <input type="hidden" name="dep_id[]" value="<?= $depts[0]['id'] ?>">
-                                <input type="text" class="form-control" name="assigned_days[0]">
+                                <input type="text" class="form-control" id="knit_id" name="assigned_days[0]">
                             </td>
                         </tr>
                         <tr>
@@ -155,14 +155,14 @@ $conn->close();
                             <td>Total pcs : <?= $sum['total'] ?></td>
                             <td>
                                 <input type="hidden" name="dep_id[]" value="<?= $depts[1]['id'] ?>">
-                                <input type="text" class="form-control" name="assigned_days[1]">
+                                <input type="text" class="form-control" id="cut_id" name="assigned_days[1]">
                             </td>
                         </tr>
                         <tr>
                             <td>Sewing</td>
                             <td>Total pcs : <?= $sum['total'] ?></td>
                             <td><input type="hidden" name="dep_id[]" value="<?= $depts[2]['id'] ?>">
-                                <input type="text" class="form-control" name="assigned_days[2]"></td>
+                                <input type="text" class="form-control" id="sew_id" name="assigned_days[2]"></td>
                         </tr>
                         <tr>
                             <td>Packaging
@@ -171,73 +171,89 @@ $conn->close();
                                                     $package = intval($package);
                                                     echo $package; ?></td>
                             <td><input type="hidden" name="dep_id[]" value="<?= $depts[3]['id'] ?>">
-                                <input type="text" class="form-control" name="assigned_days[3]"></td>
+                                <input type="text" class="form-control" id="package_id" name="assigned_days[3]"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
             <div class="card-footer text-center">
-                <button class="btn btn-primary col-sm-4" type="submit" name="done">Move to production</button>
+                <button class="btn btn-primary col-sm-4" type="submit" id="submit" name="save">Move to production</button>
             </div>
         </form>
+
     </div>
 </section>
 <!-- /.content -->
 
 <?php include 'includes/admin-footer.php'; ?>
 <script type="text/javascript">
-    $(document).ready(function() {
+    <?php if (isset($_SESSION['msg'])) { ?>
+        $(document).Toasts('create', {
+            class: 'bg-<?= $_SESSION['msg']['type'] ?>',
+            title: '<?= $_SESSION['msg']['title'] ?>',
+            autohide: true,
+            icon: 'fas fa-<?= $_SESSION['msg']['icon'] ?> fa-lg',
+            delay: 5000,
+            body: '<?= $_SESSION['msg']['body'] ?>',
+            position: 'bottomLeft'
+        })
+    <?php }
+    unset($_SESSION['msg']);
+    ?>
 
-        $('#form').validate({
-            rules: {
-                knitting_time: {
-                    required: true,
-                    digits: true
-                },
-                cutting_time: {
-                    required: true,
-                    digits: true
-                },
-                sewing_time: {
-                    required: true,
-                    digits: true
-                },
-                packaging_time: {
-                    required: true,
-                    digits: true
-                },
-            },
-            messages: {
-                knitting_time: {
-                    required: "Pllease enter days needed to complete the task",
-                    digits: "Please enter vaild days"
-                },
-                cutting_time: {
-                    required: "Pllease enter days needed to complete the task",
-                    digits: "Please enter vaild days"
-                },
-                sewing_time: {
-                    required: "Pllease enter days needed to complete the task",
-                    digits: "Please enter vaild days"
-                },
-                packaging_time: {
-                    required: "Pllease enter days needed to complete the task",
-                    digits: "Please enter vaild days"
-                },
-            },
-            errorElement: 'span',
-            errorPlacement: function(error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-control').after(error);
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
+    function validation() {
+        let result = true;
+        $(".invalid-feedback").remove();
+        $("input").removeClass("is-invalid");
+        $("#form input").each(
+            function(index) {
+                let inputText = $(this);
+                if ((inputText.val() == "")) {
+                    let inputID = inputText.attr('id');
+                    $("#" + inputID).after('<span class="invalid-feedback">* ' +
+                        'this field is required</span>').addClass("is-invalid").focus();
+                    result = false;
+                    return false;
+                }
+                if ((inputText.val() < 0)) {
+                    let inputID = inputText.attr('id');
+                    $("#" + inputID).after('<span class="invalid-feedback">* ' +
+                        'days must be a positive value</span>').addClass("is-invalid").focus();
+                    result = false;
+                    return false;
+                }
             }
-        });
+        )
+        return result;
+    }
+
+    $("#submit").on('click', function() {
+        if (validation() == false) {
+            return false;
+        };
+        let numberDays = parseInt($('#numberDays').val());
+
+        let knit_id = parseInt($('#knit_id').val());
+        let cut_id = parseInt($('#cut_id').val());
+        let sew_id = parseInt($('#sew_id').val());
+        let package_id = parseInt($('#package_id').val());
+        let sum = (knit_id + cut_id + sew_id + package_id);
+        if (numberDays < sum) {
+            $(document).Toasts('create', {
+                class: 'bg-danger',
+                title: 'Check Again!',
+                autohide: true,
+                icon: 'fas fa-warning fa-lg',
+                delay: 5000,
+                body: 'Total assigned days is greater than due days',
+                position: 'bottomLeft'
+            })
+            return false;
+        } else {
+            return true;
+        }
+
     });
 </script>
 </body>
