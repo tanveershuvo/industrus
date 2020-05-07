@@ -39,7 +39,7 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview ">
-                        <a href="task-allocate" class="nav-link <?= ($activePage == 'task-allocate' || $activePage == 'view-order-details') ? 'active' : ''; ?> ">
+                        <a href="task-allocate" class="nav-link <?= ($activePage == 'task-allocate' || $activePage == 'order-task') ? 'active' : ''; ?> ">
                             <i class="nav-icon fas fa-info-circle"></i>
                             <p>
                                 Allocate Tasks

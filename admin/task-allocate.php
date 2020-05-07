@@ -5,13 +5,14 @@ include 'includes/admin-navbar.php';
 include 'includes/admin-sidebar.php';
 include_once("../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details WHERE status = 3 OR status = 4 ";
+$sql = "SELECT * FROM order_details WHERE status = 4 OR status = 5 OR status = 6 ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
 while ($data = $result->fetch_assoc()) {
     $row[] = $data;
 }
+
 $stmt->close();
 $conn->close();
 
@@ -21,7 +22,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>All Detailed Orders </h1>
+                <h1>Allocate Tasks </h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -38,6 +39,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Shipment Date</th>
+                        <th>Production status</th>
                         <th>Allocate</th>
                     </tr>
                 </thead>
@@ -53,8 +55,25 @@ $conn->close();
                                 <td><?= $value['detailOrderDate'] ?></td>
                                 <td><?= $value['shipmentDate'] ?></td>
                                 <td style='color:green;'>
-                                    <a href="order-task?order-id=<?= $value['orderId'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Allocate</a>
+                                    <?php if ($value['status'] == 5) { ?>
+                                        <form action="controllers/tasksController" method="POST">
+                                            <input type="hidden" value="<?= $value['orderId'] ?>" name="order_id">
+                                            <button class="btn btn-success btn-sm" name="production_start" type="submit"><i class="fas fa-play"></i> Start</button>
+                                        </form>
+                                    <?php } else if ($value['status'] == 6) {
+                                        echo 'In Production';
+                                    } else {
+                                        echo 'Allocate First';
+                                    } ?>
                                 </td>
+                                <td style='color:green;'>
+                                    <?php if ($value['status'] == 4) { ?>
+                                        <a href="order-task?order-id=<?= $value['orderId'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Allocate</a>
+                                    <?php } else { ?>
+                                        <a href="order-task?editable&&order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Edit tasks</a>
+                                    <?php } ?>
+                                </td>
+
                             </tr>
                     <?php }
                     } ?>
@@ -67,6 +86,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Shipment Date</th>
+                        <th>Production status</th>
                         <th>Sample Details</th>
                     </tr>
                 </tfoot>

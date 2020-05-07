@@ -5,7 +5,7 @@ include 'includes/admin-navbar.php';
 include 'includes/admin-sidebar.php';
 include_once("../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details WHERE status = 3 OR status = 4 ";
+$sql = "SELECT * FROM order_details WHERE status != 0 OR status != 1 OR status != 2 ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -38,7 +38,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Shipment Date</th>
-                        <th>Sample Details</th>
+                        <th>Order Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,11 +60,13 @@ $conn->close();
                                                             } else {
                                                                 echo 'Not yet';
                                                             } ?></td>
-                                <td style='color:green;'><?php if ($value['status'] == 4) { ?>
+                                <td style='color:green;'>
+                                    <?php
+                                    if (($value['status'] == 3)) {
+                                        echo 'Pending';
+                                    } else { ?>
                                         <a href="view-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                    <?php } else if (($value['status'] == 3)) {
-                                                                echo 'Pending';
-                                                            } ?></td>
+                                    <?php } ?> </td>
                             </tr>
                     <?php }
                     } ?>
@@ -77,7 +79,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Shipment Date</th>
-                        <th>Sample Details</th>
+                        <th>Order Details</th>
                     </tr>
                 </tfoot>
             </table>

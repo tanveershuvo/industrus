@@ -21,6 +21,17 @@ if (isset($_GET['order-id'])) {
     $sum = $result->fetch_assoc();
     $stmt->close();
 }
+if (isset($_GET['editable'])) {
+    $sql = "SELECT * FROM order_tasks WHERE order_id = ? ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $orderId);
+    $orderId = $_GET['order-id'];
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($data = $result->fetch_assoc()) {
+        $tasks[] = $data;
+    }
+}
 $sql = "SELECT * FROM deaprtments";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -133,7 +144,7 @@ $conn->close();
         <form id="form" action="controllers/tasksController" method="POST">
             <input type="hidden" name="order_id" value="<?= $_GET['order-id'] ?>">
             <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover table-striped text-center">
+                <table id="example2" class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr class="">
                             <th width="33%">Department</th>
@@ -147,7 +158,13 @@ $conn->close();
                             <td>Total fabric : Kg</td>
                             <td>
                                 <input type="hidden" name="dep_id[]" value="<?= $depts[0]['id'] ?>">
-                                <input type="text" class="form-control" id="knit_id" name="assigned_days[0]">
+                                <input type="text" class="form-control" id="knit_id" name="assigned_days[0]" value="<?php
+                                                                                                                    if (isset($tasks)) {
+                                                                                                                        if (($depts[0]['id'] == $tasks[0]['department_id'])) {
+                                                                                                                            echo $tasks[0]['assign_days'];
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    ?>">
                             </td>
                         </tr>
                         <tr>
@@ -155,14 +172,26 @@ $conn->close();
                             <td>Total pcs : <?= $sum['total'] ?></td>
                             <td>
                                 <input type="hidden" name="dep_id[]" value="<?= $depts[1]['id'] ?>">
-                                <input type="text" class="form-control" id="cut_id" name="assigned_days[1]">
+                                <input type="text" class="form-control" id="cut_id" name="assigned_days[1]" value="<?php
+                                                                                                                    if (isset($tasks)) {
+                                                                                                                        if (($depts[1]['id'] == $tasks[1]['department_id'])) {
+                                                                                                                            echo $tasks[1]['assign_days'];
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    ?>">
                             </td>
                         </tr>
                         <tr>
                             <td>Sewing</td>
                             <td>Total pcs : <?= $sum['total'] ?></td>
                             <td><input type="hidden" name="dep_id[]" value="<?= $depts[2]['id'] ?>">
-                                <input type="text" class="form-control" id="sew_id" name="assigned_days[2]"></td>
+                                <input type="text" class="form-control" id="sew_id" name="assigned_days[2]" value="<?php
+                                                                                                                    if (isset($tasks)) {
+                                                                                                                        if (($depts[2]['id'] == $tasks[2]['department_id'])) {
+                                                                                                                            echo $tasks[2]['assign_days'];
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    ?>"></td>
                         </tr>
                         <tr>
                             <td>Packaging
@@ -171,14 +200,23 @@ $conn->close();
                                                     $package = intval($package);
                                                     echo $package; ?></td>
                             <td><input type="hidden" name="dep_id[]" value="<?= $depts[3]['id'] ?>">
-                                <input type="text" class="form-control" id="package_id" name="assigned_days[3]"></td>
+                                <input type="text" class="form-control" id="package_id" name="assigned_days[3]" value="<?php if (isset($tasks)) {
+                                                                                                                            if (($depts[3]['id'] == $tasks[3]['department_id'])) {
+                                                                                                                                echo $tasks[3]['assign_days'];
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                        ?>"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
             <div class="card-footer text-center">
-                <button class="btn btn-primary col-sm-4" type="submit" id="submit" name="save">Move to production</button>
+                <?php if (isset($tasks)) { ?>
+                    <button class="btn btn-info col-sm-4 submit" type="submit" name="edit"> Edit Allocate</button>
+                <?php } else { ?>
+                    <button class="btn btn-primary col-sm-4 submit" type="submit" name="save"> Save Allocate</button>
+                <?php } ?>
             </div>
         </form>
 
@@ -188,20 +226,6 @@ $conn->close();
 
 <?php include 'includes/admin-footer.php'; ?>
 <script type="text/javascript">
-    <?php if (isset($_SESSION['msg'])) { ?>
-        $(document).Toasts('create', {
-            class: 'bg-<?= $_SESSION['msg']['type'] ?>',
-            title: '<?= $_SESSION['msg']['title'] ?>',
-            autohide: true,
-            icon: 'fas fa-<?= $_SESSION['msg']['icon'] ?> fa-lg',
-            delay: 5000,
-            body: '<?= $_SESSION['msg']['body'] ?>',
-            position: 'bottomLeft'
-        })
-    <?php }
-    unset($_SESSION['msg']);
-    ?>
-
     function validation() {
         let result = true;
         $(".invalid-feedback").remove();
@@ -228,7 +252,7 @@ $conn->close();
         return result;
     }
 
-    $("#submit").on('click', function() {
+    $(".submit").on('click', function() {
         if (validation() == false) {
             return false;
         };
