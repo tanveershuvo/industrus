@@ -24,7 +24,7 @@ if (isset($_POST['save'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Tasks assigned', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been assigned !', 'type' => 'success'];
-    header("Location:../task-allocate");
+    header("Location:../marchandiser/task-allocate");
 }
 if (isset($_POST['edit'])) {
 
@@ -43,7 +43,7 @@ if (isset($_POST['edit'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Tasks Edited', 'icon' => 'check-circle', 'body' => 'Tasks of Order id ' . $orderId . ' has been Edited !', 'type' => 'success'];
-    header("Location:../task-allocate");
+    header("Location:../marchandiser/task-allocate");
 }
 
 if (isset($_POST['production_start'])) {
@@ -53,11 +53,12 @@ if (isset($_POST['production_start'])) {
     $stmt->bind_param("s",  $orderId);
     $orderId = mysqli_real_escape_string($conn, $_POST['order_id']);
     $stmt->execute();
-    $sql = "Update `order_tasks` SET `status`= 1 WHERE department_id = 1 AND order_id = ?";
+    $sql = "Update `order_tasks` SET `started_at` = ? ,`status`= 1 WHERE department_id = 1 AND order_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s",  $orderId);
+    $stmt->bind_param("ss",  $startDate, $orderId);
+    $startDate = date('m/d/Y');
     $stmt->execute();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Tasks Edited', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been moved to production !', 'type' => 'success'];
-    header("Location:../task-allocate");
+    header("Location:../marchandiser/task-allocate");
 }

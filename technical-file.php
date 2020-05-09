@@ -13,8 +13,7 @@
         //
         $query = "SELECT * FROM order_colors_quantity WHERE order_id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("s", $order_id);
-        $order_id = $row['orderId'];
+        $stmt->bind_param("s", $id);
         $stmt->execute();
         $result2 = $stmt->get_result();
         while ($data = $result2->fetch_assoc()) {

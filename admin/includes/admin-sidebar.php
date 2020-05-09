@@ -40,13 +40,64 @@
                     </li>
                     <li class="nav-item has-treeview ">
                         <a href="task-allocate" class="nav-link <?= ($activePage == 'task-allocate' || $activePage == 'order-task') ? 'active' : ''; ?> ">
-                            <i class="nav-icon fas fa-info-circle"></i>
+                            <i class="nav-icon fas fa-tasks"></i>
                             <p>
                                 Allocate Tasks
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="production-status" class="nav-link <?= ($activePage == 'production-status') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-industry"></i>
+                            <p>
+                                Production Status
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="finished-orders" class="nav-link <?= ($activePage == 'finished-orders' || $activePage == 'finished-order-details') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-check-square"></i>
+                            <p>
+                                Finished Orders
+                            </p>
+                        </a>
+                    </li>
                 <?php } ?>
+                <?php if ((isset($_SESSION['isLoggedIn'])) && ($_SESSION['admin-role'] == 2 || $_SESSION['admin-role'] == 0)) { ?>
+                    <label class="text-secondary mb-3 text-center text-sm">KNITTING MASTER NAVIGATION</label>
+                    <li class="nav-item has-treeview ">
+                        <a href="knitting-master-dashboard" class="nav-link <?= ($activePage == 'knitting-master-dashboard') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="knitting-orders" class="nav-link <?= ($activePage == 'knitting-orders') || $activePage == 'knitting-order-details' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Knitting Orders
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="knitting-finished-orders" class="nav-link <?= ($activePage == 'knitting-finished-orders') || $activePage == 'knitting-finished-order-details' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                knitting Finished Orders
+                            </p>
+                        </a>
+                    </li>
+                <?php } ?>
+                <li class="nav-item has-treeview ">
+                    <a href="../update-password" class="nav-link <?= ($activePage == 'update-password') ? 'active' : ''; ?> ">
+                        <i class="nav-icon fas fa-lock"></i>
+                        <p>
+                            Update Password
+                        </p>
+                    </a>
+                </li>
 
             </ul>
         </nav>

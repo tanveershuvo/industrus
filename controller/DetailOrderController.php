@@ -5,11 +5,13 @@ include_once("../imageUpload.php");
 $conn = connect();
 if (isset($_POST['submit'])) {
 
+    print_r($_POST);
+
     $query = "UPDATE `order_details` SET `frontMeasurementSketch`=?,
-    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? ,`shipmentDate`=? , `orderDate`=? ,`status` = 4 WHERE orderId = ?";
+    `backMeasurementSketch`=?,`collarMeasurementSketch`=?,`frontSewingSkecth`=?,`frontPlacketSkecth`=?,`slideSlitSkecth`=?,`pcs_per_box`=? ,`shipmentDate`=? , `detailOrderDate`=? ,`status` = 4 WHERE orderId = ?";
 
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssssss", $frontMeasurementSketch, $backMeasurementSketch, $collarMeasurementSketch, $frontSewingSkecth, $frontPlacketSkecth, $slideSlitSkecth, $pcsPerBox, $orderId);
+    $stmt->bind_param("ssssssssss", $frontMeasurementSketch, $backMeasurementSketch, $collarMeasurementSketch, $frontSewingSkecth, $frontPlacketSkecth, $slideSlitSkecth, $pcsPerBox, $shipmentDate, $orderDate, $orderId);
 
     $orderId = mysqli_real_escape_string($conn, $_POST['order_id']);
     $pcsPerBox = mysqli_real_escape_string($conn, $_POST['peicePerBox']);
@@ -125,5 +127,5 @@ if (isset($_POST['submit'])) {
     $clmt->close();
     $ycmt->close();
     $conn->close();
-    header('Location:order_form');
+    header('Location:sample-request');
 }

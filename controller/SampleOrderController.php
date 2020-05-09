@@ -5,10 +5,10 @@ include_once("../imageUpload.php");
 $conn = connect();
 if (isset($_POST['samplesubmit'])) {
     $query = "INSERT INTO `order_details`(`orderId`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`,`productSketch`, `yarnDescription`,`user_id`, `sampleOrderDate`)
-              VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?,?,?)";
+              VALUES (?, ?, ?,?,?,?, ?, ?,?,?,?,?,?,?)";
 
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssssssssss", $id, $buyerName, $companyName, $productName, $productPrice, $composition, $fabricsWeight, $samplePcs, $fabricConstruction, $febricDescription, $uploadInstance, $yarnDescription, $userID, $sampleOrderDate);
+    $stmt->bind_param("ssssssssssssss", $id, $buyerName, $companyName, $productName, $productPrice, $composition, $fabricsWeight, $samplePcs, $fabricConstruction, $febricDescription, $uploadInstance, $yarnDescription, $userID, $sampleOrderDate);
 
     $id = uniqid();
     $userID = $_SESSION['id'];

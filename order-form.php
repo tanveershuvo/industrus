@@ -1,5 +1,37 @@
 <?php include 'includes/header.php'; ?>
-<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/navbar.php';
+include_once("dbCon.php");
+$conn = connect();
+if (isset($_SESSION['isLoggedIn'])) {
+  $sql = "SELECT * FROM order_details WHERE user_id =? AND status = 1";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $id);
+  $id = $_SESSION['id'];
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $stmt->close();
+  $row = $result->fetch_assoc();
+  //
+  if (!isset($row)) {
+    return;
+  }
+  $query = "SELECT * FROM order_colors_quantity WHERE order_id = ?";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param("s", $order_id);
+  $order_id = $row['orderId'];
+  $stmt->execute();
+  $result2 = $stmt->get_result();
+  while ($data = $result2->fetch_assoc()) {
+    $colors[] = $data;
+  }
+  $stmt->close();
+  //
+  $conn->close();
+} else {
+  return;
+}
+
+?>
 <section id="tabs" class="project-tab">
   <form id="form" action="controller/DetailOrderController" method="post" enctype="multipart/form-data">
     <div id="smartwizard">

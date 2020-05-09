@@ -101,9 +101,10 @@
       }
     });
   });
-  $("input[type=file]").on('change', function(event) {
+  $("#form input[type=file]").on('change', function(event) {
     $(".invalid-feedback").remove();
     $("input").removeClass("is-invalid");
+    var input = $(this);
     var inputFile = event.currentTarget;
     $(inputFile).parent()
       .find('.custom-file-label')
