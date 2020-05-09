@@ -26,6 +26,8 @@ if (isset($_POST["login"])) {
 				header('Location:../marchandiser/marchant-dashboard');
 			} else if ($row['role'] == 2) {
 				header('Location:../knitting-master/knitting-master-dashboard');
+			} else if ($row['role'] == 3) {
+				header('Location:../cutting-master/cutting-master-dashboard');
 			}
 		}
 	} else {

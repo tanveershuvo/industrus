@@ -90,6 +90,33 @@
                         </a>
                     </li>
                 <?php } ?>
+                <?php if ((isset($_SESSION['isLoggedIn'])) && ($_SESSION['admin-role'] == 3 || $_SESSION['admin-role'] == 0)) { ?>
+                    <label class="text-secondary mb-3 text-center text-sm">CUTTING MASTER NAVIGATION</label>
+                    <li class="nav-item has-treeview ">
+                        <a href="cutting-master-dashboard" class="nav-link <?= ($activePage == 'cutting-master-dashboard') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="cutting-orders" class="nav-link <?= ($activePage == 'cutting-orders') || $activePage == 'cutting-order-details' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Cutting Orders
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="cutting-finished-orders" class="nav-link <?= ($activePage == 'cutting-finished-orders') || $activePage == 'cutting-finished-order-details' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Cutting Finished Orders
+                            </p>
+                        </a>
+                    </li>
+                <?php } ?>
                 <li class="nav-item has-treeview ">
                     <a href="../update-password" class="nav-link <?= ($activePage == 'update-password') ? 'active' : ''; ?> ">
                         <i class="nav-icon fas fa-lock"></i>

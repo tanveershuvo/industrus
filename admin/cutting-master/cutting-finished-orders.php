@@ -5,7 +5,7 @@ include '../includes/admin-navbar.php';
 include '../includes/admin-sidebar.php';
 include_once("../../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details as od, order_tasks as ot WHERE od.orderId = ot.order_id AND ot.status = 2  AND ot.department_id = 1 ";
+$sql = "SELECT * FROM order_details as od, order_tasks as ot WHERE od.orderId = ot.order_id AND ot.status = 2 AND ot.department_id = 2 ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();

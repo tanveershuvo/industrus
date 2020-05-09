@@ -1,9 +1,9 @@
 <?php
-$title = "Industrus | Knitting Master Dasboard";
+$title = "Industrus | Cutting Master Dasboard";
 include '../includes/admin-header.php';
 include_once("../../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_tasks WHERE department_id = 1";
+$sql = "SELECT * FROM order_tasks WHERE department_id = 2";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -22,7 +22,7 @@ foreach ($statusDatas as $statusData) {
     }
 }
 
-$sql = "SELECT SUM(CASE WHEN Status = 2 THEN 1 ELSE 0 END) AS `Finished`, SUM(CASE WHEN Status = 1 THEN 1 ELSE 0 END) AS `In-progress` FROM order_tasks WHERE department_id = 1";
+$sql = "SELECT SUM(CASE WHEN Status = 2 THEN 1 ELSE 0 END) AS `Finished`, SUM(CASE WHEN Status = 1 THEN 1 ELSE 0 END) AS `In-progress` FROM order_tasks WHERE department_id = 2";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -196,7 +196,7 @@ include '../includes/admin-sidebar.php';
         doc.setFontSize(33);
         doc.setFillColor(135, 124, 45, 0);
         doc.addImage(imgData, 'png', 10, 10, 150, 100);
-        doc.save('Knitting Order days comparison.pdf');
+        doc.save('Cutting order days comparison.pdf');
     }
 
     function generateStatusPDF() {
@@ -204,7 +204,7 @@ include '../includes/admin-sidebar.php';
         doc.setFontSize(33);
         doc.setFillColor(135, 124, 45, 0);
         doc.addImage(img1Data, 'png', 10, 10, 150, 100);
-        doc.save('Knitting Order status.pdf');
+        doc.save('Cutting order status.pdf');
     }
 
     $('#daypdf').click(generateDayPDF);
