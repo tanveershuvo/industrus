@@ -11,9 +11,11 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+
                 <!-- Marchant Menu -->
                 <?php if ((isset($_SESSION['isLoggedIn'])) && ($_SESSION['admin-role'] == 1 || $_SESSION['admin-role'] == 0)) { ?>
-                    <label class="text-secondary mb-3 text-center text-sm">MARCHANT NAVIGATION</label>
+                    <label class="text-secondary mb-3 text-center text-sm">NAVIGATION</label>
                     <li class="nav-item has-treeview ">
                         <a href="marchant-dashboard" class="nav-link <?= ($activePage == 'marchant-dashboard') ? 'active' : ''; ?> ">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -31,7 +33,7 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview ">
-                        <a href="detailed-orders" class="nav-link <?= ($activePage == 'detailed-orders' || $activePage == 'view-order-details') ? 'active' : ''; ?> ">
+                        <a href="detailed-orders" class="nav-link <?= ($activePage == 'detailed-orders' || $activePage == 'view-order-details' || $activePage == 'calculate-cost') ? 'active' : ''; ?> ">
                             <i class="nav-icon fas fa-info-circle"></i>
                             <p>
                                 Detailed orders
@@ -101,7 +103,7 @@
                         </a>
                     </li>
                     <li class="nav-item has-treeview ">
-                        <a href="cutting-orders" class="nav-link <?= ($activePage == 'cutting-orders') || $activePage == 'cutting-order-details' ? 'active' : ''; ?> ">
+                        <a href="cutting-orders" class="nav-link <?= ($activePage == 'cutting-orders') || $activePage == 'cutting-order-details' || $activePage == 'cutting-production-history' ? 'active' : ''; ?> ">
                             <i class="nav-icon fas fa-info-circle"></i>
                             <p>
                                 Cutting Orders
@@ -113,6 +115,60 @@
                             <i class="nav-icon fas fa-info-circle"></i>
                             <p>
                                 Cutting Finished Orders
+                            </p>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if ((isset($_SESSION['isLoggedIn'])) && ($_SESSION['admin-role'] == 4 || $_SESSION['admin-role'] == 0)) { ?>
+                    <label class="text-secondary mb-3 text-center text-sm">SEWING MASTER NAVIGATION</label>
+                    <li class="nav-item has-treeview ">
+                        <a href="sewing-master-dashboard" class="nav-link <?= ($activePage == 'sewing-master-dashboard') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="sewing-orders" class="nav-link <?= ($activePage == 'sewing-orders') || $activePage == 'sewing-order-details' || $activePage == 'sewing-production-history' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Sewing Orders
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="sewing-finished-orders" class="nav-link <?= ($activePage == 'sewing-finished-orders') || $activePage == 'sewing-finished-order-details' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Sewing Finished Orders
+                            </p>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if ((isset($_SESSION['isLoggedIn'])) && ($_SESSION['admin-role'] == 5 || $_SESSION['admin-role'] == 0)) { ?>
+                    <label class="text-secondary mb-3 text-center text-sm">PACKAGE MASTER NAVIGATION</label>
+                    <li class="nav-item has-treeview ">
+                        <a href="package-master-dashboard" class="nav-link <?= ($activePage == 'package-master-dashboard') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="package-orders" class="nav-link <?= ($activePage == 'package-orders') || $activePage == 'package-order-details' || $activePage == 'package-production-history' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Package Orders
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="package-finished-orders" class="nav-link <?= ($activePage == 'package-finished-orders') || $activePage == 'package-finished-order-details' ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-info-circle"></i>
+                            <p>
+                                Package Finished Orders
                             </p>
                         </a>
                     </li>

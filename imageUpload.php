@@ -26,7 +26,7 @@ function uploadImageChosen($files)
             }
         }
     } else {
-        $image = $_POST['productSketch'];
+        $image = '';
         return $image;
     }
 }

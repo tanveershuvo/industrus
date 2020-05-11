@@ -1,12 +1,12 @@
 <?php
-$title = "Industrus | Sewing History";
+$title = "Industrus | Sample Requests";
 include '../includes/admin-header.php';
 include '../includes/admin-navbar.php';
 include '../includes/admin-sidebar.php';
 include_once("../../dbCon.php");
 $conn = connect();
 if (isset($_GET['order-id'])) {
-    $sql = "SELECT * FROM production_track WHERE department_id = 2 AND order_id = ?  ";
+    $sql = "SELECT * FROM production_track WHERE department_id = 3 AND order_id = ?  ";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $orderId);
     $orderId = mysqli_real_escape_string($conn, $_GET['order-id']);
@@ -18,7 +18,7 @@ if (isset($_GET['order-id'])) {
 } else {
     return;
 }
-$sql = "SELECT * FROM production_track WHERE department_id = 2 AND production_date = ?  ";
+$sql = "SELECT * FROM production_track WHERE department_id = 3 AND production_date = ?  ";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $date);
 $date = date('m/d/Y');
@@ -28,14 +28,15 @@ $r = $stmt->get_result();
 $d = $r->fetch_assoc();
 $stmt->close();
 
-$sql = "SELECT SUM(total) as total FROM `order_colors_quantity` WHERE order_id=? ";
+$sql = "SELECT SUM(total) as total FROM `order_colors_quantity` WHERE order_id= ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $orderId);
+$orderId = mysqli_real_escape_string($conn, $_GET['order-id']);
 $stmt->execute();
 $result = $stmt->get_result();
 $sum = $result->fetch_assoc();
 
-$sql = "SELECT SUM(production_amount) as total FROM `production_track` WHERE order_id=? AND department_id = 2";
+$sql = "SELECT SUM(production_amount) as total FROM `production_track` WHERE order_id=? AND department_id = 3";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $orderId);
 $orderId = mysqli_real_escape_string($conn, $_GET['order-id']);
@@ -61,7 +62,7 @@ $conn->close();
                 </div>
                 <!-- /.card-header -->
                 <form action="../controllers/ordertrackController.php" method="post">
-                    <input type="hidden" name="department_id" value="2">
+                    <input type="hidden" name="department_id" value="3">
                     <input type="hidden" id="left_production" name="production_left" value="<?= $left_production ?>">
                     <div class="card-body">
                         <div class="row">
@@ -111,7 +112,7 @@ $conn->close();
                 </div>
                 <!-- /.card-header -->
                 <form action="../controllers/ordertrackController.php" method="post">
-                    <input type="hidden" name="department_id" value="2">
+                    <input type="hidden" name="department_id" value="3">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 row">
@@ -184,7 +185,7 @@ $conn->close();
                                 <td><?= $key + 1 ?></td>
                                 <td><?= $value['production_date'] ?></td>
                                 <td><?= $value['production_amount'] ?> pcs</td>
-                                <td><a href="cutting-production-history?order-id=<?= $_GET['order-id'] ?>&&date=<?= $value['production_date'] ?>&&amount=<?= $value['production_amount'] ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Edit</a></td>
+                                <td><a href="sewing-production-history?order-id=<?= $_GET['order-id'] ?>&&date=<?= $value['production_date'] ?>&&amount=<?= $value['production_amount'] ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Edit</a></td>
                             </tr>
 
                     <?php }
@@ -240,6 +241,7 @@ $conn->close();
             ]
         });
     });
+
 
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;

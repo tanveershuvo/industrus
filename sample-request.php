@@ -30,19 +30,20 @@ $conn = connect();
         $conn->close();
         $row = $result->fetch_assoc();
         $view =  $row['status'];
-        if ($view == 1) {
+        if ($view == '3') {
             header('Location:order-form');
         }
+
     ?>
         <br>
-        <?php if ($view == 0) { ?>
+        <?php if ($view == '0') { ?>
             <div class="alert alert-primary fade show mt-3 mb-5">
                 <h4 class="alert-heading mb-3"><i class="fa fa-info-circle"></i> Done!</h4>
                 <p>Your sample requisition form have been submitted. It will take some time to take a look at your proposal.</p>
                 <hr>
                 <p class="">For further communication, go to your mail and knock us ! </p>
             </div>
-        <?php } else if ($view == 'no result' || $view == 7 || $view == 2) {
+        <?php } else if ($view == 'no result' || $view == '7' || $view == '2') {
         ?>
             <div class="card bg-light mb-5">
                 <form id="myForm" action="controller/SampleOrderController" method="post" enctype="multipart/form-data">
@@ -214,10 +215,10 @@ $conn = connect();
                 </form>
 
             </div>
-        <?php } else if ($view == 3) {
+        <?php } else if ($view == '1') {
         ?>
             <div class="alert alert-success fade show mt-3 mb-5 text-center">
-                <h4 class="alert-heading mb-3"><i class="fa fa-check-circle"></i> Your order is placed</h4>
+                <h4 class="alert-heading mb-3"><i class="fa fa-check-circle"></i> Your order is accepted</h4>
                 <hr>
                 <p>Further communication will be done through mail!</p>
 

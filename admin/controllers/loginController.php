@@ -28,6 +28,12 @@ if (isset($_POST["login"])) {
 				header('Location:../knitting-master/knitting-master-dashboard');
 			} else if ($row['role'] == 3) {
 				header('Location:../cutting-master/cutting-master-dashboard');
+			} else if ($row['role'] == 4) {
+				header('Location:../sewing-master/sewing-master-dashboard');
+			} else if ($row['role'] == 5) {
+				header('Location:../package-master/package-master-dashboard');
+			} else if ($row['role'] == 0) {
+				header('Location:../admin-dashboard');
 			}
 		}
 	} else {

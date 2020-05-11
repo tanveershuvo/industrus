@@ -5,7 +5,7 @@ include '../includes/admin-navbar.php';
 include '../includes/admin-sidebar.php';
 include_once("../../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details WHERE status IN (6,7)";
+$sql = "SELECT * FROM order_details WHERE status IN (6,8)";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -45,7 +45,7 @@ while ($data = $result->fetch_assoc()) {
                     if (isset($row)) {
                         foreach ($row as $value) {
 
-                            $sql = "SELECT * FROM order_tasks as od , deaprtments as d WHERE od.department_id = d.id AND order_id = ? AND od.status = 2 ";
+                            $sql = "SELECT * FROM order_tasks as od , deaprtments as d WHERE od.department_id = d.id AND order_id = ? AND od.status = 1 ";
                             $stmt = $conn->prepare($sql);
                             $stmt->bind_param("s", $orderId);
                             $orderId = $value['orderId'];
@@ -66,9 +66,10 @@ while ($data = $result->fetch_assoc()) {
                                 <td><?= $value['detailOrderDate'] ?></td>
                                 <td><?= $value['shipmentDate'] ?></td>
                                 <?php
-                                if ($value['status'] != 7) {
+                                if ($value['status'] != 8) {
+
                                     foreach ($data as $val) {
-                                        if ($val['department_id'] == 1 && $val['status'] == 2) {
+                                        if ($val['department_id'] == 1) {
                                 ?>
                                             <td>
                                                 <div class="progress progress-sm">
@@ -82,7 +83,8 @@ while ($data = $result->fetch_assoc()) {
                                             <td class="project-state">
                                                 <span class="badge badge-primary"><?= $val['department_name'] ?> </span>
                                             </td>
-                                        <?php } else if ($val['department_id'] == 2 && $val['status'] == 2) { ?>
+                                        <?php
+                                        } else if ($val['department_id'] == 2) { ?>
                                             <td>
                                                 <div class="progress progress-sm">
                                                     <div class="progress-bar bg-blue" role="progressbar" aria-volumenow="40" aria-volumemin="40" aria-volumemax="100" style="width: 40% ">
@@ -96,7 +98,8 @@ while ($data = $result->fetch_assoc()) {
                                                 <span class="badge badge-primary"><?= $val['department_name'] ?></span>
                                             </td>
 
-                                        <?php } else if ($val['department_id'] == 3 && $val['status'] == 2) { ?>
+                                        <?php
+                                        } else if ($val['department_id'] == 3) { ?>
                                             <td>
                                                 <div class="progress progress-sm">
                                                     <div class="progress-bar bg-blue" role="progressbar" aria-volumenow="60" aria-volumemin="60" aria-volumemax="100" style="width: 60% ">
@@ -110,7 +113,8 @@ while ($data = $result->fetch_assoc()) {
                                                 <span class="badge badge-primary"><?= $val['department_name'] ?></span>
                                             </td>
 
-                                        <?php } else if ($val['department_id'] == 4 && $val['status'] == 2) { ?>
+                                        <?php
+                                        } else if ($val['department_id'] == 4) { ?>
                                             <td>
                                                 <div class="progress progress-sm">
                                                     <div class="progress-bar bg-blue" role="progressbar" aria-volumenow="80" aria-volumemin="80" aria-volumemax="100" style="width: 80% ">
@@ -123,8 +127,8 @@ while ($data = $result->fetch_assoc()) {
                                             <td class="project-state">
                                                 <span class="badge badge-primary"><?= $val['department_name'] ?></span>
                                             </td>
-
-                                    <?php }
+                                    <?php
+                                        }
                                     }
                                 } else { ?>
                                     <td>

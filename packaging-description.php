@@ -63,7 +63,6 @@
             <tr>
                 <th scope="col">Reference <span class="error">*</span></th>
                 <th width="40%" scope="col">Description <span class="error">*</span></th>
-                <th scope="col">Associated Image</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -72,12 +71,6 @@
                 <td scope="row"> <input type="text" class="form-control  clonable-increment-name " name="packageReference[0]" placeholder="reference"> </td>
                 <td>
                     <textarea class="form-control  clonable-increment-name" rows="3" id="comment_0" placeholder="describe other package information" name="packageDescription[0]"></textarea>
-                </td>
-                <td>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input clonable-increment-name" name="packageSketch[0]" aria-describedby="inputGroupFileAddon04">
-                        <label class="custom-file-label" for="postedFile">upload image</label>
-                    </div>
                 </td>
                 <td id="data">
                     <div class="btn-group btn-group-sm" role="group" aria-label="...">

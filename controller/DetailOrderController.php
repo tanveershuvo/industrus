@@ -59,8 +59,6 @@ if (isset($_POST['submit'])) {
         $colors[] = $data;
     }
 
-
-
     for ($i = 0; $i < $sewingReferenceArr; $i++) {
 
         $query = "INSERT INTO `yarn_description`(`id`, `order_id`, `reference`, `description`) VALUES (?, ?, ?,?)";
@@ -71,8 +69,6 @@ if (isset($_POST['submit'])) {
         $sewingDescription = mysqli_real_escape_string($conn, $_POST['sewingDescription'][$i]);
         $ydmt->execute();
 
-
-        // print_r($colors);
         foreach ($colors as $key => $value) {
 
             $query = "INSERT INTO `yarn_color`(`yarn_desc_id`, `color`, `yarn_color`) VALUES (?, ?,?)";
@@ -108,17 +104,12 @@ if (isset($_POST['submit'])) {
 
         for ($i = 0; $i < $packageReferenceArr; $i++) {
 
-            $query = "INSERT INTO `package_description`(`order_id`, `reference`, `description`, `package_image`)VALUES (?, ?, ?, ?)";
+            $query = "INSERT INTO `package_description`(`order_id`, `reference`, `description`)VALUES (?, ?, ?)";
             $clmt = $conn->prepare($query);
-            $clmt->bind_param("ssss", $orderId, $packageReference, $packageDescription, $packageSketch);
-
+            $clmt->bind_param("sss", $orderId, $packageReference, $packageDescription);
             $packageReference = mysqli_real_escape_string($conn, $_POST['packageReference'][$i]);
             $packageDescription = mysqli_real_escape_string($conn, $_POST['packageDescription'][$i]);
-            if (isset($_FILES['packageSketch'])) {
-                $packageSketch = uploadImageChosen($_FILES['packageSketch']);
-            } else {
-                $packageSketch = 0;
-            }
+
             $clmt->execute();
         }
     }
@@ -127,5 +118,5 @@ if (isset($_POST['submit'])) {
     $clmt->close();
     $ycmt->close();
     $conn->close();
-    header('Location:sample-request');
+    header('Location:../sample-request');
 }

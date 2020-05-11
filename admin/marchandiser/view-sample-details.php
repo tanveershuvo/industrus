@@ -50,9 +50,6 @@ if (isset($_GET['order-id'])) {
                         <div class="col-sm-4">
                             <button class="btn btn-outline-dark btn-block print" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
                         </div>
-                        <div class="col-sm-8">
-                            <button class="btn btn-outline-success btn-block print"><i class="fas fa-calculator"></i> Calculate Cost</button>
-                        </div>
                     </div>
                 <?php } else if ($row['status'] == 0) {
                     echo '<h5 style="color:blue;font:bold;" >To calculate, Accept order First! </h5>';

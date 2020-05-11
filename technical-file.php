@@ -2,7 +2,7 @@
     include_once("dbCon.php");
     $conn = connect();
     if (isset($_SESSION['isLoggedIn'])) {
-        $sql = "SELECT * FROM order_details WHERE user_id =? AND status = 1";
+        $sql = "SELECT * FROM order_details WHERE user_id =? AND status = 3";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $id);
         $id = $_SESSION['id'];

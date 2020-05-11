@@ -105,14 +105,17 @@ if (isset($_GET['order-id'])) {
                 <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <h5> Order ID :&nbsp;<?= $row['orderId'] ?></h5>
                             </div>
-                            <div class="col-sm-4">
-                                <h5>Sample Order Date : <?= $row['sampleOrderDate'] ?></h5>
+                            <div class="col-sm-3">
+                                <h6>Sample Order Date : <?= $row['sampleOrderDate'] ?></h6>
                             </div>
-                            <div class="col-sm-4">
-                                <button class=" btn btn-outline-dark col-sm-4  float-right print" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
+                            <div class="col-sm-3">
+                                <h6>Order Date : <?= $row['detailOrderDate'] ?></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <button class=" btn btn-outline-dark col-sm-4 float-right print" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>
                             </div>
                         </div>
                     </div>
@@ -404,7 +407,6 @@ if (isset($_GET['order-id'])) {
                                 <tr>
                                     <th scope="col">Reference </th>
                                     <th scope="col">Description</th>
-                                    <th scope="col">Assigned image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -413,9 +415,6 @@ if (isset($_GET['order-id'])) {
                                     <tr>
                                         <td><?= $packageDescription['reference'] ?></td>
                                         <td><?= $packageDescription['description'] ?></td>
-                                        <td><a href="../../img/samples/<?= $packageDescription['package_image'] ?>" data-toggle="lightbox" data-title="package image" data-gallery="gallery">
-                                                <img src="../../img/samples/<?= $packageDescription['package_image'] ?>" class="img-fluid mb-2 border border-secondary" alt="package_image" />
-                                            </a></td>
                                     </tr>
                                 <?php }
                                 ?>

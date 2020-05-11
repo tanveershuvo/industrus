@@ -5,7 +5,7 @@ include '../includes/admin-navbar.php';
 include '../includes/admin-sidebar.php';
 include_once("../../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details as od, order_tasks as ot WHERE od.orderId = ot.order_id AND ot.status = 2 AND ot.department_id = 2 ";
+$sql = "SELECT * FROM order_details as od, order_tasks as ot WHERE od.orderId = ot.order_id AND ot.status = 2 AND ot.department_id = 3 ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,7 +21,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>All FInished Cutting Orders </h1>
+                <h1>All FInished Sewing Orders </h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -50,7 +50,7 @@ $conn->close();
                                 <td style='color:blue;'><?= $value['started_at'] ?></td>
                                 <td style='color:green;'><?= $value['finished_at'] ?></td>
                                 <td>
-                                    <a href="cutting-finished-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                    <a href="sewing-finished-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
                                 </td>
                             </tr>
                     <?php }

@@ -1,11 +1,11 @@
 <?php
-$title = "Industrus | Sample Requests";
+$title = "Industrus | Package Orders";
 include '../includes/admin-header.php';
 include '../includes/admin-navbar.php';
 include '../includes/admin-sidebar.php';
 include_once("../../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details as od, order_tasks as ot WHERE od.orderId = ot.order_id AND ot.status = 1 AND ot.department_id = 2 ";
+$sql = "SELECT * FROM order_details as od, order_tasks as ot WHERE od.orderId = ot.order_id AND ot.status = 1 AND ot.department_id = 4 ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,7 +21,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>All Knitting Orders </h1>
+                <h1>All Package Orders </h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -82,10 +82,10 @@ $conn->close();
                                     } ?>
                                 </td>
                                 <td>
-                                    <a href="cutting-production-history?order-id=<?= $value['orderId'] ?>" class="btn btn-secondary btn-sm"><i class="fas fa-cut"></i>Details</a>
+                                    <a href="package-production-history?order-id=<?= $value['orderId'] ?>" class="btn btn-secondary btn-sm"><i class="fas fa-cut"></i>Details</a>
                                 </td>
                                 <td>
-                                    <a href="cutting-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                    <a href="package-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
                                 </td>
                             </tr>
                     <?php }
@@ -163,7 +163,7 @@ $conn->close();
             if (result.value == true) {
                 var input = $("<input>")
                     .attr("type", "hidden")
-                    .attr("name", "cutting_done");
+                    .attr("name", "package_done");
                 $('#form').append(input);
                 $('#form').submit();
             }

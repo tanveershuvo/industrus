@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2020 at 08:41 PM
+-- Generation Time: May 11, 2020 at 05:04 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -41,7 +41,12 @@ CREATE TABLE `admin_login` (
 --
 
 INSERT INTO `admin_login` (`id`, `name`, `email`, `password`, `role`) VALUES
-(1, 'Marchandiser', 'marchandise@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1);
+(1, 'Marchandiser', 'marchandise@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1),
+(2, 'Knitting', 'knitting@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 2),
+(3, 'cutting', 'cutting@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 3),
+(4, 'sewing', 'sewing@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 4),
+(5, 'Package', 'package@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 5),
+(6, 'admin', 'admin@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 0);
 
 -- --------------------------------------------------------
 
@@ -90,8 +95,8 @@ CREATE TABLE `measurement_pattern` (
 --
 
 INSERT INTO `measurement_pattern` (`id`, `order_id`, `reference`, `description`, `tolerance`, `s_size`, `m_size`, `l_size`, `xl_size`, `xxl_size`, `xxxl_size`) VALUES
-(1, '5eacb4b85135a', 'Ref *', 'Description ', '1', '1', '1', '', '', '', ''),
-(2, '5eacb4b85135a', 'ref 2', 'Description  Description ', '2', '1', '1', '', '', '', '');
+(1, '5eb8058fd81c9', 'Collar', 'Collar measurement', '1', '12', '13', '14', '15', '16', '17'),
+(2, '5eb8058fd81c9', 'Shouldar', 'shoulder measurement', '5', '20', '21', '22', '23', '24', '25');
 
 -- --------------------------------------------------------
 
@@ -117,9 +122,8 @@ CREATE TABLE `order_colors_quantity` (
 --
 
 INSERT INTO `order_colors_quantity` (`id`, `order_id`, `color`, `sQuantity`, `mQuantity`, `lQuantity`, `xlQuantity`, `xxlQuantity`, `xxxlQuantity`, `total`) VALUES
-(1, '5eacb4b85135a', 'Expedita fugit aut ', '510', '572', '506', '280', '222', '333', 2312),
-(2, '5eacb4b85135a', 'Possimus voluptate ', '106', '593', '839', '867', '477', '563', 3359),
-(3, '5eacb4b85135a', 'Qui quis nisi exerci', '693', '535', '701', '787', '580', '15', 3876);
+(1, '5eb8058fd81c9', 'Black', '50', '50', '50', '', '', '', 150),
+(2, '5eb8058fd81c9', 'White', '50', '50', '50', '50', '50', '50', 300);
 
 -- --------------------------------------------------------
 
@@ -149,17 +153,18 @@ CREATE TABLE `order_details` (
   `slideSlitSkecth` varchar(200) NOT NULL,
   `pcs_per_box` varchar(15) NOT NULL,
   `shipmentDate` varchar(100) NOT NULL,
-  `detailOrderDate` varchar(100) DEFAULT NULL,
+  `detailOrderDate` varchar(100) NOT NULL,
   `sampleOrderDate` varchar(100) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=sampledefault,1=sample_accepted,2=sample_rejected,3=pendingDetails,4 = userImputted,5=task-allocated,6=Order-in-production'
+  `finishedDate` varchar(50) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=sampledefault,1=sample_accepted,2=sample_rejected,3=pendingDetails,4 = userImputted,5=task-allocated,6=Order-in-production, 7 =order_finished'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details` (`orderId`, `user_id`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`, `productSketch`, `yarnDescription`, `frontMeasurementSketch`, `backMeasurementSketch`, `collarMeasurementSketch`, `frontSewingSkecth`, `frontPlacketSkecth`, `slideSlitSkecth`, `pcs_per_box`, `shipmentDate`, `detailOrderDate`, `sampleOrderDate`, `status`) VALUES
-('5eacb4b85135a', 1, 'Lareina Castro', 'Gillespie Noble Co', 'Ora Graves', '758', 'Voluptate ipsa expe', 'Quia voluptatem simi', '12', 'Velit fugiat id qui', 'Dicta repellendus O', '20200502014600_banner-1.jpg', 'Nemo dolor at repudi', '20200502014929_banner-2.jpg', '20200502014929_banner-3.jpg', '20200502014929_flag-1.jpg', '20200502014929_hero-1.jpg', '20200502014929_hero-2.jpg', '20200502014929_hero-3.jpg', '12', '05/12/2020', '12/05/2020', '12/05/2020', 6);
+INSERT INTO `order_details` (`orderId`, `user_id`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`, `productSketch`, `yarnDescription`, `frontMeasurementSketch`, `backMeasurementSketch`, `collarMeasurementSketch`, `frontSewingSkecth`, `frontPlacketSkecth`, `slideSlitSkecth`, `pcs_per_box`, `shipmentDate`, `detailOrderDate`, `sampleOrderDate`, `finishedDate`, `status`) VALUES
+('5eb8058fd81c9', 1, 'Tanveer', 'AJ Garments', 'Men full sleeve', '6.50', '65% cotton', '125 GSM', '10', 'combed cottton single pique', 'combed', '20200510154551_18-14-LineDrawing.jpg', 'Yarn GSM 100', '20200510155259_blog-1.jpg', '20200510155259_blog-2.jpg', '20200510155259_blog-3.jpg', '20200510155259_blog-5.jpg', '20200510155259_blog-6.jpg', '20200510155259_blog-detail.jpg', '10', '05/23/2020', '05/10/2020', '05/10/2020', '05/11/2020', 7);
 
 -- --------------------------------------------------------
 
@@ -172,18 +177,21 @@ CREATE TABLE `order_tasks` (
   `order_id` varchar(50) NOT NULL,
   `department_id` int(11) NOT NULL,
   `assign_days` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0
+  `started_at` varchar(50) NOT NULL,
+  `finished_at` varchar(50) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `flag` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `order_tasks`
 --
 
-INSERT INTO `order_tasks` (`id`, `order_id`, `department_id`, `assign_days`, `status`) VALUES
-(1, '5eacb4b85135a', 1, 1, 1),
-(2, '5eacb4b85135a', 2, 1, 0),
-(3, '5eacb4b85135a', 3, 2, 0),
-(4, '5eacb4b85135a', 4, 1, 0);
+INSERT INTO `order_tasks` (`id`, `order_id`, `department_id`, `assign_days`, `started_at`, `finished_at`, `status`, `flag`) VALUES
+(1, '5eb8058fd81c9', 1, 3, '05/11/2020', '05/11/2020', 2, 0),
+(2, '5eb8058fd81c9', 2, 3, '05/12/2020', '05/11/2020', 2, 1),
+(3, '5eb8058fd81c9', 3, 3, '05/12/2020', '05/11/2020', 2, 1),
+(4, '5eb8058fd81c9', 4, 3, '05/12/2020', '05/11/2020', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -207,8 +215,8 @@ CREATE TABLE `package_box_details` (
 --
 
 INSERT INTO `package_box_details` (`id`, `order_id`, `size`, `length`, `width`, `height`, `grossWeight`, `nertWeight`) VALUES
-(1, '5eacb4b85135a', 's', '12', '12', '12', '12', '12'),
-(2, '5eacb4b85135a', 'm', '21', '2', '21', '21', '21');
+(1, '5eb8058fd81c9', 's', '12', '12', '12', '5', '6'),
+(2, '5eb8058fd81c9', 'm', '12', '12', '12', '5', '6');
 
 -- --------------------------------------------------------
 
@@ -220,9 +228,65 @@ CREATE TABLE `package_description` (
   `id` int(11) NOT NULL,
   `order_id` varchar(20) NOT NULL,
   `reference` varchar(50) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `package_image` varchar(200) NOT NULL
+  `description` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `package_description`
+--
+
+INSERT INTO `package_description` (`id`, `order_id`, `reference`, `description`) VALUES
+(1, '5eb8058fd81c9', 'barcode', 'barcode needed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `production_track`
+--
+
+CREATE TABLE `production_track` (
+  `id` int(11) NOT NULL,
+  `order_id` varchar(50) NOT NULL,
+  `production_date` varchar(50) NOT NULL,
+  `production_amount` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `production_track`
+--
+
+INSERT INTO `production_track` (`id`, `order_id`, `production_date`, `production_amount`, `department_id`) VALUES
+(1, '5eb8058fd81c9', '05/11/2020', 450, 2),
+(2, '5eb8058fd81c9', '05/11/2020', 450, 3),
+(3, '5eb8058fd81c9', '05/11/2020', 450, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_costing`
+--
+
+CREATE TABLE `product_costing` (
+  `id` int(11) NOT NULL,
+  `order_id` varchar(50) NOT NULL,
+  `fabAmount` varchar(11) NOT NULL,
+  `fabCost` varchar(11) NOT NULL,
+  `knitCost` varchar(11) NOT NULL,
+  `dyeCost` varchar(11) NOT NULL,
+  `stitching` varchar(11) NOT NULL,
+  `cutting` varchar(11) NOT NULL,
+  `packaging` varchar(11) NOT NULL,
+  `totalPrice` varchar(20) NOT NULL,
+  `perPiecePrice` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_costing`
+--
+
+INSERT INTO `product_costing` (`id`, `order_id`, `fabAmount`, `fabCost`, `knitCost`, `dyeCost`, `stitching`, `cutting`, `packaging`, `totalPrice`, `perPiecePrice`) VALUES
+(1, '5eb8058fd81c9', '10', '100', '50', '5', '0.1', '0.2', '0.3', '2020.00', '4.04');
 
 -- --------------------------------------------------------
 
@@ -245,7 +309,7 @@ CREATE TABLE `user_login` (
 --
 
 INSERT INTO `user_login` (`id`, `name`, `email`, `password`, `company_name`, `phone`, `token`) VALUES
-(1, 'Mohammad Murphy', 'tanveershuvos@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Cox and Russell LLC', '6', '');
+(1, 'tanveer', 'tanveershuvos@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'abc', '01683182337', '');
 
 -- --------------------------------------------------------
 
@@ -265,12 +329,8 @@ CREATE TABLE `yarn_color` (
 --
 
 INSERT INTO `yarn_color` (`id`, `yarn_desc_id`, `color`, `yarn_color`) VALUES
-(1, '5eacb5893471e', 'Expedita fugit aut ', 'a'),
-(2, '5eacb5893471e', 'Possimus voluptate ', 'b'),
-(3, '5eacb5893471e', 'Qui quis nisi exerci', 'c'),
-(4, '5eacb589794bf', 'Expedita fugit aut ', 'e'),
-(5, '5eacb589794bf', 'Possimus voluptate ', 'f'),
-(6, '5eacb589794bf', 'Qui quis nisi exerci', 'g');
+(1, '5eb8073b919b9', 'Black', 'white'),
+(2, '5eb8073b919b9', 'White', 'black');
 
 -- --------------------------------------------------------
 
@@ -290,8 +350,7 @@ CREATE TABLE `yarn_description` (
 --
 
 INSERT INTO `yarn_description` (`id`, `order_id`, `reference`, `description`) VALUES
-('5eacb5893471e', '5eacb4b85135a', 'Yarn ', 'Yarn Yarn '),
-('5eacb589794bf', '5eacb4b85135a', 'Yarn 2', 'Yarn Yarn Yarn Yarn ');
+('5eb8073b919b9', '5eb8058fd81c9', 'Front', 'Front placket');
 
 --
 -- Indexes for dumped tables
@@ -351,6 +410,18 @@ ALTER TABLE `package_description`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `production_track`
+--
+ALTER TABLE `production_track`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_costing`
+--
+ALTER TABLE `product_costing`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_login`
 --
 ALTER TABLE `user_login`
@@ -376,7 +447,7 @@ ALTER TABLE `yarn_description`
 -- AUTO_INCREMENT for table `admin_login`
 --
 ALTER TABLE `admin_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `deaprtments`
@@ -394,7 +465,7 @@ ALTER TABLE `measurement_pattern`
 -- AUTO_INCREMENT for table `order_colors_quantity`
 --
 ALTER TABLE `order_colors_quantity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_tasks`
@@ -412,7 +483,19 @@ ALTER TABLE `package_box_details`
 -- AUTO_INCREMENT for table `package_description`
 --
 ALTER TABLE `package_description`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `production_track`
+--
+ALTER TABLE `production_track`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_costing`
+--
+ALTER TABLE `product_costing`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_login`
@@ -424,7 +507,7 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `yarn_color`
 --
 ALTER TABLE `yarn_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

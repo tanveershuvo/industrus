@@ -38,6 +38,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Action</th>
+                        <th>Calculate</th>
                         <th>Sample Details</th>
                     </tr>
                 </thead>
@@ -62,6 +63,13 @@ $conn->close();
                                         echo 'Accepted';
                                     } ?>
                                 </td>
+                                <td>
+                                    <?php if (($value['status'] == 1)) { ?>
+                                        <a href="calculate-cost?order-id=<?= $value['orderId'] ?>" class="btn btn-outline-success btn-sm print"><i class="fas fa-calculator"></i> Calculate Cost</a>
+                                    <?php } else {
+                                        echo 'Accept First';
+                                    } ?>
+                                </td>
                                 <td><a href="view-sample-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a></td>
                             </tr>
                     <?php }
@@ -75,6 +83,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Action</th>
+                        <th>Calculate</th>
                         <th>Sample Details</th>
                     </tr>
                 </tfoot>
@@ -115,6 +124,9 @@ $conn->close();
                 null,
                 {
                     'search': false,
+                    'orderable': false,
+                }, {
+                    'searchable': false,
                     'orderable': false,
                 }, {
                     'searchable': false,

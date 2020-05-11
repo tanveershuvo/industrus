@@ -1,5 +1,5 @@
 <?php
-$title = 'Indutrus| Finished Order Details';
+$title = 'Indutrus| Order Details';
 include '../includes/admin-header.php';
 include '../includes/admin-navbar.php';
 include '../includes/admin-sidebar.php';
@@ -15,13 +15,34 @@ if (isset($_GET['order-id'])) {
     $stmt->close();
     $row = $result->fetch_assoc();
     //
-    $query = "SELECT * FROM measurement_pattern WHERE order_id = ?";
+    $query = "SELECT * FROM order_colors_quantity WHERE order_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $id);
     $stmt->execute();
     $result2 = $stmt->get_result();
     while ($data = $result2->fetch_assoc()) {
-        $measurements[] = $data;
+        $colors[] = $data;
+    }
+    //
+    //
+    $query = "SELECT * FROM yarn_description WHERE order_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $result2 = $stmt->get_result();
+    while ($data = $result2->fetch_assoc()) {
+        $yarnDescriptions[] = $data;
+    }
+
+    foreach ($yarnDescriptions as $val) {
+        $query = "SELECT * FROM yarn_color WHERE yarn_desc_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $val['id']);
+        $stmt->execute();
+        $result2 = $stmt->get_result();
+        while ($data = $result2->fetch_assoc()) {
+            $yarnColor[] = $data;
+        }
     }
     //
 
@@ -53,54 +74,50 @@ if (isset($_GET['order-id'])) {
             <div class="card-text mt-3 mb-3">
                 <div class="row text-center">
                     <div class="col-sm-4 ">
-                        <label for="examples" class="mb-3"><b>Front Measurement Sketch :</b></label>
-                        <a href="../../img/samples/<?= $row['frontMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Front Measurement Sketch" data-gallery="gallery">
-                            <img src="../../img/samples/<?= $row['frontMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Measurement Sketch" />
+                        <label for="examples" class="mb-3"><b>Front Sewing Sketch :</b></label>
+                        <a href="../../img/samples/<?= $row['frontSewingSkecth'] ?>" data-toggle="lightbox" data-title="Front Sewing Sketch" data-gallery="gallery">
+                            <img src="../../img/samples/<?= $row['frontSewingSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Sewing Sketch" />
                         </a>
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="examples" class="mb-3"><b>Back Measurement Sketch :</b></label>
-                        <a href="../../img/samples/<?= $row['backMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Back Measurement Sketch" data-gallery="gallery">
-                            <img src="../../img/samples/<?= $row['backMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Back Measurement Sketch" />
+                        <label for="examples" class="mb-3"><b>Front Placket Skecth :</b></label>
+                        <a href="../../img/samples/<?= $row['frontPlacketSkecth'] ?>" data-toggle="lightbox" data-title="Front Placket Skecth" data-gallery="gallery">
+                            <img src="../../img/samples/<?= $row['frontPlacketSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Placket Skecth" />
                         </a>
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="examples" class="mb-3"><b>Collar Measurement Sketch :</b></label>
-                        <a href="../../img/samples/<?= $row['collarMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Collar Measurement Sketch " data-gallery="gallery">
-                            <img src="../../img/samples/<?= $row['collarMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Collar Measurement Sketch" />
+                        <label for="examples" class="mb-3"><b>Slide Slit Skecth :</b></label>
+                        <a href="../../img/samples/<?= $row['slideSlitSkecth'] ?>" data-toggle="lightbox" data-title="Slide Slit Skecth  " data-gallery="gallery">
+                            <img src="../../img/samples/<?= $row['slideSlitSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Slide Slit Skecth " />
                         </a>
                     </div>
                 </div>
             </div>
-            <h5 class="mb-3"><strong>Pattern/Chart of</strong> Measurement : </h5>
+            <h5 class="mb-3"><strong>Sewing</strong> Details : </h5>
             <table class="table table-head-fixed text-nowrap table-bordered ">
                 <thead>
                     <tr>
                         <th scope="col">Reference </th>
                         <th width="25%" scope="col">Description</th>
-                        <th scope="col">Tol(-+) (in Inch)</th>
-                        <th scope="col" class="s">S (in Inch)</th>
-                        <th scope="col" class="m">M (in Inch)</th>
-                        <th scope="col" class="l">L (in Inch)</th>
-                        <th scope="col" class="xl">XL (in Inch)</th>
-                        <th scope="col" class="xxl">XXL (in Inch)</th>
-                        <th scope="col" class="xxxl">XXXL (in Inch)</th>
+                        <?php foreach ($colors as $color) { ?>
+                            <th><?= $color['color'] ?></th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($measurements as $measurement) { ?>
+                    <?php foreach ($yarnDescriptions as $yarnDescription) { ?>
                         <tr>
-                            <td><?= $measurement['reference'] ?></td>
-                            <td><?= $measurement['description'] ?></td>
-                            <td><?= $measurement['tolerance'] ?></td>
-                            <td><?= $measurement['s_size'] ?></td>
-                            <td><?= $measurement['m_size'] ?></td>
-                            <td><?= $measurement['l_size'] ?></td>
-                            <td><?= $measurement['xl_size'] ?></td>
-                            <td><?= $measurement['xxl_size'] ?></td>
-                            <td><?= $measurement['xxl_size'] ?></td>
+                            <td><?= $yarnDescription['reference'] ?></td>
+                            <td><?= $yarnDescription['description'] ?></td>
+                            <?php foreach ($yarnColor as $yc) {
+                                if ($yarnDescription['id'] == $yc['yarn_desc_id']) { ?>
+                                    <td><?php
+                                        echo $yc['yarn_color'];
+                                        ?></td>
+                            <?php }
+                            } ?>
                         </tr>
                     <?php } ?>
                 </tbody>
