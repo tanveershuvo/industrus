@@ -1,9 +1,9 @@
 <?php
 $title = "Industrus | Order & Tasks";
-include '../includes/admin-header.php';
-include '../includes/admin-navbar.php';
-include '../includes/admin-sidebar.php';
-include_once("../../dbCon.php");
+include 'includes/admin-header.php';
+include 'includes/admin-navbar.php';
+include 'includes/admin-sidebar.php';
+include_once("../dbCon.php");
 $conn = connect();
 $sql = "SELECT * FROM order_details WHERE status IN (6,8)";
 $stmt = $conn->prepare($sql);
@@ -132,7 +132,7 @@ while ($data = $result->fetch_assoc()) {
                                     }
                                 } else { ?>
                                     <td>
-                                        <form action="../controllers/orderStatusController.php" method="post">
+                                        <form action="controllers/orderStatusController.php" method="post">
                                             <input type="hidden" name="order_id" value="<?= $value['orderId'] ?>">
                                             <button class="btn btn-success btn-block btn-sm" type="submit" name="finished">Move to Finished</button>
                                         </form>
@@ -151,7 +151,7 @@ while ($data = $result->fetch_assoc()) {
         <!-- /.card-body -->
     </div>
 </section>
-<?php include '../includes/admin-footer.php'; ?>
+<?php include 'includes/admin-footer.php'; ?>
 </body>
 
 </html>

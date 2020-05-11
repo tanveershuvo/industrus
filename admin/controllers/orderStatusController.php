@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../dbCon.php");
+include_once("../dbCon.php");
 $conn = connect();
 
 if (isset($_POST['finished'])) {
@@ -13,7 +13,7 @@ if (isset($_POST['finished'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Order Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished !', 'type' => 'success'];
-    header("Location:../marchandiser/finished-orders");
+    header("Location:finished-orders");
 }
 if (isset($_POST['movetoAllocation'])) {
     $sql = "UPDATE `order_details` SET`status` = 3 WHERE orderId = ?";
@@ -24,7 +24,7 @@ if (isset($_POST['movetoAllocation'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Negotiation Complete!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been in Pre-order !', 'type' => 'success'];
-    header("Location:../marchandiser/detailed-orders");
+    header("Location:detailed-orders");
 }
 
 if (isset($_POST['knitting_done'])) {
@@ -44,7 +44,7 @@ if (isset($_POST['knitting_done'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Knitting Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Knitting !', 'type' => 'success'];
-    header("Location:../knitting-master/knitting-finished-orders");
+    header("Location:knitting-finished-orders");
 }
 
 if (isset($_POST['cutting_done'])) {
@@ -64,7 +64,7 @@ if (isset($_POST['cutting_done'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Cutting Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Knitting !', 'type' => 'success'];
-    header("Location:../cutting-master/cutting-finished-orders");
+    header("Location:cutting-finished-orders");
 }
 if (isset($_POST['sewing_done'])) {
     $sql = "UPDATE `order_tasks` SET `finished_at`= ? ,`status` = 2 WHERE order_id = ? AND department_id = 3";
@@ -83,7 +83,7 @@ if (isset($_POST['sewing_done'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Sewing Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Knitting !', 'type' => 'success'];
-    header("Location:../sewing-master/sewing-finished-orders");
+    header("Location:sewing-finished-orders");
 }
 if (isset($_POST['package_done'])) {
     $sql = "UPDATE `order_tasks` SET `finished_at`= ? ,`status` = 2 WHERE order_id = ? AND department_id = 4";
@@ -99,5 +99,5 @@ if (isset($_POST['package_done'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Packaging Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Knitting !', 'type' => 'success'];
-    header("Location:../package-master/package-finished-orders");
+    header("Location:package-finished-orders");
 }

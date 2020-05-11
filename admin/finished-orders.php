@@ -1,11 +1,11 @@
 <?php
 $title = "Industrus | Sample Requests";
-include '../includes/admin-header.php';
-include '../includes/admin-navbar.php';
-include '../includes/admin-sidebar.php';
-include_once("../../dbCon.php");
+include 'includes/admin-header.php';
+include 'includes/admin-navbar.php';
+include 'includes/admin-sidebar.php';
+include_once("../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details WHERE status IN (3,4,5,6)";
+$sql = "SELECT * FROM order_details WHERE status = 7";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,7 +21,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>All Detailed Orders </h1>
+                <h1>Finished Orders </h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -37,7 +37,7 @@ $conn->close();
                         <th>Company Name</th>
                         <th>Product Name</th>
                         <th>Order date</th>
-                        <th>Shipment Date</th>
+                        <th>Finished Date</th>
                         <th>Order Details</th>
                     </tr>
                 </thead>
@@ -50,23 +50,11 @@ $conn->close();
                                 <td><?= $value['buyerName'] ?></td>
                                 <td><?= $value['companyName'] ?></td>
                                 <td><?= $value['productName'] ?></td>
-                                <td style='color:green;'><?php if ($value['detailOrderDate'] !== '') {
-                                                                echo $value['detailOrderDate'];
-                                                            } else {
-                                                                echo 'Not yet';
-                                                            } ?></td>
-                                <td style='color:green;'><?php if ($value['shipmentDate'] !== '') {
-                                                                echo $value['shipmentDate'];
-                                                            } else {
-                                                                echo 'Not yet';
-                                                            } ?></td>
+                                <td style='color:green;'><?php echo $value['detailOrderDate']; ?></td>
+                                <td style='color:green;'><?php echo $value['finishedDate']; ?></td>
                                 <td style='color:green;'>
-                                    <?php
-                                    if (($value['status'] == 3)) {
-                                        echo 'Pending';
-                                    } else { ?>
-                                        <a href="view-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                    <?php } ?> </td>
+                                    <a href="finished-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View Details</a>
+                                </td>
                             </tr>
                     <?php }
                     } ?>
@@ -78,7 +66,7 @@ $conn->close();
                         <th>Company Name</th>
                         <th>Product Name</th>
                         <th>Order date</th>
-                        <th>Shipment Date</th>
+                        <th>Finished Date</th>
                         <th>Order Details</th>
                     </tr>
                 </tfoot>
@@ -87,7 +75,7 @@ $conn->close();
         <!-- /.card-body -->
     </div>
 </section>
-<?php include '../includes/admin-footer.php'; ?>
+<?php include 'includes/admin-footer.php'; ?>
 <script>
     <?php if (isset($_SESSION['msg'])) {
     ?>
@@ -125,27 +113,18 @@ $conn->close();
             ]
         });
     });
-    $('#decline').on('click', function(e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, decline it!'
-        }).then((result) => {
-            if (result.value == true) {
-                var input = $("<input>")
-                    .attr("type", "hidden")
-                    .attr("name", "decline-order");
-                $('#form').append(input);
-                $('#form').submit();
-            }
+    <?php if (isset($_SESSION['msg'])) {
+    ?>
+        $(document).Toasts('create', {
+            class: 'bg-<?= $_SESSION['msg']['type'] ?>',
+            title: '<?= $_SESSION['msg']['title'] ?>',
+            autohide: true,
+            icon: 'fas fa-<?= $_SESSION['msg']['icon'] ?> fa-lg',
+            delay: 5000,
+            body: '<?= $_SESSION['msg']['body'] ?>',
+            position: 'bottomLeft'
         })
-        return false;
-    });
+    <?php } ?>
 </script>
 </body>
 

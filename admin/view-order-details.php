@@ -1,9 +1,9 @@
 <?php
 $title = 'Indutrus| Sample Details';
-include '../includes/admin-header.php';
-include '../includes/admin-navbar.php';
-include '../includes/admin-sidebar.php';
-include_once("../../dbCon.php");
+include 'includes/admin-header.php';
+include 'includes/admin-navbar.php';
+include 'includes/admin-sidebar.php';
+include_once("../dbCon.php");
 $conn = connect();
 if (isset($_GET['order-id'])) {
     $sql = "SELECT * FROM order_details WHERE orderId = ?";
@@ -237,8 +237,8 @@ if (isset($_GET['order-id'])) {
                                     <label for="myImg" class="control-label"><b>Product Sketch:</b></label>
                                 </div>
                                 <div class="col-sm-8">
-                                    <a href="../../img/samples/<?= $row['productSketch'] ?>" data-toggle="lightbox" data-title="product Sketch" data-gallery="gallery">
-                                        <img src="../../img/samples/<?= $row['productSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="product Sketch" />
+                                    <a href="../img/samples/<?= $row['productSketch'] ?>" data-toggle="lightbox" data-title="product Sketch" data-gallery="gallery">
+                                        <img src="../img/samples/<?= $row['productSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="product Sketch" />
                                     </a>
                                 </div>
                             </div>
@@ -253,22 +253,22 @@ if (isset($_GET['order-id'])) {
                         <div class="row text-center">
                             <div class="col-sm-4 ">
                                 <label for="examples" class="mb-3"><b>Front Measurement Sketch :</b></label>
-                                <a href="../../img/samples/<?= $row['frontMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Front Measurement Sketch" data-gallery="gallery">
-                                    <img src="../../img/samples/<?= $row['frontMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Measurement Sketch" />
+                                <a href="../img/samples/<?= $row['frontMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Front Measurement Sketch" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['frontMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Measurement Sketch" />
                                 </a>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="examples" class="mb-3"><b>Back Measurement Sketch :</b></label>
-                                <a href="../../img/samples/<?= $row['backMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Back Measurement Sketch" data-gallery="gallery">
-                                    <img src="../../img/samples/<?= $row['backMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Back Measurement Sketch" />
+                                <a href="../img/samples/<?= $row['backMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Back Measurement Sketch" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['backMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Back Measurement Sketch" />
                                 </a>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="examples" class="mb-3"><b>Collar Measurement Sketch :</b></label>
-                                <a href="../../img/samples/<?= $row['collarMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Collar Measurement Sketch " data-gallery="gallery">
-                                    <img src="../../img/samples/<?= $row['collarMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Collar Measurement Sketch" />
+                                <a href="../img/samples/<?= $row['collarMeasurementSketch'] ?>" data-toggle="lightbox" data-title="Collar Measurement Sketch " data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['collarMeasurementSketch'] ?>" class="img-fluid mb-2 border border-secondary" alt="Collar Measurement Sketch" />
                                 </a>
                             </div>
                         </div>
@@ -313,22 +313,22 @@ if (isset($_GET['order-id'])) {
                         <div class="row text-center">
                             <div class="col-sm-4 ">
                                 <label for="examples" class="mb-3"><b>Front Sewing Sketch :</b></label>
-                                <a href="../../img/samples/<?= $row['frontSewingSkecth'] ?>" data-toggle="lightbox" data-title="Front Sewing Sketch" data-gallery="gallery">
-                                    <img src="../../img/samples/<?= $row['frontSewingSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Sewing Sketch" />
+                                <a href="../img/samples/<?= $row['frontSewingSkecth'] ?>" data-toggle="lightbox" data-title="Front Sewing Sketch" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['frontSewingSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Sewing Sketch" />
                                 </a>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="examples" class="mb-3"><b>Front Placket Skecth :</b></label>
-                                <a href="../../img/samples/<?= $row['frontPlacketSkecth'] ?>" data-toggle="lightbox" data-title="Front Placket Skecth" data-gallery="gallery">
-                                    <img src="../../img/samples/<?= $row['frontPlacketSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Placket Skecth" />
+                                <a href="../img/samples/<?= $row['frontPlacketSkecth'] ?>" data-toggle="lightbox" data-title="Front Placket Skecth" data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['frontPlacketSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Front Placket Skecth" />
                                 </a>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="examples" class="mb-3"><b>Slide Slit Skecth :</b></label>
-                                <a href="../../img/samples/<?= $row['slideSlitSkecth'] ?>" data-toggle="lightbox" data-title="Slide Slit Skecth  " data-gallery="gallery">
-                                    <img src="../../img/samples/<?= $row['slideSlitSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Slide Slit Skecth " />
+                                <a href="../img/samples/<?= $row['slideSlitSkecth'] ?>" data-toggle="lightbox" data-title="Slide Slit Skecth  " data-gallery="gallery">
+                                    <img src="../img/samples/<?= $row['slideSlitSkecth'] ?>" class="img-fluid mb-2 border border-secondary" alt="Slide Slit Skecth " />
                                 </a>
                             </div>
                         </div>
@@ -428,7 +428,7 @@ if (isset($_GET['order-id'])) {
     </div>
 
 </section>
-<?php include '../includes/admin-footer.php'; ?>
+<?php include 'includes/admin-footer.php'; ?>
 <script>
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;

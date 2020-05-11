@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../dbCon.php");
+include_once("../dbCon.php");
 $conn = connect();
 
 if (isset($_POST['accept-sample'])) {
@@ -12,7 +12,7 @@ if (isset($_POST['accept-sample'])) {
         $stmt->close();
         $conn->close();
         $_SESSION['msg'] = ['title' => 'Sample request accepted', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been accepted !', 'type' => 'success'];
-        header('Location:../marchandiser/sample-requests');
+        header('Location:marchandiser/sample-requests');
     }
 } else if (isset($_POST['decline-sample'])) {
     $sql = "UPDATE `order_details` SET status=2 WHERE orderId=?";
@@ -23,6 +23,6 @@ if (isset($_POST['accept-sample'])) {
         $stmt->close();
         $conn->close();
         $_SESSION['msg'] = ['title' => 'Sample request declined', 'icon' => 'exclamation-triangle',  'body' => 'Order id ' . $orderId . ' has been declined !', 'type' => 'warning'];
-        header('Location:../marchandiser/sample-requests');
+        header('Location:marchandiser/sample-requests');
     }
 }

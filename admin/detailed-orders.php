@@ -1,18 +1,17 @@
 <?php
-$title = "Industrus | Allocate task";
-include '../includes/admin-header.php';
-include '../includes/admin-navbar.php';
-include '../includes/admin-sidebar.php';
-include_once("../../dbCon.php");
+$title = "Industrus | Sample Requests";
+include 'includes/admin-header.php';
+include 'includes/admin-navbar.php';
+include 'includes/admin-sidebar.php';
+include_once("../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details WHERE status = 4 OR status = 5 OR status = 6 ";
+$sql = "SELECT * FROM order_details WHERE status IN (3,4,5,6)";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
 while ($data = $result->fetch_assoc()) {
     $row[] = $data;
 }
-
 $stmt->close();
 $conn->close();
 
@@ -22,7 +21,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>Allocate Tasks </h1>
+                <h1>All Detailed Orders </h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -39,8 +38,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Shipment Date</th>
-                        <th>Production status</th>
-                        <th>Allocate</th>
+                        <th>Order Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,28 +50,23 @@ $conn->close();
                                 <td><?= $value['buyerName'] ?></td>
                                 <td><?= $value['companyName'] ?></td>
                                 <td><?= $value['productName'] ?></td>
-                                <td><?= $value['detailOrderDate'] ?></td>
-                                <td><?= $value['shipmentDate'] ?></td>
+                                <td style='color:green;'><?php if ($value['detailOrderDate'] !== '') {
+                                                                echo $value['detailOrderDate'];
+                                                            } else {
+                                                                echo 'Not yet';
+                                                            } ?></td>
+                                <td style='color:green;'><?php if ($value['shipmentDate'] !== '') {
+                                                                echo $value['shipmentDate'];
+                                                            } else {
+                                                                echo 'Not yet';
+                                                            } ?></td>
                                 <td style='color:green;'>
-                                    <?php if ($value['status'] == 5) { ?>
-                                        <form action="../controllers/tasksController" method="POST">
-                                            <input type="hidden" value="<?= $value['orderId'] ?>" name="order_id">
-                                            <button class="btn btn-success btn-sm" name="production_start" type="submit"><i class="fas fa-play"></i> Start</button>
-                                        </form>
-                                    <?php } else if ($value['status'] == 6) {
-                                        echo 'In Production';
-                                    } else {
-                                        echo 'Allocate First';
-                                    } ?>
-                                </td>
-                                <td style='color:green;'>
-                                    <?php if ($value['status'] == 4) { ?>
-                                        <a href="order-task?order-id=<?= $value['orderId'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Allocate</a>
-                                    <?php } else { ?>
-                                        <a href="order-task?editable&&order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Edit tasks</a>
-                                    <?php } ?>
-                                </td>
-
+                                    <?php
+                                    if (($value['status'] == 3)) {
+                                        echo 'Pending';
+                                    } else { ?>
+                                        <a href="view-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                    <?php } ?> </td>
                             </tr>
                     <?php }
                     } ?>
@@ -86,8 +79,7 @@ $conn->close();
                         <th>Product Name</th>
                         <th>Order date</th>
                         <th>Shipment Date</th>
-                        <th>Production status</th>
-                        <th>Sample Details</th>
+                        <th>Order Details</th>
                     </tr>
                 </tfoot>
             </table>
@@ -95,7 +87,7 @@ $conn->close();
         <!-- /.card-body -->
     </div>
 </section>
-<?php include '../includes/admin-footer.php'; ?>
+<?php include 'includes/admin-footer.php'; ?>
 <script>
     <?php if (isset($_SESSION['msg'])) {
     ?>
@@ -120,7 +112,6 @@ $conn->close();
             "autoWidth": true,
             "responsive": true,
             'columns': [
-                null,
                 null,
                 null,
                 null,

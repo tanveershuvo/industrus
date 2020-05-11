@@ -1,9 +1,9 @@
 <?php
-$title = 'Indutrus| Sample Details';
-include '../includes/admin-header.php';
-include '../includes/admin-navbar.php';
-include '../includes/admin-sidebar.php';
-include_once("../../dbCon.php");
+$title = 'Indutrus| View Sample Details';
+include 'includes/admin-header.php';
+include 'includes/admin-navbar.php';
+include 'includes/admin-sidebar.php';
+include_once("../dbCon.php");
 $conn = connect();
 if (isset($_GET['order-id'])) {
     $sql = "SELECT * FROM order_details WHERE orderId = ?";
@@ -174,14 +174,14 @@ if (isset($_GET['order-id'])) {
                         <label for="myImg" class="control-label"><b>Product Sketch:</b></label>
                     </div>
                     <div class="col-sm-8">
-                        <img src="../../img/samples/<?= $row['productSketch'] ?>" data-action="zoom" alt="example" style="width:100%;max-width:300px">
+                        <img src="img/samples/<?= $row['productSketch'] ?>" data-action="zoom" alt="example" style="width:100%;max-width:300px">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<?php include '../includes/admin-footer.php'; ?>
+<?php include 'includes/admin-footer.php'; ?>
 <script>
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;

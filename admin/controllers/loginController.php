@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../dbCon.php");
+include_once("../dbCon.php");
 $conn = connect();
 if (isset($_POST["login"])) {
 
@@ -23,21 +23,21 @@ if (isset($_POST["login"])) {
 			$_SESSION['admin-name'] = $row['name'];
 			$_SESSION['admin-role'] = $row['role'];
 			if ($row['role'] == 1) {
-				header('Location:../marchandiser/marchant-dashboard');
+				header('Location:marchant-dashboard');
 			} else if ($row['role'] == 2) {
-				header('Location:../knitting-master/knitting-master-dashboard');
+				header('Location:knitting-master-dashboard');
 			} else if ($row['role'] == 3) {
-				header('Location:../cutting-master/cutting-master-dashboard');
+				header('Location:cutting-master-dashboard');
 			} else if ($row['role'] == 4) {
-				header('Location:../sewing-master/sewing-master-dashboard');
+				header('Location:sewing-master-dashboard');
 			} else if ($row['role'] == 5) {
-				header('Location:../package-master/package-master-dashboard');
+				header('Location:package-master-dashboard');
 			} else if ($row['role'] == 0) {
-				header('Location:../admin-dashboard');
+				header('Location:admin-dashboard');
 			}
 		}
 	} else {
-		header('Location:../index');
+		header('Location:index');
 		$_SESSION['error'] = 'invalid';
 	}
 }

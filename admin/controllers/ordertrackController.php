@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../dbCon.php");
+include_once("../dbCon.php");
 $conn = connect();
 
 if (isset($_POST['add_production'])) {
@@ -23,11 +23,11 @@ if (isset($_POST['add_production'])) {
         $conn->close();
         $_SESSION['msg'] = ['title' => 'Added successful', 'icon' => 'check-circle', 'body' => 'Toadys production amount inserted successfully!', 'type' => 'success'];
         if ($department_id == 2) {
-            header('Location:../cutting-master/cutting-production-history?order-id=' . $orderId . '');
+            header('Location:cutting-production-history?order-id=' . $orderId . '');
         } else if ($department_id == 3) {
-            header('Location:../sewing-master/sewing-production-history?order-id=' . $orderId . '');
+            header('Location:sewing-production-history?order-id=' . $orderId . '');
         } else if ($department_id == 4) {
-            header('Location:../package-master/package-production-history?order-id=' . $orderId . '');
+            header('Location:package-production-history?order-id=' . $orderId . '');
         }
     }
 } else if (isset($_POST['edit_production'])) {
@@ -43,11 +43,11 @@ if (isset($_POST['add_production'])) {
         $conn->close();
         $_SESSION['msg'] = ['title' => 'Edited successful', 'icon' => 'check-circle', 'body' => 'Production amount edited successfully!', 'type' => 'warning'];
         if ($department_id == 2) {
-            header('Location:../cutting-master/cutting-production-history?order-id=' . $orderId . '');
+            header('Location:cutting-production-history?order-id=' . $orderId . '');
         } else if ($department_id == 3) {
-            header('Location:../sewing-master/sewing-production-history?order-id=' . $orderId . '');
+            header('Location:sewing-production-history?order-id=' . $orderId . '');
         } else if ($department_id == 4) {
-            header('Location:../package-master/package-production-history?order-id=' . $orderId . '');
+            header('Location:package-production-history?order-id=' . $orderId . '');
         }
     }
 }

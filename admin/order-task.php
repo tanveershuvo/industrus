@@ -1,9 +1,9 @@
 <?php
 $title = "Industrus | Allocate Tasks orders";
-include '../includes/admin-header.php';
-include '../includes/admin-navbar.php';
-include '../includes/admin-sidebar.php';
-include_once("../../dbCon.php");
+include 'includes/admin-header.php';
+include 'includes/admin-navbar.php';
+include 'includes/admin-sidebar.php';
+include_once("../dbCon.php");
 $conn = connect();
 if (isset($_GET['order-id'])) {
     $sql = "SELECT * FROM order_details WHERE orderId = ?";
@@ -141,7 +141,7 @@ $conn->close();
             </div>
             <input type="hidden" id="numberDays" value="<?= $numberDays ?>">
         </div>
-        <form id="form" action="../controllers/tasksController" method="POST">
+        <form id="form" action="controllers/tasksController" method="POST">
             <input type="hidden" name="order_id" value="<?= $_GET['order-id'] ?>">
             <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover table-striped">
@@ -224,7 +224,7 @@ $conn->close();
 </section>
 <!-- /.content -->
 
-<?php include '../includes/admin-footer.php'; ?>
+<?php include 'includes/admin-footer.php'; ?>
 <script type="text/javascript">
     function validation() {
         let result = true;
