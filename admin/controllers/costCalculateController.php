@@ -22,7 +22,7 @@ if (isset($_POST['addProductCost'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Cost Saved Successfully!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished cost calculating !', 'type' => 'success'];
-    header("Location:marchandiser/calculate-cost?order-id=" . $orderId . "");
+    header("Location:../calculate-cost?order-id=" . $orderId . "");
 }
 
 
@@ -44,7 +44,7 @@ if (isset($_POST['editProductCost'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Cost Edited Successfully!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been edited cost calculating !', 'type' => 'warning'];
-    header("Location:marchandiser/calculate-cost?order-id=" . $orderId . "");
+    header("Location:../calculate-cost?order-id=" . $orderId . "");
 }
 
 ?>

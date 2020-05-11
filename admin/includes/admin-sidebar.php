@@ -12,15 +12,25 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-
+                <?php if ((isset($_SESSION['isLoggedIn'])) && ($_SESSION['admin-role'] == 0)) { ?>
+                    <label class="text-secondary mb-3 text-center text-sm">NAVIGATION</label>
+                    <li class="nav-item has-treeview ">
+                        <a href="admin-dashboard" class="nav-link <?= ($activePage == 'admin-dashboard') ? 'active' : ''; ?> ">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                <?php } ?>
                 <!-- Marchant Menu -->
                 <?php if ((isset($_SESSION['isLoggedIn'])) && ($_SESSION['admin-role'] == 1 || $_SESSION['admin-role'] == 0)) { ?>
-                    <label class="text-secondary mb-3 text-center text-sm">NAVIGATION</label>
+                    <label class="text-secondary mb-3 text-center text-sm">MARCHANT NAVIGATION</label>
                     <li class="nav-item has-treeview ">
                         <a href="marchant-dashboard" class="nav-link <?= ($activePage == 'marchant-dashboard') ? 'active' : ''; ?> ">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Dashboard
+                                Marchant Dashboard
                             </p>
                         </a>
                     </li>
@@ -174,7 +184,7 @@
                     </li>
                 <?php } ?>
                 <li class="nav-item has-treeview ">
-                    <a href="../update-password" class="nav-link <?= ($activePage == 'update-password') ? 'active' : ''; ?> ">
+                    <a href="update-password" class="nav-link <?= ($activePage == 'update-password') ? 'active' : ''; ?> ">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>
                             Update Password

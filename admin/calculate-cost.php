@@ -1,9 +1,10 @@
 <?php
 $title = 'Indutrus| Cost Calculator';
-include '../includes/admin-header.php';
-include '../includes/admin-navbar.php';
-include '../includes/admin-sidebar.php';
-include_once("../../dbCon.php");
+include 'includes/admin-header.php';
+include 'check-marchant.php';
+include 'includes/admin-navbar.php';
+include 'includes/admin-sidebar.php';
+include_once("../dbCon.php");
 $conn = connect();
 if (isset($_GET['order-id'])) {
     $sql = "SELECT * FROM order_details WHERE orderId = ?";
@@ -51,7 +52,7 @@ if (isset($_GET['order-id'])) {
             </div>
             <div class="col-sm-6">
                 <?php if (isset($cost['fabAmount'])) { ?>
-                    <form action="../controllers/orderStatusController.php" method="post">
+                    <form action="controllers/orderStatusController.php" method="post">
                         <input type="hidden" name="order_id" value="<?= $_GET['order-id'] ?>">
                         <button name="movetoAllocation" class="btn btn-primary float-right">Negotiation Complete</button>
                     </form>
@@ -63,7 +64,7 @@ if (isset($_GET['order-id'])) {
 </section>
 
 <section class="content py-1">
-    <form action="../controllers/costCalculateController.php" method="post" id="costForm">
+    <form action="controllers/costCalculateController.php" method="post" id="costForm">
         <input type="hidden" name="order_id" value="<?= $_GET['order-id'] ?>">
         <div class="card">
             <div class="card-header row">
@@ -176,7 +177,7 @@ if (isset($_GET['order-id'])) {
         </div>
     </form>
 </section>
-<?php include '../includes/admin-footer.php'; ?>
+<?php include 'includes/admin-footer.php'; ?>
 <script>
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;

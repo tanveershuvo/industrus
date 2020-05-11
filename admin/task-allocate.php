@@ -1,6 +1,7 @@
 <?php
 $title = "Industrus | Allocate task";
 include 'includes/admin-header.php';
+include 'check-marchant.php';
 include 'includes/admin-navbar.php';
 include 'includes/admin-sidebar.php';
 include_once("../dbCon.php");

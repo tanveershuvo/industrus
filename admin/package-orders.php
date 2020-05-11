@@ -1,12 +1,12 @@
 <?php
-$title = "Industrus | Sample Requests";
+$title = "Industrus | Package Orders";
 include 'includes/admin-header.php';
-include 'check-marchant.php';
+include 'check-package.php';
 include 'includes/admin-navbar.php';
 include 'includes/admin-sidebar.php';
 include_once("../dbCon.php");
 $conn = connect();
-$sql = "SELECT * FROM order_details WHERE status = 0 OR status=1";
+$sql = "SELECT * FROM order_details as od, order_tasks as ot WHERE od.orderId = ot.order_id AND ot.status = 1 AND ot.department_id = 4 ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -22,7 +22,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>All Sample Orders </h1>
+                <h1>All Package Orders </h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -34,44 +34,60 @@ $conn->close();
                 <thead>
                     <tr class="">
                         <th>Order Id</th>
-                        <th>Buyer Name</th>
-                        <th>Company Name</th>
                         <th>Product Name</th>
-                        <th>Order date</th>
-                        <th>Action</th>
-                        <th>Calculate</th>
-                        <th>Sample Details</th>
+                        <th>Starting date</th>
+                        <th>Finishing Days</th>
+                        <th>Finish within</th>
+                        <th>Status</th>
+                        <th>Production history</th>
+                        <th>Order Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if (isset($row)) {
-                        foreach ($row as $value) { ?>
+                        foreach ($row as $value) {
+                            $start = $value['started_at'];
+                            $finish = date('m/d/Y', strtotime($start . ' + ' . $value['assign_days'] . ' days'));
+                            $today = date('m/d/Y');
+                            $time1 = strtotime($finish);
+                            $time2 = strtotime($today);
+                            $daysLeftInt = $time1 - $time2;
+                            $daysLeft = round($daysLeftInt / (60 * 60 * 24));
+                            $finishing_date =  date('d/m/Y', strtotime($start . ' + ' . $value['assign_days'] . ' days'));
+
+                    ?>
                             <tr>
                                 <td><?= $value['orderId'] ?></td>
-                                <td><?= $value['buyerName'] ?></td>
-                                <td><?= $value['companyName'] ?></td>
                                 <td><?= $value['productName'] ?></td>
-                                <td><?= $value['sampleOrderDate'] ?></td>
-                                <td style='white-space: nowrap;color:green;'>
-                                    <?php if ($value['status'] == 0) { ?>
-                                        <form id="form" action="controllers/orderController" method="post">
-                                            <input type="hidden" name="orderId" value="<?= $value['orderId'] ?>">
-                                            <button class="btn btn-outline-success btn-sm pull-right" name="accept-sample" type="submit"><i class=" fas fa-plus-circle"></i>Accept</button>
-                                            <button class="btn btn-outline-danger btn-sm pull-left" id="decline" type="submit"><i class="fas fa-trash"></i>Decline</button>
+                                <td style='color:blue;'><?= $value['started_at'] ?></td>
+                                <?php if ($daysLeft >= 0) { ?>
+                                    <td style='color:green;'>
+                                        <?= $daysLeft . ' days left'; ?>
+                                    </td>
+                                <?php } else if ($daysLeft < 0) { ?>
+                                    <td style='color:red;'>
+                                        <?php $daysLeft = abs($daysLeft);
+                                        echo  $daysLeft . ' days over'; ?>
+                                    </td>
+                                <?php } ?>
+                                <td><?= $finishing_date ?></td>
+                                <td style='color:blue;'>
+                                    <?php if ($value['flag'] == 1) { ?>
+                                        <form action="controllers/orderStatusController" id="form" method="POST">
+                                            <input type="hidden" name="order_id" value="<?= $value['orderId'] ?>">
+                                            <button id="knittingDone" class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> FInished</button>
                                         </form>
-                                    <?php } else if (($value['status'] == 1)) {
-                                        echo 'Accepted';
+                                    <?php } else {
+                                        echo 'Production Not done';
                                     } ?>
                                 </td>
                                 <td>
-                                    <?php if (($value['status'] == 1)) { ?>
-                                        <a href="calculate-cost?order-id=<?= $value['orderId'] ?>" class="btn btn-outline-success btn-sm print"><i class="fas fa-calculator"></i> Calculate Cost</a>
-                                    <?php } else {
-                                        echo 'Accept First';
-                                    } ?>
+                                    <a href="package-production-history?order-id=<?= $value['orderId'] ?>" class="btn btn-secondary btn-sm"><i class="fas fa-cut"></i>Details</a>
                                 </td>
-                                <td><a href="view-sample-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a></td>
+                                <td>
+                                    <a href="package-order-details?order-id=<?= $value['orderId'] ?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                </td>
                             </tr>
                     <?php }
                     } ?>
@@ -79,13 +95,13 @@ $conn->close();
                 <tfoot>
                     <tr>
                         <th>Order Id</th>
-                        <th>Buyer Name</th>
-                        <th>Company Name</th>
                         <th>Product Name</th>
-                        <th>Order date</th>
-                        <th>Action</th>
-                        <th>Calculate</th>
-                        <th>Sample Details</th>
+                        <th>Starting date</th>
+                        <th>Finishing Days</th>
+                        <th>Finish within</th>
+                        <th>Status</th>
+                        <th>Production history</th>
+                        <th>Order Details</th>
                     </tr>
                 </tfoot>
             </table>
@@ -123,10 +139,8 @@ $conn->close();
                 null,
                 null,
                 null,
+                null,
                 {
-                    'search': false,
-                    'orderable': false,
-                }, {
                     'searchable': false,
                     'orderable': false,
                 }, {
@@ -136,7 +150,7 @@ $conn->close();
             ]
         });
     });
-    $('#decline').on('click', function(e) {
+    $('#knittingDone').on('click', function(e) {
         e.preventDefault();
         Swal.fire({
             title: 'Are you sure?',
@@ -145,12 +159,12 @@ $conn->close();
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, decline it!'
+            confirmButtonText: 'Yes, Knitting Done!'
         }).then((result) => {
             if (result.value == true) {
                 var input = $("<input>")
                     .attr("type", "hidden")
-                    .attr("name", "decline-sample");
+                    .attr("name", "package_done");
                 $('#form').append(input);
                 $('#form').submit();
             }

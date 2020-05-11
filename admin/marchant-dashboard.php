@@ -1,6 +1,7 @@
 <?php
 $title = "Industrus | Cutting Master Dasboard";
 include 'includes/admin-header.php';
+include 'check-marchant.php';
 include_once("../dbCon.php");
 $conn = connect();
 $sql = "SELECT productPrice,orderId,totalprice, (SELECT SUM(total) FROM order_colors_quantity as ocq , order_details as od WHERE ocq.order_id = od.orderId ) as 'total_quantity' FROM order_details as od, product_costing as pc WHERE od.orderId = pc.order_id AND od.status = 7";

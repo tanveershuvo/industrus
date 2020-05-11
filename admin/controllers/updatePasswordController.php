@@ -25,15 +25,15 @@ if (isset($_POST['updatepass'])) {
         if ($_SESSION['admin-role'] == 1) {
             header('Location:marchant-dashboard');
         } else if ($_SESSION['admin-role'] == 2) {
-            header('Location:knitting-master-dashboard');
+            header('Location:../knitting-master-dashboard');
         } else if ($_SESSION['admin-role'] == 3) {
-            header('Location:cutting-master-dashboard');
+            header('Location:../cutting-master-dashboard');
         } else if ($_SESSION['admin-role'] == 4) {
-            header('Location:sewing-master-dashboard');
+            header('Location:../sewing-master-dashboard');
         } else if ($_SESSION['admin-role'] == 5) {
-            header('Location:package-master-dashboard');
+            header('Location:../package-master-dashboard');
         } else if ($_SESSION['admin-role'] == 0) {
-            header('Location:admin-dashboard');
+            header('Location:../admin-dashboard');
         }
     } else {
         header('Location:update-password');

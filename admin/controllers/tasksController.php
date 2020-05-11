@@ -24,7 +24,7 @@ if (isset($_POST['save'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Tasks assigned', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been assigned !', 'type' => 'success'];
-    header("Location:task-allocate");
+    header("Location:../task-allocate");
 }
 if (isset($_POST['edit'])) {
 
@@ -43,7 +43,7 @@ if (isset($_POST['edit'])) {
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Tasks Edited', 'icon' => 'check-circle', 'body' => 'Tasks of Order id ' . $orderId . ' has been Edited !', 'type' => 'success'];
-    header("Location:task-allocate");
+    header("Location:../task-allocate");
 }
 
 if (isset($_POST['production_start'])) {
@@ -60,5 +60,5 @@ if (isset($_POST['production_start'])) {
     $stmt->execute();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Tasks Edited', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been moved to production !', 'type' => 'success'];
-    header("Location:task-allocate");
+    header("Location:../task-allocate");
 }

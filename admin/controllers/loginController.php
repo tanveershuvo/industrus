@@ -23,17 +23,17 @@ if (isset($_POST["login"])) {
 			$_SESSION['admin-name'] = $row['name'];
 			$_SESSION['admin-role'] = $row['role'];
 			if ($row['role'] == 1) {
-				header('Location:marchant-dashboard');
+				header('Location:../marchant-dashboard');
 			} else if ($row['role'] == 2) {
-				header('Location:knitting-master-dashboard');
+				header('Location:../knitting-master-dashboard');
 			} else if ($row['role'] == 3) {
-				header('Location:cutting-master-dashboard');
+				header('Location:../cutting-master-dashboard');
 			} else if ($row['role'] == 4) {
-				header('Location:sewing-master-dashboard');
+				header('Location:../sewing-master-dashboard');
 			} else if ($row['role'] == 5) {
-				header('Location:package-master-dashboard');
+				header('Location:../package-master-dashboard');
 			} else if ($row['role'] == 0) {
-				header('Location:admin-dashboard');
+				header('Location:../admin-dashboard');
 			}
 		}
 	} else {

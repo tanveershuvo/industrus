@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../logout"><i class="fas fa-power-off"></i>&nbsp; Sign Out</a>
+                    <a class="nav-link" href="logout"><i class="fas fa-power-off"></i>&nbsp; Sign Out</a>
                 </li>
             </ul>
         </nav>
