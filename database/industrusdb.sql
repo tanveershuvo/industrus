@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2020 at 05:04 AM
+-- Generation Time: May 12, 2020 at 02:20 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -90,14 +90,6 @@ CREATE TABLE `measurement_pattern` (
   `xxxl_size` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `measurement_pattern`
---
-
-INSERT INTO `measurement_pattern` (`id`, `order_id`, `reference`, `description`, `tolerance`, `s_size`, `m_size`, `l_size`, `xl_size`, `xxl_size`, `xxxl_size`) VALUES
-(1, '5eb8058fd81c9', 'Collar', 'Collar measurement', '1', '12', '13', '14', '15', '16', '17'),
-(2, '5eb8058fd81c9', 'Shouldar', 'shoulder measurement', '5', '20', '21', '22', '23', '24', '25');
-
 -- --------------------------------------------------------
 
 --
@@ -116,14 +108,6 @@ CREATE TABLE `order_colors_quantity` (
   `xxxlQuantity` varchar(20) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `order_colors_quantity`
---
-
-INSERT INTO `order_colors_quantity` (`id`, `order_id`, `color`, `sQuantity`, `mQuantity`, `lQuantity`, `xlQuantity`, `xxlQuantity`, `xxxlQuantity`, `total`) VALUES
-(1, '5eb8058fd81c9', 'Black', '50', '50', '50', '', '', '', 150),
-(2, '5eb8058fd81c9', 'White', '50', '50', '50', '50', '50', '50', 300);
 
 -- --------------------------------------------------------
 
@@ -159,13 +143,6 @@ CREATE TABLE `order_details` (
   `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=sampledefault,1=sample_accepted,2=sample_rejected,3=pendingDetails,4 = userImputted,5=task-allocated,6=Order-in-production, 7 =order_finished'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `order_details`
---
-
-INSERT INTO `order_details` (`orderId`, `user_id`, `buyerName`, `companyName`, `productName`, `productPrice`, `composition`, `fabricsWeight`, `samplePcs`, `fabricConstruction`, `febricDescription`, `productSketch`, `yarnDescription`, `frontMeasurementSketch`, `backMeasurementSketch`, `collarMeasurementSketch`, `frontSewingSkecth`, `frontPlacketSkecth`, `slideSlitSkecth`, `pcs_per_box`, `shipmentDate`, `detailOrderDate`, `sampleOrderDate`, `finishedDate`, `status`) VALUES
-('5eb8058fd81c9', 1, 'Tanveer', 'AJ Garments', 'Men full sleeve', '6.50', '65% cotton', '125 GSM', '10', 'combed cottton single pique', 'combed', '20200510154551_18-14-LineDrawing.jpg', 'Yarn GSM 100', '20200510155259_blog-1.jpg', '20200510155259_blog-2.jpg', '20200510155259_blog-3.jpg', '20200510155259_blog-5.jpg', '20200510155259_blog-6.jpg', '20200510155259_blog-detail.jpg', '10', '05/23/2020', '05/10/2020', '05/10/2020', '05/11/2020', 7);
-
 -- --------------------------------------------------------
 
 --
@@ -182,16 +159,6 @@ CREATE TABLE `order_tasks` (
   `status` int(11) NOT NULL DEFAULT 0,
   `flag` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `order_tasks`
---
-
-INSERT INTO `order_tasks` (`id`, `order_id`, `department_id`, `assign_days`, `started_at`, `finished_at`, `status`, `flag`) VALUES
-(1, '5eb8058fd81c9', 1, 3, '05/11/2020', '05/11/2020', 2, 0),
-(2, '5eb8058fd81c9', 2, 3, '05/12/2020', '05/11/2020', 2, 1),
-(3, '5eb8058fd81c9', 3, 3, '05/12/2020', '05/11/2020', 2, 1),
-(4, '5eb8058fd81c9', 4, 3, '05/12/2020', '05/11/2020', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -210,14 +177,6 @@ CREATE TABLE `package_box_details` (
   `nertWeight` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `package_box_details`
---
-
-INSERT INTO `package_box_details` (`id`, `order_id`, `size`, `length`, `width`, `height`, `grossWeight`, `nertWeight`) VALUES
-(1, '5eb8058fd81c9', 's', '12', '12', '12', '5', '6'),
-(2, '5eb8058fd81c9', 'm', '12', '12', '12', '5', '6');
-
 -- --------------------------------------------------------
 
 --
@@ -230,13 +189,6 @@ CREATE TABLE `package_description` (
   `reference` varchar(50) NOT NULL,
   `description` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `package_description`
---
-
-INSERT INTO `package_description` (`id`, `order_id`, `reference`, `description`) VALUES
-(1, '5eb8058fd81c9', 'barcode', 'barcode needed');
 
 -- --------------------------------------------------------
 
@@ -251,15 +203,6 @@ CREATE TABLE `production_track` (
   `production_amount` int(11) NOT NULL,
   `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `production_track`
---
-
-INSERT INTO `production_track` (`id`, `order_id`, `production_date`, `production_amount`, `department_id`) VALUES
-(1, '5eb8058fd81c9', '05/11/2020', 450, 2),
-(2, '5eb8058fd81c9', '05/11/2020', 450, 3),
-(3, '5eb8058fd81c9', '05/11/2020', 450, 4);
 
 -- --------------------------------------------------------
 
@@ -281,13 +224,6 @@ CREATE TABLE `product_costing` (
   `perPiecePrice` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `product_costing`
---
-
-INSERT INTO `product_costing` (`id`, `order_id`, `fabAmount`, `fabCost`, `knitCost`, `dyeCost`, `stitching`, `cutting`, `packaging`, `totalPrice`, `perPiecePrice`) VALUES
-(1, '5eb8058fd81c9', '10', '100', '50', '5', '0.1', '0.2', '0.3', '2020.00', '4.04');
-
 -- --------------------------------------------------------
 
 --
@@ -304,13 +240,6 @@ CREATE TABLE `user_login` (
   `token` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_login`
---
-
-INSERT INTO `user_login` (`id`, `name`, `email`, `password`, `company_name`, `phone`, `token`) VALUES
-(1, 'tanveer', 'tanveershuvos@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'abc', '01683182337', '');
-
 -- --------------------------------------------------------
 
 --
@@ -324,14 +253,6 @@ CREATE TABLE `yarn_color` (
   `yarn_color` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `yarn_color`
---
-
-INSERT INTO `yarn_color` (`id`, `yarn_desc_id`, `color`, `yarn_color`) VALUES
-(1, '5eb8073b919b9', 'Black', 'white'),
-(2, '5eb8073b919b9', 'White', 'black');
-
 -- --------------------------------------------------------
 
 --
@@ -344,13 +265,6 @@ CREATE TABLE `yarn_description` (
   `reference` varchar(20) NOT NULL,
   `description` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `yarn_description`
---
-
-INSERT INTO `yarn_description` (`id`, `order_id`, `reference`, `description`) VALUES
-('5eb8073b919b9', '5eb8058fd81c9', 'Front', 'Front placket');
 
 --
 -- Indexes for dumped tables
@@ -401,19 +315,22 @@ ALTER TABLE `order_tasks`
 -- Indexes for table `package_box_details`
 --
 ALTER TABLE `package_box_details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `package_description`
 --
 ALTER TABLE `package_description`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `production_track`
 --
 ALTER TABLE `production_track`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `product_costing`
@@ -459,55 +376,55 @@ ALTER TABLE `deaprtments`
 -- AUTO_INCREMENT for table `measurement_pattern`
 --
 ALTER TABLE `measurement_pattern`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_colors_quantity`
 --
 ALTER TABLE `order_colors_quantity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_tasks`
 --
 ALTER TABLE `order_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `package_box_details`
 --
 ALTER TABLE `package_box_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `package_description`
 --
 ALTER TABLE `package_description`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `production_track`
 --
 ALTER TABLE `production_track`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_costing`
 --
 ALTER TABLE `product_costing`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `yarn_color`
 --
 ALTER TABLE `yarn_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -537,6 +454,24 @@ ALTER TABLE `order_details`
 ALTER TABLE `order_tasks`
   ADD CONSTRAINT `order_tasks_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `deaprtments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `order_tasks_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`orderId`);
+
+--
+-- Constraints for table `package_box_details`
+--
+ALTER TABLE `package_box_details`
+  ADD CONSTRAINT `package_box_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `package_description`
+--
+ALTER TABLE `package_description`
+  ADD CONSTRAINT `package_description_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `production_track`
+--
+ALTER TABLE `production_track`
+  ADD CONSTRAINT `production_track_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

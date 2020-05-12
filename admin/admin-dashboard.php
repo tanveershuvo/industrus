@@ -123,7 +123,7 @@ include 'includes/admin-sidebar.php';
                 <div class="col-8">
                     <h3 class="card-title">
                         <i class="fas fa-chart-area"></i>
-                        Order Assigned & Finishing days Chart
+                        Cost Benefit Analysis Chart
                     </h3>
 
                 </div>

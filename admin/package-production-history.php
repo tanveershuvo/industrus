@@ -160,7 +160,7 @@ $conn->close();
                     <h5>Total Order : <?= $sum['total'] ?> pcs</h5>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Production Done : <?= $productSum['total'] ?> pcs</h5>
+                    <h5>Package Done : <?= $productSum['total'] ?> pcs</h5>
                 </div>
                 <div class="col-sm-3">
                     <button class=" btn btn-outline-dark col-sm-4  float-right print" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print</button>

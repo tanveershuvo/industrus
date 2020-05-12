@@ -2,6 +2,7 @@
 session_start();
 include_once("../dbCon.php");
 $conn = connect();
+include_once("../sendMail.php");
 
 if (isset($_POST['finished'])) {
     $sql = "UPDATE `order_details` SET `finishedDate`= ? ,`status` = 7 WHERE orderId = ?";
@@ -10,6 +11,16 @@ if (isset($_POST['finished'])) {
     $orderId = mysqli_real_escape_string($conn, $_POST['order_id']);
     $ddate = date('m/d/Y');
     $stmt->execute();
+    $sql = "SELECT * FROM order_details as od, user_login as ul WHERE od.user_id = ul.id AND od.orderId = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $orderId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+    $subject = 'Order Finished';
+    $high_text = 'Your Order Has been Finished!';
+    $low_text = 'Shipment of your order is ready! Thanks for being with us!';
+    mailSender($data['orderId'], $data['email'], $data['name'], $high_text, $low_text, $subject);
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Order Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished !', 'type' => 'success'];
@@ -21,6 +32,16 @@ if (isset($_POST['movetoAllocation'])) {
     $stmt->bind_param("s",  $orderId);
     $orderId = mysqli_real_escape_string($conn, $_POST['order_id']);
     $stmt->execute();
+    $sql = "SELECT * FROM order_details as od, user_login as ul WHERE od.user_id = ul.id AND od.orderId = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $orderId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+    $subject = 'Order is approved';
+    $high_text = 'Now, Give us detail order Information!';
+    $low_text = 'Your order is approved! Please provide detail order information! Thanks for being with us!';
+    mailSender($data['orderId'], $data['email'], $data['name'], $high_text, $low_text, $subject);
     $stmt->close();
     $conn->close();
     $_SESSION['msg'] = ['title' => 'Negotiation Complete!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been in Pre-order !', 'type' => 'success'];

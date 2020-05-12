@@ -1,7 +1,6 @@
 <?php
-$title = "Industrus | Dasboard";
+$title = "Industrus | Login";
 include 'includes/admin-header.php';
-
 ?>
 
 <body class="hold-transition login-page">

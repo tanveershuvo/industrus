@@ -3,7 +3,6 @@ session_start();
 include_once("../dbCon.php");
 $conn = connect();
 if (isset($_POST["login"])) {
-
 	$sql = "SELECT * FROM admin_login where email =? AND password=?";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("ss", $email, $password);
@@ -37,7 +36,8 @@ if (isset($_POST["login"])) {
 			}
 		}
 	} else {
-		header('Location:index');
+
 		$_SESSION['error'] = 'invalid';
+		header('Location:../index');
 	}
 }
