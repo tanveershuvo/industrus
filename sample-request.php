@@ -31,7 +31,7 @@ $conn = connect();
         $row = $result->fetch_assoc();
         $view =  $row['status'];
         if ($view == '3') {
-            header('Location:order-form');
+            echo '<script>window.location.href="http://localhost/industrus/order-form"</script>';
         }
 
     ?>
