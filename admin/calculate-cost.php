@@ -67,96 +67,105 @@ if (isset($_GET['order-id'])) {
     <form action="controllers/costCalculateController.php" method="post" id="costForm">
         <input type="hidden" name="order_id" value="<?= $_GET['order-id'] ?>">
         <div class="card">
-            <div class="card-header row">
-                <div class="col-md-4">
-                    <h5>Total Order : <b><?= $sum['total'] ?></b> pieces</h5>
-                    <input type="hidden" id="totalpiece" value="<?= $sum['total'] ?>">
+            <div id="pdf">
+                <div class="card-header row">
+                    <div class="col-md-3">
+                        <h5>Total Order : <b><?= $sum['total'] ?></b> pieces</h5>
+                        <input type="hidden" id="totalpiece" value="<?= $sum['total'] ?>">
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Offered Price : $<?= $row['productPrice'] ?> </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h6>Fabric amount in kg :</h6>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="fabAmount" name="fabAmount" placeholder="fabric amount" value="<?php if (isset($cost['fabAmount'])) {
+                                                                                                                                        echo $cost['fabAmount'];
+                                                                                                                                    } ?>">
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-warning btn-md" target="_blank" href="costpdf?order-id=<?= $_GET['order-id'] ?>"> <i class="fas fa-download"></i> Download</a>
+
+                    </div>
+
                 </div>
-                <div class="col-md-4">
-                    <h5>Offered Price : $<?= $row['productPrice'] ?> </h5>
-                </div>
-                <div class="col-md-2">
-                    <h6>Fabric amount in kg :</h6>
-                </div>
-                <div class="col-md-2">
-                    <input type="text" class="form-control" id="fabAmount" name="fabAmount" placeholder="fabric amount" value="<?php if (isset($cost['fabAmount'])) {
-                                                                                                                                    echo $cost['fabAmount'];
-                                                                                                                                } ?>">
-                </div>
+                <table id="example2" class="table table-bordered text-center">
+                    <thead class="thead-light">
+                        <tr class="">
+                            <th>Particular Costing</th>
+                            <th>Details</th>
+                            <th>Price in $</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="40%">Fabric Cost</td>
+                            <td width="40%">Per kg</td>
+                            <td width="20%"><input type="text" class="form-control" id="fabCost" name="fabCost" placeholder="fabric cost" value="<?php if (isset($cost['fabCost'])) {
+                                                                                                                                                        echo $cost['fabCost'];
+                                                                                                                                                    } ?>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Knitting charges</td>
+                            <td>Per kg</td>
+                            <td><input type=" text" class="form-control" id="knitCost" name="knitCost" placeholder="Knitting cost" value="<?php if (isset($cost['knitCost'])) {
+                                                                                                                                                echo $cost['knitCost'];
+                                                                                                                                            } ?>"></td>
+                        </tr>
+                        <tr>
+                            <td>Dyeing charges</td>
+                            <td>Per kg</td>
+                            <td><input type="text" class="form-control" id="dyeCost" name="dyeCost" placeholder="Dyeing cost" value="<?php if (isset($cost['dyeCost'])) {
+                                                                                                                                            echo $cost['dyeCost'];
+                                                                                                                                        } ?>"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table id="example2" class="table table-bordered text-center">
+                    <thead class="thead-light">
+                        <tr>
+                            <th width="40%">CMTP Charges</th>
+                            <th width="40%">Details</th>
+                            <th width="20%">Rate in $</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stitching</td>
+                            <td>per piece</td>
+                            <td><input type="text" class="form-control" id="stitching" name="stitching" placeholder="stitching cost" value="<?php if (isset($cost['stitching'])) {
+                                                                                                                                                echo $cost['stitching'];
+                                                                                                                                            } ?>"></td>
+                        </tr>
+                        <tr>
+                            <td>Cutting</td>
+                            <td>per piece</td>
+                            <td><input type="text" class="form-control" id="cutting" name="cutting" placeholder="cutting cost" value="<?php if (isset($cost['cutting'])) {
+                                                                                                                                            echo $cost['cutting'];
+                                                                                                                                        } ?>"></td>
+                        </tr>
+                        <tr>
+                            <td>Packaging charges</td>
+                            <td>per piece</td>
+                            <td><input type="text" class="form-control" id="packaging" name="packaging" placeholder="packaging cost" value="<?php if (isset($cost['packaging'])) {
+                                                                                                                                                echo $cost['packaging'];
+                                                                                                                                            } ?>"></td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td colspan="2"><b>Total Price</b></td>
+                            <td><input type="text" id="total" readonly="true" name="totalPrice" value=""></td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td colspan="2"><b>Price per piece</b></td>
+                            <td><input type="text" id="perPiecePrice" readonly="true" name="perPiecePrice" value=""></td>
+                        </tr>
+                    </tbody>
+                </table>
 
             </div>
-            <table id="example2" class="table table-bordered text-center">
-                <thead class="thead-light">
-                    <tr class="">
-                        <th>Particular Costing</th>
-                        <th>Details</th>
-                        <th>Price in $</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td width="40%">Fabric Cost</td>
-                        <td width="40%">Per kg</td>
-                        <td width="20%"><input type="text" class="form-control" id="fabCost" name="fabCost" placeholder="fabric cost" value="<?php if (isset($cost['fabCost'])) {
-                                                                                                                                                    echo $cost['fabCost'];
-                                                                                                                                                } ?>"></td>
-                    </tr>
-                    <tr>
-                        <td>Knitting charges</td>
-                        <td>Per kg</td>
-                        <td><input type=" text" class="form-control" id="knitCost" name="knitCost" placeholder="Knitting cost" value="<?php if (isset($cost['knitCost'])) {
-                                                                                                                                            echo $cost['knitCost'];
-                                                                                                                                        } ?>"></td>
-                    </tr>
-                    <tr>
-                        <td>Dyeing charges</td>
-                        <td>Per kg</td>
-                        <td><input type="text" class="form-control" id="dyeCost" name="dyeCost" placeholder="Dyeing cost" value="<?php if (isset($cost['dyeCost'])) {
-                                                                                                                                        echo $cost['dyeCost'];
-                                                                                                                                    } ?>"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table id="example2" class="table table-bordered text-center">
-                <thead class="thead-light">
-                    <tr>
-                        <th width="40%">CMTP Charges</th>
-                        <th width="40%">Details</th>
-                        <th width="20%">Rate in $</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Stitching</td>
-                        <td>per piece</td>
-                        <td><input type="text" class="form-control" id="stitching" name="stitching" placeholder="stitching cost" value="<?php if (isset($cost['stitching'])) {
-                                                                                                                                            echo $cost['stitching'];
-                                                                                                                                        } ?>"></td>
-                    </tr>
-                    <tr>
-                        <td>Cutting</td>
-                        <td>per piece</td>
-                        <td><input type="text" class="form-control" id="cutting" name="cutting" placeholder="cutting cost" value="<?php if (isset($cost['cutting'])) {
-                                                                                                                                        echo $cost['cutting'];
-                                                                                                                                    } ?>"></td>
-                    </tr>
-                    <tr>
-                        <td>Packaging charges</td>
-                        <td>per piece</td>
-                        <td><input type="text" class="form-control" id="packaging" name="packaging" placeholder="packaging cost" value="<?php if (isset($cost['packaging'])) {
-                                                                                                                                            echo $cost['packaging'];
-                                                                                                                                        } ?>"></td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td colspan="2"><b>Total Price</b></td>
-                        <td><input type="text" id="total" readonly="true" name="totalPrice" value=""></td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td colspan="2"><b>Price per piece</b></td>
-                        <td><input type="text" id="perPiecePrice" readonly="true" name="perPiecePrice" value=""></td>
-                    </tr>
-                </tbody>
-            </table>
+
             <div class="card-footer text-center">
                 <div class="row">
                     <div class="col-lg-6">

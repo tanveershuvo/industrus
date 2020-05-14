@@ -1,6 +1,5 @@
 <?php
 $title = "Industrus | Admin Dasboard";
-include 'check-admin.php';
 include 'includes/admin-header.php';
 include_once("../dbCon.php");
 $conn = connect();

@@ -84,7 +84,7 @@ if (isset($_POST['cutting_done'])) {
     $stmt->execute();
     $stmt->close();
     $conn->close();
-    $_SESSION['msg'] = ['title' => 'Cutting Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Knitting !', 'type' => 'success'];
+    $_SESSION['msg'] = ['title' => 'Cutting Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Cutting !', 'type' => 'success'];
     header("Location:../cutting-finished-orders");
 }
 if (isset($_POST['sewing_done'])) {
@@ -103,7 +103,7 @@ if (isset($_POST['sewing_done'])) {
     $stmt->execute();
     $stmt->close();
     $conn->close();
-    $_SESSION['msg'] = ['title' => 'Sewing Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Knitting !', 'type' => 'success'];
+    $_SESSION['msg'] = ['title' => 'Sewing Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Sewing !', 'type' => 'success'];
     header("Location:../sewing-finished-orders");
 }
 if (isset($_POST['package_done'])) {
@@ -119,6 +119,6 @@ if (isset($_POST['package_done'])) {
     $stmt->execute();
     $stmt->close();
     $conn->close();
-    $_SESSION['msg'] = ['title' => 'Packaging Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Knitting !', 'type' => 'success'];
+    $_SESSION['msg'] = ['title' => 'Packaging Finished!', 'icon' => 'check-circle', 'body' => 'Order id ' . $orderId . ' has been Finished Packaging !', 'type' => 'success'];
     header("Location:../package-finished-orders");
 }
